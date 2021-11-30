@@ -1,8 +1,22 @@
 _id: spc_05d41e868c7e497f93b553bed09bd275
 type: ApiSpec
 parentId: wrk_1888dffe20a8474cb2e464f928eed1c0
-modified: 1638277539166
+modified: 1638278014888
 created: 1638277539166
 fileName: QRate
-contents: ""
+contents: |-
+  {
+    "openapi": "3.0.2",
+    "info": {
+      "title": "QRate",
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "https://api.server.test/v1"
+      }
+    ],
+    "paths": {
+    }
+  }
 contentType: yaml
