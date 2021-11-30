@@ -6,11 +6,11 @@ Eine progressive Webapp, in der man Barcodes scannen kann, um herauszufinden, ob
 
 ## Team
 
-**Alexander Salzmann:** Backend, Erstellung PPT, Organisation
-**Anne Krämer:** Frontend, Logo, Code Review
-**Gina Weber:** Frontend, Dokumentation, Linting-Integration, Code Review, Organisation
-**Jonas Grill:** Backend, Code Review
-**Niklas Schäfer:** Frontend, Code Review
+**Alexander Salzmann:** Backend, Erstellung PPT, Organisation  
+**Anne Krämer:** Frontend, Logo, Code Review  
+**Gina Weber:** Frontend, Dokumentation, Linting-Integration, Code Review, Organisation  
+**Jonas Grill:** Backend, Code Review  
+**Niklas Schäfer:** Frontend, Code Review  
 
 ## Unsere Webseite
 
