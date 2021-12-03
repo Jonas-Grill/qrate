@@ -1,0 +1,138 @@
+openapi: 3.0.3
+info:
+  title: QRate
+  description: QRate
+  version: 1.0.0
+servers:
+  - url: 'localhost:3000'
+paths:
+  /users:
+    post:
+      summary: Registers new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+               schema:
+                 type: string
+  /user:
+    get:
+      summary: Returns the authorized user
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A Test
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /fooditems:
+    get:
+      summary: Returns all fooditems.
+      operationId: findFooditems
+      responses:
+        200:
+          description: fooditem response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fooditem'
+
+  /fooditems/{id}:
+    get:
+      summary: Returns a fooditem by ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID of user to fetch
+          required: true
+          schema:
+            $ref: '#/components/schemas/Id'
+      responses:
+        200:
+          description: A Test
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fooditem'
+        404:
+          description: A fooditem with the specified ID was not found.
+
+components:
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          example: 611d5cd230dd29fc60df7b94
+        username:
+          type: string
+          example: Gina
+        password:
+          type: string
+          example: 1234
+        allergene:
+          type: array
+          enum:
+            - Lactose
+            - Milksugar
+            - Gluten
+          example:
+            - Lactose
+            - Milksugar
+            - Gluten
+      required:
+        - password
+        - username
+    JWT-Token:
+      type: string
+      example: eyJhbGciOiJIUzUxMiJ9.eyJVc2VybmFtZSI6IkdpbmEiLCJleHAiOjE2MzgzNjQwMzMsImlhdCI6MTYzODM2NDAzMywiUGFzc3dvcmQiOiIxMjM0In0.cqPtZ3bAdcDlVZdPc9yFleDZrH_dIpAv-lKtMcwMTmH5w6szvaWdYoLkQXVk6hkZG1hE0TehtbnuM9f_jgYx1w
+    Fooditem:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 611d5cd230dd29fc60df7b94
+        name:
+          type: string
+          example: Banana Smoothie
+        allergene:
+          type: array
+          example:
+            - Lactose
+            - Milksugar
+            - Gluten
+      required:
+        - _id
+        - password
+        - username
+    Id:
+      type: integer
+      format: int64
+      minimum: 1
+      example: 611d5cd230dd29fc60df7b94
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
