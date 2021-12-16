@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {NbPopoverDirective} from "@nebular/theme";
 
 @Component({
@@ -9,38 +17,69 @@ import {NbPopoverDirective} from "@nebular/theme";
 })
 export class LoginComponent implements OnInit {
   isRegister = true;
-  emailId: any;
-  usernameId: any;
-  passwordId: any;
-  passwordtwiceId: any;
+
+  email: any;
+  username: any;
+  password: any;
+  repeatPassword: any;
+
+  emailPopover: any;
+  usernamePopover: any;
+  passwordPopover: any;
+  passwordRepeatPopover: any;
+
   re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective | undefined;
+  @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(private cd: ChangeDetectorRef) {
+  }
 
   ngOnInit(): void {
   }
 
-  updateisLogin(value: any): void {
-    this.isRegister = value.includes('Register');
+  updateIsLogin(value: any): void {
+    if (value.length === 0) {
+      this.isRegister = !this.isRegister;
+    } else {
+      this.isRegister = value.includes('Register');
+    }
     this.cd.markForCheck();
   }
 
+  onInput(): void {
+    this.popovers?.forEach(popover => popover.hide())
+  }
+
   onSubmitClick(): void {
-    this.popover?.show()
-    if(this.isRegister){
-      if(this.emailId.length === 0){
-
-      }else if(this.re.test(this.emailId)){
-
+    if (!this.email || this.email.length === 0) {
+      this.emailPopover = "Bitte gib deine E-Mail Adresse ein";
+      this.popovers?.filter(item => item.popoverClass == "email").shift()?.show();
+    } else if (!this.re.test(this.email)) {
+      this.emailPopover = "Bitte gib eine gültige E-Mail Adresse ein";
+      this.popovers?.filter(item => item.popoverClass == "email").shift()?.show();
+    }
+    if (!this.password || this.password.length === 0) {
+      this.passwordPopover = "Bitte gib ein Passwort ein";
+      this.popovers?.filter(item => item.popoverClass == "password").shift()?.show();
+    }
+    if (this.isRegister) {
+      if (this.password && this.password.length < 8) {
+        this.passwordPopover = "Das passwort ist nicht sicher genug";
+        this.popovers?.filter(item => item.popoverClass == "password").shift()?.show();
+      } else if (this.password !== this.repeatPassword) {
+        this.passwordPopover = "Die Passwörter stimmen nicht überein";
+        this.popovers?.filter(item => item.popoverClass == "password").shift()?.show();
       }
-    }else if(!this.isRegister){
-      if(this.emailId.length === 0){
-
-      }else if(this.re.test(this.emailId)){
-
+      if (!this.username || this.username.length === 0) {
+        this.usernamePopover = "Bitte überlege dir einen Username";
+        this.popovers?.filter(item => item.popoverClass == "username").shift()?.show();
+      } else if (this.username == "Gina") {
+        this.usernamePopover = "Dieser Username ist schon vergeben";
+        this.popovers?.filter(item => item.popoverClass == "username").shift()?.show();
       }
     }
   }
 }
+
+

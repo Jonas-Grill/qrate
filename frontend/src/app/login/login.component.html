@@ -4,32 +4,32 @@
       <img class="mx-auto h-64 w-auto rounded-lg" src="/assets/Logo.PNG">
     </div>
     <div class="flex justify-center w-full">
-      <nb-button-group size="large" class="flex w-full" (valueChange)="updateisLogin($event)">
-        <button pressed="true" nbButtonToggle fullWidth value="Login">Login</button>
-        <button nbButtonToggle fullWidth value="Register">Registrieren</button>
+      <nb-button-group size="large" class="flex w-full" (valueChange)="updateIsLogin($event)">
+        <button [pressed]="!isRegister" nbButtonToggle fullWidth value="Login">Login</button>
+        <button [pressed]="isRegister" nbButtonToggle fullWidth value="Register">Registrieren</button>
       </nb-button-group>
     </div>
     <div class="mt-8 space-y-6">
       <div>
         <div>
           <label for="email-address" class="sr-only">Email address</label>
-          <input nbInput fullWidth nbPopover="Bitte gib deine E-Mail Adresse ein" nbPopoverTrigger="noop" status="primary" [(ngModel)]="emailId" id="email-address" name="email" type="email" autocomplete="email"
-                 required class="relative" placeholder="E-Mail Adresse">
+          <input nbInput fullWidth [nbPopover]="emailPopover" nbPopoverTrigger="noop" nbPopoverClass="email" nbPopoverPlacement="right" status="primary" [(ngModel)]="email" id="email-address" name="email" type="email" autocomplete="email"
+                 required class="relative" placeholder="E-Mail Adresse" (input)="onInput()">
         </div>
         <div class="mt-2" *ngIf="isRegister">
-          <label for="email-address" class="sr-only">Email address</label>
-          <input nbInput fullWidth nbPopover="Bitte gib deinen Username ein" nbPopoverTrigger="noop" status="primary" [(ngModel)]="usernameId" id="email-address2" name="email" type="email" autocomplete="email"
-                 required class="relative" placeholder="Username">
+          <label for="username" class="sr-only">Username</label>
+          <input nbInput fullWidth [nbPopover]="usernamePopover" nbPopover="Bitte gib deinen Username ein" nbPopoverTrigger="noop" nbPopoverClass="username" nbPopoverPlacement="right" status="primary" [(ngModel)]="username" id="username" name="username" type="text" autocomplete="username"
+                 required class="relative" placeholder="Username" (input)="onInput()">
         </div>
         <div class="mt-2">
           <label for="password" class="sr-only">Password</label>
-          <input nbInput fullWidth nbPopover="Bitte gib dein Passwort ein" nbPopoverTrigger="noop" status="primary" [(ngModel)]="passwordId" id="password" name="password" type="password"
-                 autocomplete="current-password" required class="relative" placeholder="Passwort">
+          <input nbInput fullWidth [nbPopover]="passwordPopover" nbPopover="Bitte gib dein Passwort ein" nbPopoverTrigger="noop" nbPopoverClass="password" nbPopoverPlacement="right" status="primary" [(ngModel)]="password" id="password" name="password" type="password"
+                 autocomplete="current-password" required class="relative" placeholder="Passwort" (input)="onInput()">
         </div>
         <div class="mt-2" *ngIf="isRegister">
-          <label for="password" class="sr-only">Password</label>
-          <input nbInput fullWidth nbPopover="Bitte gib dein Passwort erneut ein" nbPopoverTrigger="noop" status="primary" [(ngModel)]="passwordtwiceId" id="password2" name="password" type="password"
-                 autocomplete="current-password" required class="relative" placeholder="Passwort wiederholen">
+          <label for="password-repeat" class="sr-only">Password-repeat</label>
+          <input nbInput fullWidth [nbPopover]="passwordRepeatPopover" nbPopover="Bitte gib dein Passwort erneut ein" nbPopoverTrigger="noop" nbPopoverClass="passwordRepeat" nbPopoverPlacement="right" status="primary" [(ngModel)]="repeatPassword" id="password-repeat" name="password-repeat" type="password"
+                 autocomplete="current-password" required class="relative" placeholder="Passwort wiederholen" (input)="onInput()">
         </div>
       </div>
 
