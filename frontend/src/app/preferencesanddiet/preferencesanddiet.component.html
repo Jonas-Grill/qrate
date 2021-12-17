@@ -1,0 +1,41 @@
+<div>
+  <div>
+    <nb-accordion multi>
+      <nb-accordion-item>
+        <nb-accordion-item-header>
+          Geht gar nicht! Nichtmal Spuren von...
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <div *ngFor="let allergie of allergies" id="allergies-div">
+            <nb-checkbox status="primary" (change)="onChangeAllergies()" id="allergie{{allergie}}">{{allergie}}</nb-checkbox>
+          </div>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+
+      <nb-accordion-item>
+        <nb-accordion-item-header>
+          Geht in geringen Mengen! Spuren von... sind in Ordnung
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <div *ngFor="let allergie of allergies" id="tracesOf-div">
+            <nb-checkbox status="primary" (change)="onChangeTracesOf()" id="tracesOf{{allergie}}">{{allergie}}</nb-checkbox>
+          </div>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+
+      <nb-accordion-item>
+        <nb-accordion-item-header>
+          Diese Ernährungsweise ist mein Ding!
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <div *ngFor="let diet of diets" id="diets-div">
+            <nb-checkbox status="primary" (change)="onChangeDiet()" id="diet{{diet}}">{{diet}}</nb-checkbox>
+          </div>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
+  </div>
+  <div class="flex justify-items-end py-4">
+    <button nbButton fullWidth (click)="onClickNext()" status="primary">Weiter</button>
+  </div>
+</div>

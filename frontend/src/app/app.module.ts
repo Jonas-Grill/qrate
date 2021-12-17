@@ -15,11 +15,13 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from "@angular/forms";
+import { PreferencesanddietComponent } from './preferencesanddiet/preferencesanddiet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    PreferencesanddietComponent,
   ],
   imports: [
     BrowserModule,
