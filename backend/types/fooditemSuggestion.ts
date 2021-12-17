@@ -1,8 +1,10 @@
 import FoodSchema from "./fooditem.ts";
+
 export default interface FooditemSuggestionSchema {
+    _id: { $oid: string };
     fooditem: FoodSchema;
     creator: string;
-    upVotes: bigint;
-    downVotes: bigint;
-    rating: bigint;
+    upVotes: number;
+    downVotes: number;
+    rating: number;
 };
