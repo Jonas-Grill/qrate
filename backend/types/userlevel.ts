@@ -1,5 +1,5 @@
 export default interface UserLevelSchema {
     levelName: string;
-    levelValue: bigint;
+    levelValue: number;
     exp: number;
 }
