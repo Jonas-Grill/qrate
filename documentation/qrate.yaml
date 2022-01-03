@@ -6,7 +6,7 @@ info:
 servers:
   - url: 'localhost:3000'
 paths:
-  /users?username=Gina:
+  /users?username=:
     post:
       summary: Registers a new user
       requestBody:
@@ -18,12 +18,16 @@ paths:
       responses:
         201:
           description: Created
+        409:
+          description: Username/E-Mail address already in use
           content:
             application/json:
               schema:
-                type: string
-        409:
-          description: Username/E-Mail address already in use
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: Username is already in use
     get:
       summary: Returns a user
       parameters:
@@ -32,7 +36,7 @@ paths:
           schema:
             type: string
           required: false
-          description: Username of user
+          description: Username of wanted user
       security:
         - bearerAuth: [ ]
       responses:
@@ -186,6 +190,14 @@ components:
   responses:
     UnauthorizedError:
       description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: You are not authorized, please first sign in to view this
   schemas:
     User:
       type: object
@@ -311,6 +323,10 @@ components:
     FooditemSuggestion:
       type: object
       properties:
+        _id:
+          type: string
+          readOnly: true
+          example: 611d5cd230dd29fc60df7b94
         fooditem:
           $ref: '#/components/schemas/Fooditem'
         creator:
@@ -327,6 +343,7 @@ components:
       format: int64
       minimum: 1
       example: 611d5cd230dd29fc60df7b94
+
   securitySchemes:
     bearerAuth:
       type: http
