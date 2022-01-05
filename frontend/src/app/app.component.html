@@ -1,18 +1,41 @@
 <nb-layout>
 
   <nb-layout-header fixed>
-  <!-- Insert header here -->
+    QRate
   </nb-layout-header>
 
   <nb-layout-column>
 
-    <app-login></app-login>
+    <!--app-tabbar></app-tabbar-->
+    <!--app-beitraege></app-beitraege-->
+    <!--app-login></app-login-->
     <router-outlet></router-outlet>
 
   </nb-layout-column>
 
-  <nb-layout-footer fixed>
-  <!-- Insert footer here -->
+  <!--nb-card>
+    <nb-card-body>
+  
+      <nb-tabset>
+        <nb-tab tabIcon="person-outline">
+          <p>List of <strong>users</strong>.</p>
+        </nb-tab>
+        <nb-tab [tabIcon]="bellIconConfig">
+          <p>List of <strong>orders</strong>.</p>
+        </nb-tab>
+        <nb-tab tabIcon="email-outline">
+          <p>List of <strong>transactions</strong>.</p>
+        </nb-tab>
+      </nb-tabset>
+  
+    </nb-card-body>
+  </nb-card-->
+  
+  <!--/nb-layout-column-->
+  <nb-layout-footer>
+    <nb-actions size="small" fullWidth>
+        <nb-action icon="search-outline"></nb-action>
+        <nb-action icon="power-outline"></nb-action>
+      </nb-actions>
   </nb-layout-footer>
-
 </nb-layout>

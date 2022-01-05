@@ -10,16 +10,22 @@ import {
   NbButtonModule,
   NbAlertModule,
   NbCheckboxModule,
-  NbInputModule, NbIconModule, NbButtonGroupModule, NbPopoverModule, NbAccordionModule
+  NbInputModule, NbIconModule, NbButtonGroupModule, NbPopoverModule, NbAccordionModule, NbFormFieldModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from "@angular/forms";
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {NbTabsetModule, NbCardModule, NbActionsModule} from '@nebular/theme';
+import { TabbarComponent } from './tabbar/tabbar.component';
+import { BeitraegeComponent } from './beitraege/beitraege.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    TabbarComponent,
+    BeitraegeComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,12 @@ import { FormsModule } from "@angular/forms";
     NbButtonGroupModule,
     FormsModule,
     NbPopoverModule,
-    NbAccordionModule
+    NbAccordionModule,
+    NbFormFieldModule,
+    MatToolbarModule,
+    NbTabsetModule,
+    NbCardModule,
+    NbActionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
