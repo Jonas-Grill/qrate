@@ -7,7 +7,7 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
           <div *ngFor="let allergie of allergene" id="allergies-div">
-            <input type="checkbox" id="{{allergie.id}}" value="{{allergie.name}}" [disabled]=allergie.disabled (change)="onChangeAllergies($event)" /><label>{{allergie.name}}</label>
+            <nb-checkbox type="checkbox" status="primary" [id]=allergie.id [disabled]=allergie.disabled (change)="onChangeAllergies($event, allergie.name)"><label>{{allergie.name}}</label></nb-checkbox>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>
@@ -18,7 +18,7 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
           <div *ngFor="let trace of traces" id="tracesOf-div">
-            <input type="checkbox" id="{{trace.id}}" value="{{trace.name}}" [disabled]=trace.disabled (change)="onChangeAllergies($event)" /><label>{{trace.name}}</label>
+            <nb-checkbox type="checkbox" status="primary" [id]="trace.id" [disabled]=trace.disabled (change)="onChangeAllergies($event, trace.name)"><label>{{trace.name}}</label></nb-checkbox>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>
@@ -29,7 +29,7 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
           <div *ngFor="let diet of diets" id="diets-div">
-            <input type="checkbox" id="{{diet.id}}" value="{{diet.name}}" (change)="onChangeDiet($event)" /><label>{{diet.name}}</label>
+            <nb-checkbox type="checkbox" status="primary" [id]=diet.id (change)="onChangeDiet($event, diet.name)"><label>{{diet.name}}</label></nb-checkbox>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>

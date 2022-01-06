@@ -31,32 +31,32 @@ export class PreferencesanddietComponent implements OnInit {
   allergielist = ["Eier","Erdnuss","Gluten","Sesam","Senf","Lupine","Sulfite","Nuss","Weichtiere","Krebstiere","Fische","Soja","Sellerie","Milch"];
   dietlist = ["Vegetarisch","Pescetarisch","Vegan"];
 
-  onChangeAllergies(selected: any): void {
+  onChangeAllergies(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES
     if (selected.target.checked){
-      if (selected.target.id.includes("allergie")){
+      if (selected.currentTarget.id.includes("allergie")){
         for (let i=0; i<this.traces.length; i++){
-          if (this.traces[i].id === "tracesof"+selected.target.value){
+          if (this.traces[i].id === "tracesof"+name){
             this.traces[i].disabled = true;
           }
         }
-      }else if (selected.target.id.includes("tracesof")){
+      }else if (selected.currentTarget.id.includes("tracesof")){
         for (let i=0; i<this.allergene.length; i++){
-          if (this.allergene[i].id === "allergie"+selected.target.value){
+          if (this.allergene[i].id === "allergie"+name){
             this.allergene[i].disabled = true;
           }
         }
       }
     }else{
-      if (selected.target.id.includes("allergie")){
+      if (selected.currentTarget.id.includes("allergie")){
         for (let i=0; i<this.traces.length; i++){
-          if (this.traces[i].id === "tracesof"+selected.target.value){
+          if (this.traces[i].id === "tracesof"+name){
             this.traces[i].disabled = false;
           }
         }
-      }else if (selected.target.id.includes("tracesof")){
+      }else if (selected.currentTarget.id.includes("tracesof")){
         for (let i=0; i<this.allergene.length; i++){
-          if (this.allergene[i].id === "allergie"+selected.target.value){
+          if (this.allergene[i].id === "allergie"+name){
             this.allergene[i].disabled = false;
           }
         }
@@ -64,9 +64,8 @@ export class PreferencesanddietComponent implements OnInit {
     }
   }
 
-  onChangeDiet(selected: any): void {
+  onChangeDiet(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY DIET
-    console.log(selected.target.id);
   }
 
   onClickNext() {
