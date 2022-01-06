@@ -19,36 +19,59 @@ export class PreferencesanddietComponent implements OnInit {
     this.dietlist.sort();
 
     for (let allergie of this.allergielist){
-      this.allergene.push({id: "allergie"+allergie, name:allergie, checked: false});
-      this.traces.push({id: "tracesof"+allergie, name:allergie, checked: false});
+      this.allergene.push({id: "allergie"+allergie, name:allergie, disabled: false});
+      this.traces.push({id: "tracesof"+allergie, name:allergie, disabled: false});
     }
 
     for (let diet of this.dietlist){
-      this.diets.push({id:diet, name:diet, checked: false});
+      this.diets.push({id:diet, name:diet});
     }
   }
 
   allergielist = ["Eier","Erdnuss","Gluten","Sesam","Senf","Lupine","Sulfite","Nuss","Weichtiere","Krebstiere","Fische","Soja","Sellerie","Milch"];
   dietlist = ["Vegetarisch","Pescetarisch","Vegan"];
 
+  onChangeAllergies(selected: any): void {
+    // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES
+    if (selected.target.checked){
+      if (selected.target.id.includes("allergie")){
+        for (let i=0; i<this.traces.length; i++){
+          if (this.traces[i].id === "tracesof"+selected.target.value){
+            this.traces[i].disabled = true;
+          }
+        }
+      }else if (selected.target.id.includes("tracesof")){
+        for (let i=0; i<this.allergene.length; i++){
+          if (this.allergene[i].id === "allergie"+selected.target.value){
+            this.allergene[i].disabled = true;
+          }
+        }
+      }
+    }else{
+      if (selected.target.id.includes("allergie")){
+        for (let i=0; i<this.traces.length; i++){
+          if (this.traces[i].id === "tracesof"+selected.target.value){
+            this.traces[i].disabled = false;
+          }
+        }
+      }else if (selected.target.id.includes("tracesof")){
+        for (let i=0; i<this.allergene.length; i++){
+          if (this.allergene[i].id === "allergie"+selected.target.value){
+            this.allergene[i].disabled = false;
+          }
+        }
+      }
+    }
+  }
+
+  onChangeDiet(selected: any): void {
+    // ON CHANGE CHECKBOX IN CATEGORY DIET
+    console.log(selected.target.id);
+  }
+
   onClickNext() {
     // ROUTING
   }
-
-  onChangeAllergies(id: string) {
-    // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES
-    let element = document.getElementById(id);
-
-  }
-
-  onChangeTracesOf() {
-    // ON CHANGE CHECKBOX IN CATEGORY TRACES OF
-  }
-
-  onChangeDiet() {
-    // ON CHANGE CHECKBOX IN CATEGORY DIET
-  }
-
 }
 
 

@@ -7,7 +7,7 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
           <div *ngFor="let allergie of allergene" id="allergies-div">
-            <nb-checkbox status="primary" id="{{allergie.id}}}" [(ngModel)]="allergie.checked">{{allergie.name}}</nb-checkbox>
+            <input type="checkbox" id="{{allergie.id}}" value="{{allergie.name}}" [disabled]=allergie.disabled (change)="onChangeAllergies($event)" /><label>{{allergie.name}}</label>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>
@@ -17,8 +17,8 @@
           Geht in geringen Mengen! Spuren von... sind in Ordnung
         </nb-accordion-item-header>
         <nb-accordion-item-body>
-          <div *ngFor="let allergie of traces" id="tracesOf-div">
-            <nb-checkbox status="primary" id="{{allergie.id}}" [(ngModel)]="allergie.checked">{{allergie.name}}</nb-checkbox>
+          <div *ngFor="let trace of traces" id="tracesOf-div">
+            <input type="checkbox" id="{{trace.id}}" value="{{trace.name}}" [disabled]=trace.disabled (change)="onChangeAllergies($event)" /><label>{{trace.name}}</label>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>
@@ -29,7 +29,7 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
           <div *ngFor="let diet of diets" id="diets-div">
-            <nb-checkbox status="primary" id="{{diet.id}}" [(ngModel)]="diet.checked">{{diet.name}}</nb-checkbox>
+            <input type="checkbox" id="{{diet.id}}" value="{{diet.name}}" (change)="onChangeDiet($event)" /><label>{{diet.name}}</label>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>
