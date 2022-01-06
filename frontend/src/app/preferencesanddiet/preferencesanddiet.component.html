@@ -6,8 +6,8 @@
           Geht gar nicht! Nichtmal Spuren von...
         </nb-accordion-item-header>
         <nb-accordion-item-body>
-          <div *ngFor="let allergie of allergies" id="allergies-div">
-            <nb-checkbox status="primary" (change)="onChangeAllergies()" id="allergie{{allergie}}">{{allergie}}</nb-checkbox>
+          <div *ngFor="let allergie of allergene" id="allergies-div">
+            <nb-checkbox status="primary" id="{{allergie.id}}}" [(ngModel)]="allergie.checked">{{allergie.name}}</nb-checkbox>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>
@@ -17,8 +17,8 @@
           Geht in geringen Mengen! Spuren von... sind in Ordnung
         </nb-accordion-item-header>
         <nb-accordion-item-body>
-          <div *ngFor="let allergie of allergies" id="tracesOf-div">
-            <nb-checkbox status="primary" (change)="onChangeTracesOf()" id="tracesOf{{allergie}}">{{allergie}}</nb-checkbox>
+          <div *ngFor="let allergie of traces" id="tracesOf-div">
+            <nb-checkbox status="primary" id="{{allergie.id}}" [(ngModel)]="allergie.checked">{{allergie.name}}</nb-checkbox>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>
@@ -29,7 +29,7 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
           <div *ngFor="let diet of diets" id="diets-div">
-            <nb-checkbox status="primary" (change)="onChangeDiet()" id="diet{{diet}}">{{diet}}</nb-checkbox>
+            <nb-checkbox status="primary" id="{{diet.id}}" [(ngModel)]="diet.checked">{{diet.name}}</nb-checkbox>
           </div>
         </nb-accordion-item-body>
       </nb-accordion-item>
