@@ -15,11 +15,15 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from "@angular/forms";
+import { BarcodescannerComponent } from './barcodescanner/barcodescanner.component';
+import {ServiceWorkerModule} from "@angular/service-worker";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    BarcodescannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { FormsModule } from "@angular/forms";
     NbButtonGroupModule,
     FormsModule,
     NbPopoverModule,
-    NbAccordionModule
+    NbAccordionModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
