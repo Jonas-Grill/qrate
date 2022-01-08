@@ -10,15 +10,18 @@ import {
   NbButtonModule,
   NbAlertModule,
   NbCheckboxModule,
-  NbInputModule, NbIconModule, NbButtonGroupModule, NbPopoverModule, NbAccordionModule, NbFormFieldModule
+  NbInputModule, NbIconModule, NbButtonGroupModule, NbPopoverModule, 
+  NbAccordionModule, NbFormFieldModule, NbAutocompleteModule,
+  NbTagModule, NbSelectModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {NbTabsetModule, NbCardModule, NbActionsModule} from '@nebular/theme';
 import { TabbarComponent } from './tabbar/tabbar.component';
 import { BeitraegeComponent } from './beitraege/beitraege.component';
+import { HinzufuegenComponent } from './hinzufuegen/hinzufuegen.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { BeitraegeComponent } from './beitraege/beitraege.component';
     LoginComponent,
     TabbarComponent,
     BeitraegeComponent,
+    HinzufuegenComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,9 +45,13 @@ import { BeitraegeComponent } from './beitraege/beitraege.component';
     NbIconModule,
     NbButtonGroupModule,
     FormsModule,
+    ReactiveFormsModule,
     NbPopoverModule,
     NbAccordionModule,
     NbFormFieldModule,
+    NbAutocompleteModule,
+    NbTagModule,
+    NbSelectModule,
     MatToolbarModule,
     NbTabsetModule,
     NbCardModule,

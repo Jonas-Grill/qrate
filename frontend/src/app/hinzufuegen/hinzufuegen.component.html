@@ -1,0 +1,133 @@
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+      <div class="flex justify-center">
+          <h2>Beitrag hinzufügen</h2>
+      </div>
+      <div class="mt-8 space-y-6">
+        <div>
+          <div>
+            <input nbInput fullWidth status="primary" id="name" type="text" required class="relative" placeholder="Name des Artikels">
+          </div>
+          <div class="mt-2">
+            <nb-card>
+                <nb-card-body class="flex justify-center">
+                    <div *ngIf="!isScanned">
+                        <nb-icon nbPrefix icon="image-outline" pack="eva"></nb-icon>
+                    </div>
+                    <div *ngIf="isScanned">
+                        <img class="mx-auto h-64 w-auto rounded-lg" src="/assets/Logo.PNG"> 
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button nbButton fullWidth class="relative flex justify-center" status="primary" (click)="onScanClick($event.target)">
+                        QR-Code einscannen
+                    </button>
+                </nb-card-footer>
+            </nb-card>
+          </div>
+          <div class="mt-2">
+            <nb-card>
+                <nb-card-body class="flex justify-center">
+                    <div *ngIf="!isBild">
+                        <nb-icon nbPrefix icon="image-outline" pack="eva"></nb-icon> 
+                    </div>
+                    <div *ngIf="isBild">
+                        <img class="mx-auto h-64 w-auto rounded-lg" src="/assets/Logo.PNG"> 
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button nbButton fullWidth class="relative flex justify-center" status="primary" (click)="onBildClick($event.target)">
+                        Bild hinzufügen
+                    </button>
+                </nb-card-footer>
+            </nb-card>
+          </div>
+          <div class="mt-2">
+            <nb-accordion>
+                <nb-accordion-item>
+                  <nb-accordion-item-header>
+                    Allergene hinzufügen
+                  </nb-accordion-item-header>
+                  <nb-accordion-item-body>
+                    <input #autoInput
+                        [formControl]="inputFormControl"
+                        nbInput
+                        type="text"
+                        placeholder="Allergene"
+                        [nbAutocomplete]="autoControl" />
+
+                    <nb-autocomplete #autoControl (selectedChange)="onSelectionChange()">
+
+                    <nb-option *ngFor="let option of filteredControlOptions$ | async" [value]="option">
+                        {{ option }}
+                    </nb-option>
+
+                    </nb-autocomplete>
+                    <div class="mt-2">
+                        <nb-tag-list (tagRemove)="onTagRemove($event)">
+                            <nb-tag removable *ngFor="let tag of tags" [text]="tag"></nb-tag>
+                        </nb-tag-list>
+                    </div>
+                  </nb-accordion-item-body>
+                </nb-accordion-item>
+            </nb-accordion>
+          </div>
+          <div class="mt-2">
+            <nb-accordion>
+                <nb-accordion-item>
+                  <nb-accordion-item-header>
+                    Spurenelemente hinzufügen
+                  </nb-accordion-item-header>
+                  <nb-accordion-item-body>
+                    <input #tagInput
+                        [formControl]="inputTagControl"
+                        nbInput
+                        type="text"
+                        placeholder="Spurenelemente"
+                        [nbAutocomplete]="autoControlTag" />
+
+                    <nb-autocomplete #autoControlTag (selectedChange)="onSelectionTagChange()">
+
+                    <nb-option *ngFor="let filterTag of filteredTags$ | async" [value]="filterTag">
+                        {{ filterTag }}
+                    </nb-option>
+
+                    </nb-autocomplete>
+                    <div class="mt-2">
+                        <nb-tag-list (tagRemove)="onTagRemove($event)">
+                            <nb-tag removable *ngFor="let tag of spurenTags" [text]="tag"></nb-tag>
+                        </nb-tag-list>
+                    </div>
+                  </nb-accordion-item-body>
+                </nb-accordion-item>
+            </nb-accordion>
+          </div>
+          <div class="mt-2">
+            <nb-accordion>
+                <nb-accordion-item>
+                    <nb-accordion-item-header>
+                        Ernährungsweise festlegen
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                        <nb-select placeholder="Ernährungsweise">
+                            <nb-option value="0">Option 0</nb-option>
+                            <nb-option value="1">Option 1</nb-option>
+                            <nb-option value="2">Option 2</nb-option>
+                            <nb-option value="3">Option 3</nb-option>
+                            <nb-option value="4">Option 4</nb-option>
+                          </nb-select>
+                    </nb-accordion-item-body>
+                </nb-accordion-item>
+            </nb-accordion>
+          </div>
+                
+        </div>
+  
+        <div>
+          <button nbButton fullWidth class="relative flex justify-center" status="primary" (click)="onSubmitClick()">
+            Hinzufügen
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
