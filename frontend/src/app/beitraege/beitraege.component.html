@@ -1,43 +1,48 @@
-<nb-card>
-    <nb-form-field>
-        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
-        <input type="text" nbInput fullWidth >
-    </nb-form-field>
-</nb-card>
-<div *ngFor = "let data of displayedBeitraege">
-    <nb-flip-card>
-        <nb-card-front>
-            <nb-card size="medium">
-                <nb-card-header>
-                    <div class="display: inline-block">{{data.name}}</div>
-                    <div class="display: inline-block; width: 100%"></div>
-                    <div class="display: inline-block">Rating: {{data.rating}}/5</div>
-                    <!--div *ngFor = "let number of [0,1,2,3,4]; let i = index" class="display: inline-block;">
-                        <div *ngIf = "data.rating >= (i+1)" class="display: inline-block;">
-                            <nb-icon nbPrefix icon="star" pack="eva"></nb-icon>
-                        </div>
-                        <div *ngIf = "i >= data.rating" class="display: inline-block;">
-                            <nb-icon nbPrefix icon="star-outline" pack="eva"></nb-icon>
-                        </div>
-                    </div-->
-                </nb-card-header>
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <nb-card>
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" nbInput fullWidth placeholder="Suche nach Beiträgen">
+            </nb-form-field>
+        </nb-card>
+        <div *ngFor = "let data of displayedBeitraege">
+            <nb-flip-card>
+                <nb-card-front>
+                    <nb-card size="medium">
+                        <nb-card-header>
+                            <div class="display: inline-block">{{data.name}}</div>
+                            <div class="display: inline-block; width: 100%"></div>
+                            <div class="display: inline-block">Rating: {{data.rating}}/5</div>
+                            <!--div *ngFor = "let number of [0,1,2,3,4]; let i = index" class="display: inline-block;">
+                                <div *ngIf = "data.rating >= (i+1)" class="display: inline-block;">
+                                    <nb-icon nbPrefix icon="star" pack="eva"></nb-icon>
+                                </div>
+                                <div *ngIf = "i >= data.rating" class="display: inline-block;">
+                                    <nb-icon nbPrefix icon="star-outline" pack="eva"></nb-icon>
+                                </div>
+                            </div-->
+                        </nb-card-header>
+                            <nb-card-body>
+                                <img class="mx-auto h-64 w-auto rounded-lg" src="{{data.image}}">
+                            </nb-card-body>
+                        <nb-card-footer>By {{data.user}}</nb-card-footer>
+                    </nb-card>
+                </nb-card-front>
+                <nb-card-back>
+                  <nb-card size="medium">
+                    <nb-card-header>{{data.name}}</nb-card-header>
                     <nb-card-body>
-                        <img class="mx-auto h-64 w-auto rounded-lg" src="{{data.image}}">
+                        Allergene:
+                        <div *ngFor = "let allergens of data.allergens">
+                            {{allergens}}
+                        </div>
                     </nb-card-body>
-                <nb-card-footer>By {{data.user}}</nb-card-footer>
-            </nb-card>
-        </nb-card-front>
-        <nb-card-back>
-          <nb-card size="medium">
-            <nb-card-header>{{data.name}}</nb-card-header>
-            <nb-card-body>
-                Allergene:
-                <div *ngFor = "let allergens of data.allergens">
-                    {{allergens}}
-                </div>
-            </nb-card-body>
-            <nb-card-footer>By {{data.user}}</nb-card-footer>
-          </nb-card>
-        </nb-card-back>
-    </nb-flip-card>
+                    <nb-card-footer>By {{data.user}}</nb-card-footer>
+                  </nb-card>
+                </nb-card-back>
+            </nb-flip-card>
+        </div>
+    </div>
 </div>
+
