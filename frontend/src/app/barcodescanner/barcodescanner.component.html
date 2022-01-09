@@ -1,9 +1,16 @@
-<div class="flex flex-grow flex-col fixed inset-0 w-full">
-  <div class="flex fixed w-full justify-center" style="background: #9ed6c4;">
-    <h4 class="p-3">Barcode scannen</h4>
-  </div>
-  <div id="scanner-container" class="fixed p-8 top-14 w-full max-w-screen-sm place-self-center">
-    <!-- QuaggaJS will populate this element -->
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div class="mt-8 space-y-6">
+      <div class="mt-2">
+        <nb-card>
+          <nb-card-header>Barcode scannen</nb-card-header>
+          <nb-card-body id="scanner-container"  class="flex justify-center">
+            <video src=""></video>
+            <canvas class="drawingBuffer"></canvas>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
   </div>
 </div>
 

@@ -1,1 +1,8 @@
+#scanner-container video, canvas {
+  width: 100%;
+  height: auto;
+}
 
+#scanner-container video.drawingBuffer, canvas.drawingBuffer {
+  display: none;
+}

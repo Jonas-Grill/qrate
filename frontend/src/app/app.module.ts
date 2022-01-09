@@ -9,8 +9,8 @@ import {
   NbLayoutModule,
   NbButtonModule,
   NbAlertModule,
-  NbCheckboxModule,
-  NbInputModule, NbIconModule, NbButtonGroupModule, NbPopoverModule, NbAccordionModule
+  NbCheckboxModule, NbCardModule,
+  NbInputModule, NbIconModule, NbButtonGroupModule, NbPopoverModule, NbAccordionModule, NbCardComponent
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
@@ -41,6 +41,7 @@ import {environment} from "../environments/environment";
     FormsModule,
     NbPopoverModule,
     NbAccordionModule,
+    NbCardModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],

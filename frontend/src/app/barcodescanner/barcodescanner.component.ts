@@ -85,16 +85,13 @@ export class BarcodescannerComponent implements AfterViewInit {
           readers: ['ean_reader'],
           multiple: false
         },
-        // See: https://github.com/ericblade/quagga2/blob/master/README.md#locate
         locate: false
       },
       (err) => {
         if (err) {
-         // console.error(`Quagga initialization failed: ${err}`);
           this.errorMessage = `Initialization error: ${err}`;
           this.started = false;
         } else {
-         // console.log(`Quagga initialization succeeded`);
           Quagga.start();
           this.started = true;
           this.changeDetectorRef.detectChanges();
