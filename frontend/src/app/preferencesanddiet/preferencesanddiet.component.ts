@@ -24,7 +24,7 @@ export class PreferencesanddietComponent implements OnInit {
     }
 
     for (let diet of this.dietlist){
-      this.diets.push({id:diet, name:diet});
+      this.diets.push({id:diet, name:diet, disabled: false});
     }
   }
 
@@ -66,6 +66,19 @@ export class PreferencesanddietComponent implements OnInit {
 
   onChangeDiet(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY DIET
+    if (selected.target.checked){
+      for (let i=0; i<this.diets.length; i++){
+        if (this.diets[i].id !== name){
+          this.diets[i].disabled = true;
+        }
+      }
+    }else{
+      for (let i=0; i<this.diets.length; i++){
+        if (this.diets[i].id !== name){
+          this.diets[i].disabled = false;
+        }
+      }
+    }
   }
 
   onClickNext() {
