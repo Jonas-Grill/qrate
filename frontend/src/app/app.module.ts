@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
 import { DialogLogoutComponent } from './dialogLogout/dialogLogout.component';
+import { DialogChangePasswordComponent } from './dialog-change-password/dialog-change-password.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DialogLogoutComponent } from './dialogLogout/dialogLogout.component';
     LoginComponent,
     ProfileComponent,
     DialogLogoutComponent,
+    DialogChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

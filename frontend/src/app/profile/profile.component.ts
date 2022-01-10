@@ -2,6 +2,7 @@ import {Component, OnInit, Optional} from '@angular/core';
 import {Allergene} from "./allergenes";
 import {NbWindowControlButtonsConfig, NbWindowService} from "@nebular/theme";
 import {DialogLogoutComponent} from "../dialogLogout/dialogLogout.component";
+import {DialogChangePasswordComponent} from "../dialog-change-password/dialog-change-password.component";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class ProfileComponent implements OnInit {
   usermail = 'max.mustermann@beispielmail.com';
   userlevel = 'Enthusiastischer Essenskenner';
 
-  openWindow() {
+  openWindowLogout() {
     const buttonsConfig: NbWindowControlButtonsConfig = {
       minimize: false,
       maximize: false,
@@ -44,6 +45,15 @@ export class ProfileComponent implements OnInit {
     };
 
     this.windowService.open(DialogLogoutComponent, { title: `Abmelden`, buttons: buttonsConfig });
+  }
+  openWindowPassword() {
+    const buttonsConfig: NbWindowControlButtonsConfig = {
+      minimize: false,
+      maximize: false,
+      fullScreen: false,
+    };
+
+    this.windowService.open(DialogChangePasswordComponent, { title: `Passwort ändern`, buttons: buttonsConfig });
   }
 
   onChangeAllergies(selected: any, name: string): void {

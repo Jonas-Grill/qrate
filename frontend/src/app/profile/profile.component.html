@@ -9,24 +9,24 @@
               <nb-tab tabIcon="person-outline">
                 <table class="max-w-full">
                   <tbody>
-                  <tr class="py-3">
-                    <td class="pr-2 break-all"><strong>Username:</strong></td>
+                  <tr>
+                    <td class="py-2 pr-2 break-all"><strong>Username:</strong></td>
                     <td [textContent]="username" class="break-all"></td>
                   </tr>
-                  <tr class="py-3">
-                    <td class="pr-2 break-all"><strong>E-Mail:</strong></td>
+                  <tr>
+                    <td class="py-2 pr-2 break-all"><strong>E-Mail:</strong></td>
                     <td [textContent]="usermail" class="break-all"></td>
                   </tr>
-                  <tr class="py-3">
-                    <td class="pr-2 break-all"><strong>Level:</strong></td>
+                  <tr>
+                    <td class="py-2 pr-2 break-all"><strong>Level:</strong></td>
                     <td [textContent]="userlevel" class="break-all"></td>
                   </tr>
                   </tbody>
                 </table>
                 <div class="py-2 pb-4">
-                  <a href="#"> Passwort ändern?</a>
+                  <a href="#" (click)="openWindowPassword()"> Passwort ändern?</a>
                 </div>
-                <button nbButton fullWidth class="open-window relative flex justify-center" status="primary" (click)="openWindow()">Abmelden
+                <button nbButton fullWidth class="open-window relative flex justify-center" status="primary" (click)="openWindowLogout()">Abmelden
                 </button>
               </nb-tab>
               <nb-tab tabIcon="checkmark-square-2-outline">
