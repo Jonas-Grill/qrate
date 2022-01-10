@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Optional} from '@angular/core';
 import {Allergene} from "./allergenes";
+import {NbWindowControlButtonsConfig, NbWindowService} from "@nebular/theme";
+import {DialogLogoutComponent} from "../dialogLogout/dialogLogout.component";
 
 
 @Component({
@@ -12,7 +14,7 @@ export class ProfileComponent implements OnInit {
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
 
-  constructor() { }
+  constructor(@Optional() private windowService: NbWindowService) {}
 
   ngOnInit(): void {
     this.allergielist.sort();
@@ -33,6 +35,16 @@ export class ProfileComponent implements OnInit {
   username = 'Max Mustermann';
   usermail = 'max.mustermann@beispielmail.com';
   userlevel = 'Enthusiastischer Essenskenner';
+
+  openWindow() {
+    const buttonsConfig: NbWindowControlButtonsConfig = {
+      minimize: false,
+      maximize: false,
+      fullScreen: false,
+    };
+
+    this.windowService.open(DialogLogoutComponent, { title: `Abmelden`, buttons: buttonsConfig });
+  }
 
   onChangeAllergies(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES

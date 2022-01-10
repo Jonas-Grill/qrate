@@ -19,17 +19,20 @@ import {
   NbCardModule,
   NbTabsetModule,
   NbSidebarModule,
+  NbWindowModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
+import { DialogLogoutComponent } from './dialogLogout/dialogLogout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProfileComponent,
+    DialogLogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { ProfileComponent } from './profile/profile.component';
     NbCardModule,
     NbTabsetModule,
     NbSidebarModule,
+    NbWindowModule.forRoot(),
 
   ],
   providers: [],
