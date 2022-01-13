@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, ViewChild, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, QueryList, ViewChild, ViewChildren, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { NbTagComponent } from '@nebular/theme';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import {NbPopoverDirective} from "@nebular/theme";
 
 @Component({
   selector: 'app-hinzufuegen',
@@ -19,14 +19,17 @@ export class HinzufuegenComponent implements OnInit {
   options: string[] = [];
   tags: string[] = [];
   spurenTags: string[] = [];
+  usedAllergenes: string[] = [];
   inputFormControl: FormControl = new FormControl();
   inputTagControl: FormControl = new FormControl();
   filteredControlOptions$!: Observable<string[]>;
-  filteredTags$!: Observable<string[]>;
   value: string | undefined;
+  allergenPopover: any;
+  spurenPopover: any;
 
   @ViewChild('autoInput') input: any;
   @ViewChild('tagInput') tagInput: any;
+  @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
   constructor() { }
 
@@ -37,12 +40,6 @@ export class HinzufuegenComponent implements OnInit {
       .pipe(
         startWith(''),
         map(filterString => this.filter(filterString)),
-      );
-    this.filteredTags$ = of(this.tags);
-    this.filteredTags$ = this.inputTagControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(filterStringTag => this.filterTag(filterStringTag)),
       );
   }
 
@@ -74,18 +71,64 @@ export class HinzufuegenComponent implements OnInit {
     if (index > -1) {
       this.tags.splice(index, 1);
     }
+    const indexUsed = this.usedAllergenes.indexOf(tagToRemove.text);
+    if (indexUsed > -1) {
+      this.usedAllergenes.splice(indexUsed, 1);
+    }
+  }
+
+  onTagSpurRemove(tagToRemove: NbTagComponent): void {
+    const index = this.spurenTags.indexOf(tagToRemove.text);
+    if (index > -1) {
+      this.spurenTags.splice(index, 1);
+    }
+    const indexUsed = this.usedAllergenes.indexOf(tagToRemove.text);
+    if (indexUsed > -1) {
+      this.usedAllergenes.splice(indexUsed, 1);
+    }
   }
   //Change Funktion für Allergene
   onSelectionChange() {
-    this.tags.push(this.input.nativeElement.value);
-    this.input.nativeElement.value = '';
-    this.filteredControlOptions$ = of(this.options);
-    this.filteredTags$ = of(this.tags);
+    let checker: boolean = false;
+    for(let tag in this.usedAllergenes) {
+      if(this.usedAllergenes[tag] == this.input.nativeElement.value) {
+        this.input.nativeElement.value = '';
+        checker = true;
+        this.allergenPopover = "Dieses Allergen wurde bereits als Allergen oder Spurenelement ausgewählt";
+        this.popovers?.filter(item => item.popoverClass == "allergen").shift()?.show();
+        setTimeout(() => {
+          this.popovers?.filter(item => item.popoverClass == "allergen").shift()?.hide();
+        }, 2000);
+        break;
+      }
+    }
+    if(checker === false) {
+      this.tags.push(this.input.nativeElement.value);
+      this.usedAllergenes.push(this.input.nativeElement.value);
+      this.input.nativeElement.value = '';
+      this.filteredControlOptions$ = of(this.options);
+    }
   }
   //Change Funktion für Spuren
   onSelectionTagChange() {
-    this.spurenTags.push(this.input.nativeElement.value);
-    this.tagInput.nativeElement.value = '';
-    this.filteredTags$ = of(this.spurenTags);
+    let checker: boolean = false;
+    for(let tag in this.usedAllergenes) {
+      if(this.usedAllergenes[tag] == this.tagInput.nativeElement.value) {
+        this.tagInput.nativeElement.value = '';
+        checker = true;
+        this.spurenPopover = "Dieses Allergen wurde bereits als Allergen oder Spurenelement ausgewählt";
+        this.popovers?.filter(item => item.popoverClass == "spur").shift()?.show();
+        setTimeout(() => {
+          this.popovers?.filter(item => item.popoverClass == "spur").shift()?.hide();
+        }, 2000);
+        break;
+      }
+    }
+    if(checker === false) {
+      this.spurenTags.push(this.tagInput.nativeElement.value);
+      this.usedAllergenes.push(this.tagInput.nativeElement.value);
+      this.tagInput.nativeElement.value = '';
+      this.filteredControlOptions$ = of(this.options);
+    }
   }
 }

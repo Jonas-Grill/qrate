@@ -12,10 +12,10 @@
             <nb-card>
                 <nb-card-body class="flex justify-center">
                     <div *ngIf="!isScanned">
-                        <nb-icon nbPrefix icon="image-outline" pack="eva"></nb-icon>
+                        <nb-icon nbPrefix icon="more-horizontal-outline" pack="eva"></nb-icon>
                     </div>
                     <div *ngIf="isScanned">
-                        <img class="mx-auto h-64 w-auto rounded-lg" src="/assets/Logo.PNG"> 
+                        <div>123453888</div> 
                     </div>
                 </nb-card-body>
                 <nb-card-footer>
@@ -54,7 +54,10 @@
                         nbInput
                         type="text"
                         placeholder="Allergene"
-                        [nbAutocomplete]="autoControl" />
+                        [nbAutocomplete]="autoControl" 
+                        [nbPopover]="allergenPopover"
+                        nbPopoverTrigger="noop"
+                        nbPopoverClass="allergen" nbPopoverPlacement="right"/>
 
                     <nb-autocomplete #autoControl (selectedChange)="onSelectionChange()">
 
@@ -84,18 +87,21 @@
                         nbInput
                         type="text"
                         placeholder="Spurenelemente"
-                        [nbAutocomplete]="autoControlTag" />
+                        [nbAutocomplete]="autoControlTag"
+                        [nbPopover]="spurenPopover"
+                        nbPopoverTrigger="noop"
+                        nbPopoverClass="spur" nbPopoverPlacement="right"/>
 
                     <nb-autocomplete #autoControlTag (selectedChange)="onSelectionTagChange()">
 
-                    <nb-option *ngFor="let filterTag of filteredTags$ | async" [value]="filterTag">
-                        {{ filterTag }}
+                    <nb-option *ngFor="let spurOption of filteredControlOptions$ | async" [value]="spurOption">
+                        {{ spurOption }}
                     </nb-option>
 
                     </nb-autocomplete>
                     <div class="mt-2">
-                        <nb-tag-list (tagRemove)="onTagRemove($event)">
-                            <nb-tag removable *ngFor="let tag of spurenTags" [text]="tag"></nb-tag>
+                        <nb-tag-list (tagRemove)="onTagSpurRemove($event)">
+                            <nb-tag removable *ngFor="let spurTag of spurenTags" [text]="spurTag"></nb-tag>
                         </nb-tag-list>
                     </div>
                   </nb-accordion-item-body>

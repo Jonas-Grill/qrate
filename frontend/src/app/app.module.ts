@@ -22,6 +22,7 @@ import {NbTabsetModule, NbCardModule, NbActionsModule} from '@nebular/theme';
 import { TabbarComponent } from './tabbar/tabbar.component';
 import { BeitraegeComponent } from './beitraege/beitraege.component';
 import { HinzufuegenComponent } from './hinzufuegen/hinzufuegen.component';
+import { ProduktinfosComponent } from './produktinfos/produktinfos.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HinzufuegenComponent } from './hinzufuegen/hinzufuegen.component';
     TabbarComponent,
     BeitraegeComponent,
     HinzufuegenComponent,
+    ProduktinfosComponent,
   ],
   imports: [
     BrowserModule,
