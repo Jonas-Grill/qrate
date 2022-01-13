@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@angular/service-worker": "^12.2.13",
+    "@ericblade/quagga2": "^1.4.2",
     "@nebular/eva-icons": "8.0.0",
     "@nebular/theme": "^8.0.0",
     "eva-icons": "^1.1.2",
