@@ -15,6 +15,7 @@ import {
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from "@angular/forms";
+import { PreferencesanddietComponent } from './preferencesanddiet/preferencesanddiet.component';
 import { BarcodescannerComponent } from './barcodescanner/barcodescanner.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from "../environments/environment";
@@ -23,6 +24,7 @@ import {environment} from "../environments/environment";
   declarations: [
     AppComponent,
     LoginComponent,
+    PreferencesanddietComponent,
     BarcodescannerComponent,
   ],
   imports: [
