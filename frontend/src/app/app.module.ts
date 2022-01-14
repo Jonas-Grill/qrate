@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {NbTabsetModule, NbCardModule, NbActionsModule} from '@nebular/theme';
+import { PreferencesanddietComponent } from './preferencesanddiet/preferencesanddiet.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from "../environments/environment";
 import { TabbarComponent } from './tabbar/tabbar.component';
@@ -35,6 +36,7 @@ import { BarcodescannerComponent } from './barcodescanner/barcodescanner.compone
     BeitraegeComponent,
     HinzufuegenComponent,
     ProduktinfosComponent,
+    PreferencesanddietComponent,
     BarcodescannerComponent,
   ],
   imports: [
