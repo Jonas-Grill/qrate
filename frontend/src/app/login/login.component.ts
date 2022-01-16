@@ -8,6 +8,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import {NbPopoverDirective} from "@nebular/theme";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -54,31 +55,44 @@ export class LoginComponent implements OnInit {
   onSubmitClick(): void {
     if (!this.email || this.email.length === 0) {
       this.emailPopover = "Bitte gib deine E-Mail Adresse ein";
-      this.popovers?.filter(item => item.popoverClass == "email").shift()?.show();
+      this.showPopover("email");
     } else if (!this.re.test(this.email)) {
       this.emailPopover = "Bitte gib eine gültige E-Mail Adresse ein";
-      this.popovers?.filter(item => item.popoverClass == "email").shift()?.show();
+      this.showPopover("email");
     }
     if (!this.password || this.password.length === 0) {
       this.passwordPopover = "Bitte gib ein Passwort ein";
-      this.popovers?.filter(item => item.popoverClass == "password").shift()?.show();
+      this.showPopover("password");
     }
     if (this.isRegister) {
       if (this.password && this.password.length < 8) {
-        this.passwordPopover = "Das passwort ist nicht sicher genug";
-        this.popovers?.filter(item => item.popoverClass == "password").shift()?.show();
+        this.passwordPopover = "Das Passwort ist nicht sicher genug";
+        this.showPopover("password");
       } else if (this.password !== this.repeatPassword) {
         this.passwordPopover = "Die Passwörter stimmen nicht überein";
-        this.popovers?.filter(item => item.popoverClass == "password").shift()?.show();
+        this.showPopover("password");
       }
       if (!this.username || this.username.length === 0) {
         this.usernamePopover = "Bitte überlege dir einen Username";
-        this.popovers?.filter(item => item.popoverClass == "username").shift()?.show();
+        this.showPopover("username");
       } else if (this.username == "Gina") {
         this.usernamePopover = "Dieser Username ist schon vergeben";
-        this.popovers?.filter(item => item.popoverClass == "username").shift()?.show();
+        this.showPopover("username");
       }
     }
+
+    if (!this.popovers?.filter(item => item.isShown).shift()) {
+      if (this.isRegister) {
+        this.router.navigate(['/', 'preferencesanddiet']);
+      } else {
+        // TODO
+        this.router.navigate(['/', 'preferencesanddiet']);
+      }
+    }
+  }
+
+  private showPopover(popoverClass: String): void {
+    this.popovers?.filter(item => item.popoverClass == popoverClass).shift()?.show();
   }
 }
 
