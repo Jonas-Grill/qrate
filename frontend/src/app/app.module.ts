@@ -19,14 +19,26 @@ import {
   NbCardModule,
   NbTabsetModule,
   NbSidebarModule,
-  NbWindowModule,
+  NbWindowModule, NbFormFieldModule, NbAutocompleteModule,
+  NbTagModule, NbSelectModule
 } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { LoginComponent } from './login/login.component';
-import { FormsModule } from "@angular/forms";
+
 import { ProfileComponent } from './profile/profile.component';
 import { DialogLogoutComponent } from './dialogLogout/dialogLogout.component';
 import { DialogChangePasswordComponent } from './dialog-change-password/dialog-change-password.component';
+  
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { PreferencesanddietComponent } from './preferencesanddiet/preferencesanddiet.component';
+import {ServiceWorkerModule} from "@angular/service-worker";
+import {environment} from "../environments/environment";
+import { TabbarComponent } from './tabbar/tabbar.component';
+import { BeitraegeComponent } from './beitraege/beitraege.component';
+import { HinzufuegenComponent } from './hinzufuegen/hinzufuegen.component';
+import { ProduktinfosComponent } from './produktinfos/produktinfos.component';
+import { BarcodescannerComponent } from './barcodescanner/barcodescanner.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +47,12 @@ import { DialogChangePasswordComponent } from './dialog-change-password/dialog-c
     ProfileComponent,
     DialogLogoutComponent,
     DialogChangePasswordComponent,
+    TabbarComponent,
+    BeitraegeComponent,
+    HinzufuegenComponent,
+    ProduktinfosComponent,
+    PreferencesanddietComponent,
+    BarcodescannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +68,7 @@ import { DialogChangePasswordComponent } from './dialog-change-password/dialog-c
     NbIconModule,
     NbButtonGroupModule,
     FormsModule,
+    ReactiveFormsModule,
     NbPopoverModule,
     NbAccordionModule,
     NbActionsModule,
@@ -58,6 +77,15 @@ import { DialogChangePasswordComponent } from './dialog-change-password/dialog-c
     NbSidebarModule,
     NbWindowModule.forRoot(),
 
+    NbFormFieldModule,
+    NbAutocompleteModule,
+    NbTagModule,
+    NbSelectModule,
+    MatToolbarModule,
+    NbTabsetModule,
+    NbCardModule,
+    NbActionsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
