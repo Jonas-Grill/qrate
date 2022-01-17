@@ -1,9 +1,9 @@
 import {Component, OnInit, Optional} from '@angular/core';
-import {Allergene} from "./allergenes";
+import {Allergene} from "../preferencesanddiet/allergenes";
 import {NbWindowControlButtonsConfig, NbWindowService} from "@nebular/theme";
 import {DialogLogoutComponent} from "../dialogLogout/dialogLogout.component";
 import {DialogChangePasswordComponent} from "../dialog-change-password/dialog-change-password.component";
-
+import {beitragType} from "../beitraege/beitraege.component";
 
 @Component({
   selector: 'app-profile',
@@ -36,6 +36,45 @@ export class ProfileComponent implements OnInit {
   username = 'Max Mustermann';
   usermail = 'max.mustermann@beispielmail.com';
   userlevel = 'Enthusiastischer Essenskenner';
+
+  displayedBeitraege: beitragType[] = [
+    {
+      name: "Apfel",
+      image: "/assets/Logo.PNG",
+      rating: 5,
+      user: "niklas",
+      allergens: ["c2c", "aa4"],
+      spuren: ["spur 1", "spur 2"],
+      art: "Vegan"
+    },
+    {
+      name: "Banane",
+      image: "/assets/Logo.PNG",
+      rating: 3,
+      user: "niklas",
+      allergens: ["c2c", "aa4"],
+      spuren: ["spur 1", "spur 2"],
+      art: "Vegan"
+    },
+    {
+      name: "Pudding",
+      image: "/assets/Logo.PNG",
+      rating: 3,
+      user: "niklas",
+      allergens: ["c2c", "aa4","xx1", "xyzS"],
+      spuren: ["spur 1", "spur 2"],
+      art: "Vegetarisch"
+    },
+    {
+      name: "Schokolade",
+      image: "/assets/Logo.PNG",
+      rating: 3,
+      user: "niklas",
+      allergens: ["c2c", "aa4"],
+      spuren: ["spur 1", "spur 2"],
+      art: "Vegetarisch"
+    }
+  ];
 
   openWindowLogout() {
     const buttonsConfig: NbWindowControlButtonsConfig = {
