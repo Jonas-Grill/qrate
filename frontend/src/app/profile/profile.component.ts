@@ -4,6 +4,7 @@ import {NbWindowControlButtonsConfig, NbWindowService} from "@nebular/theme";
 import {DialogLogoutComponent} from "../dialogLogout/dialogLogout.component";
 import {DialogChangePasswordComponent} from "../dialog-change-password/dialog-change-password.component";
 import {beitragType} from "../beitraege/beitraege.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,8 @@ export class ProfileComponent implements OnInit {
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
 
-  constructor(@Optional() private windowService: NbWindowService) {}
+  constructor(@Optional() private windowService: NbWindowService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.allergielist.sort();

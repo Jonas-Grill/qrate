@@ -3,6 +3,7 @@ import Quagga from '@ericblade/quagga2';
 import { UpdateService } from './update.service';
 import { environment} from "../../environments/environment";
 import { getMainBarcodeScanningCamera } from './camera-access';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-barcodescanner',
@@ -15,7 +16,8 @@ export class BarcodescannerComponent implements AfterViewInit {
   acceptAnyCode = true;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
-              private updateService: UpdateService) { }
+              private updateService: UpdateService,
+              private router: Router) { }
 
   ngAfterViewInit(): void {
     if (!navigator.mediaDevices || !(typeof navigator.mediaDevices.getUserMedia === 'function')) {
@@ -106,7 +108,9 @@ export class BarcodescannerComponent implements AfterViewInit {
 
   onBarcodeScanned(code: string) {
     console.log(code);
+    Quagga.stop();
     // NAVIGATE TO RESULTS
+    this.router.navigate(['/','produktinfo']);
   }
 
 }

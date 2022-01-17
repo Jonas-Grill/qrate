@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Allergene} from "./allergenes";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-preferencesanddiet',
@@ -12,7 +13,7 @@ export class PreferencesanddietComponent implements OnInit {
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.allergielist.sort();
@@ -83,6 +84,7 @@ export class PreferencesanddietComponent implements OnInit {
 
   onClickNext() {
     // ROUTING
+    this.router.navigate(['/','beitraege']);
   }
 }
 
