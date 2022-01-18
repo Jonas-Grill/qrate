@@ -1,4 +1,3 @@
-import "./deps.ts";
 import {Application} from "./deps.ts";
 import {oakCors} from "./deps.ts";
 import router from "./routes.ts";
@@ -12,7 +11,7 @@ app.use(
             "http://localhost:5000",
         ],
         credentials: true,
-    }),
+    })
 );
 app.use(router.routes());
 app.use(router.allowedMethods());
