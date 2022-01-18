@@ -1,6 +1,6 @@
 # Overview
 ## How to start app
-deno run --allow-net --allow-write --allow-read --allow-plugin --allow-env --unstable server.ts
+deno run --allow-net --allow-write --allow-read --allow-env --unstable server.ts
 
 run on version 1.11.3
 
