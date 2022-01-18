@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbIconConfig } from '@nebular/theme';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {NbIconConfig} from '@nebular/theme';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,5 @@ import { NbIconConfig } from '@nebular/theme';
 
 export class AppComponent {
   title = 'qrate';
-  bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
+  bellIconConfig: NbIconConfig = {icon: 'bell-outline', pack: 'eva'};
 }

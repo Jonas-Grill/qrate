@@ -4,7 +4,6 @@ import {
   Component,
   OnInit,
   QueryList,
-  ViewChild,
   ViewChildren
 } from '@angular/core';
 import {NbPopoverDirective} from "@nebular/theme";
