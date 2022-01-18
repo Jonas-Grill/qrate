@@ -1,6 +1,6 @@
 import User from "../types/user.ts";
 import * as userRepo from "../repositories/userRepo.ts";
-import * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
+import {bcrypt} from "../deps.ts";
 
 export const getUserByUsername = async (username: string) => {
     return await userRepo.getUserByUsername(username);
