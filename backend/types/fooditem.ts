@@ -14,5 +14,5 @@ export default interface FooditemSchema {
        salt: number
     };
     diet: string;
-    barcode: string[];
+    barcodes: string[];
 }
