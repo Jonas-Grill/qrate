@@ -9,21 +9,33 @@ import {
   NbLayoutModule,
   NbButtonModule,
   NbAlertModule,
-  NbCheckboxModule, NbCardModule,
-  NbInputModule, NbIconModule, NbButtonGroupModule, NbPopoverModule, NbAccordionModule, NbCardComponent
+  NbCheckboxModule,
+  NbInputModule, NbIconModule, NbButtonGroupModule, NbPopoverModule,
+  NbAccordionModule, NbFormFieldModule, NbAutocompleteModule,
+  NbTagModule, NbSelectModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {LoginComponent} from './login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {NbTabsetModule, NbCardModule, NbActionsModule} from '@nebular/theme';
 import {PreferencesanddietComponent} from './preferencesanddiet/preferencesanddiet.component';
 import {BarcodescannerComponent} from './barcodescanner/barcodescanner.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from "../environments/environment";
+import {TabbarComponent} from './tabbar/tabbar.component';
+import {BeitraegeComponent} from './beitraege/beitraege.component';
+import {HinzufuegenComponent} from './hinzufuegen/hinzufuegen.component';
+import {ProduktinfosComponent} from './produktinfos/produktinfos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    TabbarComponent,
+    BeitraegeComponent,
+    HinzufuegenComponent,
+    ProduktinfosComponent,
     PreferencesanddietComponent,
     BarcodescannerComponent,
   ],
@@ -41,10 +53,18 @@ import {environment} from "../environments/environment";
     NbIconModule,
     NbButtonGroupModule,
     FormsModule,
+    ReactiveFormsModule,
     NbPopoverModule,
     NbAccordionModule,
+    NbFormFieldModule,
+    NbAutocompleteModule,
+    NbTagModule,
+    NbSelectModule,
+    MatToolbarModule,
+    NbTabsetModule,
     NbCardModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    NbActionsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [],
   bootstrap: [AppComponent]
