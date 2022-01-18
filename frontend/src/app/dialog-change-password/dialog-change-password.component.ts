@@ -8,7 +8,7 @@ import {NbPopoverDirective, NbWindowRef} from "@nebular/theme";
 })
 export class DialogChangePasswordComponent {
   password: any;
-  passwordnew : any;
+  passwordnew: any;
   passwordnewrep: any;
   userpassword: any;
   passwordPopover: any;
@@ -17,7 +17,8 @@ export class DialogChangePasswordComponent {
 
   @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
-  constructor(public windowRef: NbWindowRef) {}
+  constructor(public windowRef: NbWindowRef) {
+  }
 
   onInput(): void {
     this.popovers?.forEach(popover => popover.hide())
@@ -46,5 +47,4 @@ export class DialogChangePasswordComponent {
   close() {
     this.windowRef.close();
   }
-
 }

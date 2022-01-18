@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { NbWindowRef } from '@nebular/theme';
-import { Router} from "@angular/router";
+import {Component} from '@angular/core';
+import {NbWindowRef} from '@nebular/theme';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dialog',
@@ -10,7 +10,8 @@ import { Router} from "@angular/router";
 export class DialogLogoutComponent {
 
   constructor(public windowRef: NbWindowRef,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   close() {
     this.windowRef.close();
@@ -18,7 +19,6 @@ export class DialogLogoutComponent {
 
   onLogout() {
     this.windowRef.close();
-    this.router.navigate(['/','login']);
+    this.router.navigate(['/', 'login']);
   }
-
 }

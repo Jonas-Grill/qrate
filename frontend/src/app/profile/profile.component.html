@@ -16,7 +16,8 @@
                 <div class="py-5">
                   <a href="#" (click)="openWindowPassword()"> Passwort ändern?</a>
                 </div>
-                <button nbButton fullWidth class="open-window relative flex justify-center" status="primary" (click)="openWindowLogout()">Abmelden
+                <button nbButton fullWidth class="open-window relative flex justify-center" status="primary"
+                        (click)="openWindowLogout()">Abmelden
                 </button>
               </nb-tab>
               <nb-tab tabIcon="checkmark-square-2-outline">
@@ -63,7 +64,7 @@
                 </div>
               </nb-tab>
               <nb-tab tabIcon="image-outline">
-                <div *ngFor = "let data of displayedBeitraege">
+                <div *ngFor="let data of displayedBeitraege">
                   <nb-flip-card>
                     <nb-card-front>
                       <nb-card size="medium">
@@ -98,7 +99,7 @@
                           <div class="mt-2">
                             <h6>Allergene</h6>
                             <div class="mt-2">
-                              <nb-tag-list >
+                              <nb-tag-list>
                                 <nb-tag *ngFor="let allergen of data.allergens" [text]="allergen"></nb-tag>
                               </nb-tag-list>
                             </div>
@@ -106,7 +107,7 @@
                           <div class="mt-4">
                             <h6>Spurenelemente</h6>
                             <div class="mt-2">
-                              <nb-tag-list >
+                              <nb-tag-list>
                                 <nb-tag *ngFor="let spuren of data.spuren" [text]="spuren"></nb-tag>
                               </nb-tag-list>
                             </div>
