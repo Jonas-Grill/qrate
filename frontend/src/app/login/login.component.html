@@ -13,23 +13,32 @@
       <div>
         <div>
           <label for="email-address" class="sr-only">Email address</label>
-          <input nbInput fullWidth [nbPopover]="emailPopover" nbPopoverTrigger="noop" nbPopoverClass="email" nbPopoverPlacement="top" status="primary" [(ngModel)]="email" id="email-address" name="email" type="email" autocomplete="email"
+          <input nbInput fullWidth [nbPopover]="emailPopover" nbPopoverTrigger="noop" nbPopoverClass="email"
+                 nbPopoverPlacement="top" status="primary" [(ngModel)]="email" id="email-address" name="email"
+                 type="email" autocomplete="email"
                  required class="relative" placeholder="E-Mail Adresse" (input)="onInput()">
         </div>
         <div class="mt-2" *ngIf="isRegister">
           <label for="username" class="sr-only">Username</label>
-          <input nbInput fullWidth [nbPopover]="usernamePopover" nbPopover="Bitte gib deinen Username ein" nbPopoverTrigger="noop" nbPopoverClass="username" nbPopoverPlacement="top" status="primary" [(ngModel)]="username" id="username" name="username" type="text" autocomplete="username"
+          <input nbInput fullWidth [nbPopover]="usernamePopover" nbPopover="Bitte gib deinen Username ein"
+                 nbPopoverTrigger="noop" nbPopoverClass="username" nbPopoverPlacement="top" status="primary"
+                 [(ngModel)]="username" id="username" name="username" type="text" autocomplete="username"
                  required class="relative" placeholder="Username" (input)="onInput()">
         </div>
         <div class="mt-2">
           <label for="password" class="sr-only">Password</label>
-          <input nbInput fullWidth [nbPopover]="passwordPopover" nbPopover="Bitte gib dein Passwort ein" nbPopoverTrigger="noop" nbPopoverClass="password" nbPopoverPlacement="top" status="primary" [(ngModel)]="password" id="password" name="password" type="password"
+          <input nbInput fullWidth [nbPopover]="passwordPopover" nbPopover="Bitte gib dein Passwort ein"
+                 nbPopoverTrigger="noop" nbPopoverClass="password" nbPopoverPlacement="top" status="primary"
+                 [(ngModel)]="password" id="password" name="password" type="password"
                  autocomplete="current-password" required class="relative" placeholder="Passwort" (input)="onInput()">
         </div>
         <div class="mt-2" *ngIf="isRegister">
           <label for="password-repeat" class="sr-only">Password-repeat</label>
-          <input nbInput fullWidth [nbPopover]="passwordRepeatPopover" nbPopover="Bitte gib dein Passwort erneut ein" nbPopoverTrigger="noop" nbPopoverClass="passwordRepeat" nbPopoverPlacement="top" status="primary" [(ngModel)]="repeatPassword" id="password-repeat" name="password-repeat" type="password"
-                 autocomplete="current-password" required class="relative" placeholder="Passwort wiederholen" (input)="onInput()">
+          <input nbInput fullWidth [nbPopover]="passwordRepeatPopover" nbPopover="Bitte gib dein Passwort erneut ein"
+                 nbPopoverTrigger="noop" nbPopoverClass="passwordRepeat" nbPopoverPlacement="top" status="primary"
+                 [(ngModel)]="repeatPassword" id="password-repeat" name="password-repeat" type="password"
+                 autocomplete="current-password" required class="relative" placeholder="Passwort wiederholen"
+                 (input)="onInput()">
         </div>
       </div>
 
