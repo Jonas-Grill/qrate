@@ -1,5 +1,5 @@
 // DotENV
-import "https://deno.land/x/dotenv@v3.1.0/load.ts";
+
 
 // DJWT
 export type {Algorithm} from "https://deno.land/x/djwt@v2.4/algorithm.ts";
