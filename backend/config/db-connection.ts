@@ -1,12 +1,10 @@
 import {MongoClient} from "../deps.ts";
-import {} from "./config.ts"
+import {DB_LINK} from "./config.ts"
 
 const client = new MongoClient();
 
-//Connecting to a Mongo Atlas Database
-await client.connect(
-    `mongodb+srv://gaja:@buddy.ssoak.mongodb.net/?retryWrites=true&w=majority&authMechanism=SCRAM-SHA-1`,
-);
+//Connecting to a Local Mongo Database
+await client.connect(DB_LINK);
 
 const db = client.database("users");
 
