@@ -1,13 +1,13 @@
 _id: env_env_d78266492088822f3b28b079aa06769b60ef3116_sub
 type: Environment
 parentId: env_d78266492088822f3b28b079aa06769b60ef3116
-modified: 1638281134566
+modified: 1642534879904
 created: 1638278196034
 name: OpenAPI env
 data:
-  scheme: https
-  base_path: /v1
-  host: api.server.test
+  scheme: http
+  base_path: ""
+  host: localhost:8008
 dataPropertyOrder:
   "&":
     - scheme

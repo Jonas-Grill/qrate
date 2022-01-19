@@ -1,0 +1,21 @@
+_id: req_9833bb9827ba47bd9af4bd05954e934d
+type: Request
+parentId: wrk_1888dffe20a8474cb2e464f928eed1c0
+modified: 1642534912068
+created: 1642534648783
+url: "{{ _.base_url }}/fooditems/18776"
+name: Get Fooditem
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1642534648783
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

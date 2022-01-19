@@ -1,0 +1,21 @@
+_id: req_3fc8a57162f94581aefa58e41b5c7387
+type: Request
+parentId: wrk_1888dffe20a8474cb2e464f928eed1c0
+modified: 1642534884900
+created: 1639148441652
+url: "{{ _.base_url }}/"
+name: Good First Request
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1639148441652
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
