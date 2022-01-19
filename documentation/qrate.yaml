@@ -1,0 +1,356 @@
+openapi: 3.0.3
+info:
+  title: QRate
+  description: QRate
+  version: 1.0.0
+servers:
+  - url: 'localhost:3000'
+paths:
+  /users?username=:
+    post:
+      summary: Registers a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: Created
+        409:
+          description: Username/E-Mail address already in use
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: Username is already in use
+    get:
+      summary: Returns a user
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: false
+          description: Username of wanted user
+      security:
+        - bearerAuth: [ ]
+      responses:
+        200:
+          description: Returns User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+    put:
+      summary: Updates user
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+        - bearerAuth: [ ]
+      responses:
+        200:
+          description: Returns updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /login:
+    post:
+      summary: Authenticates User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: Alex
+                password:
+                  type: string
+                  example: 12345
+      responses:
+        200:
+          description: Returns a bearer token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: 534t9ijg9834eguiv0ß98ww4e05rk
+  /fooditems:
+    get:
+      summary: Returns all fooditems
+      responses:
+        200:
+          description: fooditems
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fooditem'
+    post:
+      summary: Creates a new fooditem
+      responses:
+        201:
+          description: Returns the created fooditem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fooditem'
+  /fooditems/{id}:
+    get:
+      summary: Returns a fooditem by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of fooditem to fetch
+          required: true
+          schema:
+            $ref: '#/components/schemas/Id'
+      responses:
+        200:
+          description: Returns the requested fooditem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fooditem'
+        404:
+          description: A fooditem with the specified ID was not found
+  /fooditemSuggestions:
+    get:
+      summary: Returns all fooditem suggestions
+      responses:
+        200:
+          description: fooditems
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FooditemSuggestion'
+    post:
+      summary: Creates a new fooditem
+      responses:
+        201:
+          description: Returns the created fooditem suggestions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FooditemSuggestion'
+  /fooditemSuggestions/{id}:
+    get:
+      summary: Returns a fooditem suggestions by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of fooditem suggestions to fetch
+          required: true
+          schema:
+            $ref: '#/components/schemas/Id'
+      responses:
+        200:
+          description: Returns a fooditem suggestion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fooditem'
+        404:
+          description: A fooditem suggestions with the specified ID was not found
+    post:
+      summary: Post a vote
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                upVote:
+                  type: boolean
+      responses:
+        200:
+          description: Feedback
+components:
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: You are not authorized, please first sign in to view this
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          example: 611d5cd230dd29fc60df7b94
+        username:
+          type: string
+          example: Gina
+        password:
+          writeOnly: true
+          type: string
+          example: 1234
+        eMail:
+          type: string
+          example: alex.salzmann@web.de
+        userLevel:
+          $ref: '#/components/schemas/UserLevel'
+        allergene:
+          type: array
+          items:
+            $ref: '#/components/schemas/Allergen'
+        diet:
+          type: string
+          enum:
+            - Vegan
+            - Vegetarisch
+            - Pescetarisch
+            - Null
+      required:
+        - password
+        - username
+        - eMail
+
+    Allergen:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+            - Laktose
+            - Milchzucker
+            - Gluten
+          example: Lactose
+        tracesOf:
+          type: boolean
+          example: true
+
+    UserLevel:
+      readOnly: true
+      type: object
+      properties:
+        levelName:
+          type: string
+          enum:
+            - Kadett
+          example: Kadett
+        levelValue:
+          type: integer
+          minimum: 1
+          maximum: 10
+          example: 1
+        exp:
+          type: integer
+          example: 100
+
+    JWT-Token:
+      type: string
+      example: eyJhbGciOiJIUzUxMiJ9.eyJVc2VybmFtZSI6IkdpbmEiLCJleHAiOjE2MzgzNjQwMzMsImlhdCI6MTYzODM2NDAzMywiUGFzc3dvcmQiOiIxMjM0In0.cqPtZ3bAdcDlVZdPc9yFleDZrH_dIpAv-lKtMcwMTmH5w6szvaWdYoLkQXVk6hkZG1hE0TehtbnuM9f_jgYx1w
+
+    Fooditem:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          example: 611d5cd230dd29fc60df7b94
+        name:
+          type: string
+          example: Banana Smoothie
+        pictures:
+          type: array
+        allergene:
+          type: array
+          example:
+            - Lactose
+            - Milksugar
+            - Gluten
+        nutritionScore:
+          type: object
+          properties:
+            calories:
+              type: integer
+            fat:
+              type: integer
+            carbs:
+              type: integer
+            sugar:
+              type: integer
+            protein:
+              type: integer
+            salt:
+              type: integer
+        diet:
+          type: string
+          enum:
+            - Vegan
+            - Vegetarisch
+            - Pescetarisch
+        barcodes:
+          type: array
+          example:
+            - 4311536966101
+      required:
+        - name
+        - allergene
+        - nutritionScore
+        - diet
+        - barcode
+
+    FooditemSuggestion:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          example: 611d5cd230dd29fc60df7b94
+        fooditem:
+          $ref: '#/components/schemas/Fooditem'
+        creator:
+          type: string
+        upVotes:
+          type: integer
+        downVotes:
+          type: integer
+        rating:
+          type: integer
+
+    Id:
+      type: integer
+      format: int64
+      minimum: 1
+      example: 611d5cd230dd29fc60df7b94
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: [ ]

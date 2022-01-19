@@ -1,16 +1,16 @@
 # QRate:
 
-<img src="/documentation/Logo.png" width="300" height="300" />
+<img src="/documentation/Logo.PNG" width="300" height="300" />
 
 Eine progressive Webapp, in der man Barcodes scannen kann, um herauszufinden, ob die Lebensmittel zur persönlichen Ernährungsweise und potenziellen Allergien passen. Gleichzeitig kann die Community in QRate neue Lebensmittel hinzufügen. Hier wird über ein Lebensmittelbewertungssystem die Korrektheit der neu angelegten Lebensmittel sichergestellt. Ein Nutzerbewertungssystem motiviert die Nutzer über Gamification aktiv die Inhalte mitzugestalten, da man Punkte für Interaktionen in der Community sammelt.
 
 ## Team
 
-**Alexander Salzmann:** Backend, Erstellung PPT, Organisation  
+**Alexander Salzmann:** Backend, Erstellung PPT, Code Review    
 **Anne Krämer:** Frontend, Logo, Code Review  
-**Gina Weber:** Frontend, Dokumentation, Linting-Integration, Code Review, Organisation  
-**Jonas Grill:** Backend, Code Review  
-**Niklas Schäfer:** Frontend, Code Review  
+**Gina Weber:** Frontend, Dokumentation, Code Review, Organisation  
+**Jonas Grill:** Backend, Linting-Integration, Code Review  
+**Niklas Schäfer:** Frontend, Dokumentation, Code Review  
 
 ## Unsere Webseite
 

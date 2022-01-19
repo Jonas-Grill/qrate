@@ -1,0 +1,52 @@
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <img class="mx-auto h-64 w-auto rounded-lg" src="/assets/Logo.PNG">
+    </div>
+    <div class="flex justify-center w-full">
+      <nb-button-group size="large" class="flex w-full" (valueChange)="updateIsLogin($event)">
+        <button [pressed]="!isRegister" nbButtonToggle fullWidth value="Login">Login</button>
+        <button [pressed]="isRegister" nbButtonToggle fullWidth value="Register">Registrieren</button>
+      </nb-button-group>
+    </div>
+    <div class="mt-8 space-y-6">
+      <div>
+        <div>
+          <label for="email-address" class="sr-only">Email address</label>
+          <input nbInput fullWidth [nbPopover]="emailPopover" nbPopoverTrigger="noop" nbPopoverClass="email" nbPopoverPlacement="right" status="primary" [(ngModel)]="email" id="email-address" name="email" type="email" autocomplete="email"
+                 required class="relative" placeholder="E-Mail Adresse" (input)="onInput()">
+        </div>
+        <div class="mt-2" *ngIf="isRegister">
+          <label for="username" class="sr-only">Username</label>
+          <input nbInput fullWidth [nbPopover]="usernamePopover" nbPopover="Bitte gib deinen Username ein" nbPopoverTrigger="noop" nbPopoverClass="username" nbPopoverPlacement="right" status="primary" [(ngModel)]="username" id="username" name="username" type="text" autocomplete="username"
+                 required class="relative" placeholder="Username" (input)="onInput()">
+        </div>
+        <div class="mt-2">
+          <label for="password" class="sr-only">Password</label>
+          <input nbInput fullWidth [nbPopover]="passwordPopover" nbPopover="Bitte gib dein Passwort ein" nbPopoverTrigger="noop" nbPopoverClass="password" nbPopoverPlacement="right" status="primary" [(ngModel)]="password" id="password" name="password" type="password"
+                 autocomplete="current-password" required class="relative" placeholder="Passwort" (input)="onInput()">
+        </div>
+        <div class="mt-2" *ngIf="isRegister">
+          <label for="password-repeat" class="sr-only">Password-repeat</label>
+          <input nbInput fullWidth [nbPopover]="passwordRepeatPopover" nbPopover="Bitte gib dein Passwort erneut ein" nbPopoverTrigger="noop" nbPopoverClass="passwordRepeat" nbPopoverPlacement="right" status="primary" [(ngModel)]="repeatPassword" id="password-repeat" name="password-repeat" type="password"
+                 autocomplete="current-password" required class="relative" placeholder="Passwort wiederholen" (input)="onInput()">
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div class="text-sm">
+          <a href="#">
+            Passwort vergessen?
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <button nbButton fullWidth class="relative flex justify-center" status="primary" (click)="onSubmitClick()">
+          <nb-icon class="absolute left-3" icon="unlock-outline"></nb-icon>
+          {{isRegister ? 'Registrieren' : 'Login'}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
