@@ -93,5 +93,3 @@ export class LoginComponent implements OnInit {
     this.popovers?.filter(item => item.popoverClass == popoverClass).shift()?.show();
   }
 }
-
-
