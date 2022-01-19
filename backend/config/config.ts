@@ -1,4 +1,6 @@
-import {Algorithm} from "https://deno.land/x/djwt@v2.4/algorithm.ts";
+import {Algorithm} from "../deps.ts";
+
+import "https://deno.land/x/dotenv@v3.1.0/load.ts";
 
 const DENO_DIR = parseInt(Deno.env.get('DENO_DIR') || "/packages");
 const PORT = parseInt(Deno.env.get('SERVER_PORT') || "8000");

@@ -1,4 +1,4 @@
-import {Bson} from "https://deno.land/x/mongo@v0.28.1/mod.ts";
+import {Bson} from "../deps.ts";
 import db from "../config/db-connection.ts";
 import User from "../types/user.ts";
 

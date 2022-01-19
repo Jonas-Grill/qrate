@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PreferencesanddietComponent} from './preferencesanddiet.component';
+import {DialogLogoutComponent} from './dialogLogout.component';
 
-describe('PreferencesanddietComponent', () => {
-  let component: PreferencesanddietComponent;
-  let fixture: ComponentFixture<PreferencesanddietComponent>;
+describe('DialogComponent', () => {
+  let component: DialogLogoutComponent;
+  let fixture: ComponentFixture<DialogLogoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PreferencesanddietComponent]
+      declarations: [DialogLogoutComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PreferencesanddietComponent);
+    fixture = TestBed.createComponent(DialogLogoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

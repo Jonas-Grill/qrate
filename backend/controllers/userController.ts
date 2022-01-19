@@ -3,13 +3,13 @@ import {
     Request,
     Response,
     State,
-} from "https://deno.land/x/oak@v10.0.0/mod.ts";
+} from "../deps.ts";
 import {
     create,
     getNumericDate,
     Header,
     Payload,
-} from "https://deno.land/x/djwt@v2.4/mod.ts";
+} from "../deps.ts";
 import {JWT_ALG, SECRET} from ".././config/config.ts";
 import * as userService from "../services/userService.ts";
 import User from "../types/user.ts";
