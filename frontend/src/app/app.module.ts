@@ -29,7 +29,6 @@ import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {NbTabsetModule, NbCardModule, NbActionsModule} from '@nebular/theme';
 import {PreferencesanddietComponent} from './preferencesanddiet/preferencesanddiet.component';
 import {BarcodescannerComponent} from './barcodescanner/barcodescanner.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
@@ -38,7 +37,6 @@ import {TabbarComponent} from './tabbar/tabbar.component';
 import {BeitraegeComponent} from './beitraege/beitraege.component';
 import {HinzufuegenComponent} from './hinzufuegen/hinzufuegen.component';
 import {ProduktinfosComponent} from './produktinfos/produktinfos.component';
-import {BarcodescannerComponent} from './barcodescanner/barcodescanner.component';
 import {ProfileComponent} from './profile/profile.component';
 import {DialogLogoutComponent} from './dialogLogout/dialogLogout.component';
 import {DialogChangePasswordComponent} from './dialog-change-password/dialog-change-password.component';
@@ -74,7 +72,6 @@ import {DialogChangePasswordComponent} from './dialog-change-password/dialog-cha
     ReactiveFormsModule,
     NbPopoverModule,
     NbAccordionModule,
-    NbActionsModule,
     NbCardModule,
     NbTabsetModule,
     NbSidebarModule,
@@ -84,8 +81,6 @@ import {DialogChangePasswordComponent} from './dialog-change-password/dialog-cha
     NbTagModule,
     NbSelectModule,
     MatToolbarModule,
-    NbTabsetModule,
-    NbCardModule,
     NbActionsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],

@@ -82,10 +82,9 @@ export class LoginComponent implements OnInit {
 
     if (!this.popovers?.filter(item => item.isShown).shift()) {
       if (this.isRegister) {
-        this.router.navigate(['/', 'preferencesanddiet']);
+        this.router.navigate(['/', 'ernaehrungsweise']);
       } else {
-        // TODO
-        this.router.navigate(['/', 'preferencesanddiet']);
+        this.router.navigate(['/', 'beitraege']);
       }
     }
   }
