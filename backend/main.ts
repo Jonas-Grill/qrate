@@ -1,5 +1,4 @@
-import {Application} from "./deps.ts";
-import {oakCors} from "./deps.ts";
+import {Application, oakCors} from "./deps.ts";
 import router from "./routes.ts";
 import {PORT} from "./config/config.ts";
 
