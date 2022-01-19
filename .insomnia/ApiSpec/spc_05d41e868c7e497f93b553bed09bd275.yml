@@ -1,0 +1,24 @@
+_id: spc_05d41e868c7e497f93b553bed09bd275
+type: ApiSpec
+parentId: wrk_1888dffe20a8474cb2e464f928eed1c0
+modified: 1638537915532
+created: 1638277539166
+fileName: QRate
+contents: "openapi: 3.0.3
+
+  info:
+
+  \  title: QRate
+
+  \  description: QRate
+
+  \  version: 1.0.0
+
+  servers:
+
+  \  - url: 'localhost:3000'
+
+  paths:
+
+  \  "
+contentType: yaml
