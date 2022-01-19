@@ -9,8 +9,8 @@ import {BarcodescannerComponent} from "./barcodescanner/barcodescanner.component
 import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
-  {path: 'profil', component: ProfileComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'profil', component: ProfileComponent},
   {path: 'ernaehrungsweise', component: PreferencesanddietComponent},
   {path: 'beitraege', component: BeitraegeComponent},
   {path: 'hinzufuegen', component: HinzufuegenComponent},
