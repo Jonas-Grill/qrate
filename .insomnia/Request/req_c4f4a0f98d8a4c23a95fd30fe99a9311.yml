@@ -1,17 +1,17 @@
-_id: req_9833bb9827ba47bd9af4bd05954e934d
+_id: req_c4f4a0f98d8a4c23a95fd30fe99a9311
 type: Request
-parentId: fld_defc849e4cb244ae90ec05ad2d69ea86
-modified: 1642706521698
-created: 1642534648783
-url: "{{ _.base_url }}/fooditems/24214"
-name: Get Fooditem
+parentId: fld_deb16e002d37475c9509959ba5f0bc3a
+modified: 1642706410440
+created: 1642706407150
+url: "{{ _.base_url }}/users"
+name: Register new User
 description: ""
-method: GET
+method: POST
 body: {}
 parameters: []
 headers: []
 authentication: {}
-metaSortKey: -1642534648783
+metaSortKey: -1642706317061
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
