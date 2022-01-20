@@ -109,6 +109,7 @@ export class BarcodescannerComponent implements AfterViewInit {
 
   onBarcodeScanned(code: string) {
     Quagga.stop();
+    sessionStorage.setItem('barcode',code);
     this.router.navigate(['/', 'produktinfo']);
   }
 }
