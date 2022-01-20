@@ -1,12 +1,15 @@
 import * as fooditemSuggestionRepo from "../repositories/fooditemSuggestionRepo.ts";
 import FooditemSuggestion from "../types/fooditemSuggestion.ts";
+import Fooditem from "../types/fooditem.ts";
 import invalidIdException from "../exceptions/invalidIdException.ts";
 import User from "../types/user.ts";
 
-export const createNewFooditemSuggestion = async (fooditemSuggestion: FooditemSuggestion, user: User) => {
-    fooditemSuggestion.creator = user.username;
+export const createNewFooditemSuggestion = async (fooditem: Fooditem, user: User) => {
+    const fooditemSuggestion: FooditemSuggestion = {
+        creator: user.username, fooditem: fooditem, rating: 0, votes: []
+    };
 
-    return await fooditemSuggestionRepo.createFooditemSuggestion(fooditemSuggestion);
+    return await fooditemSuggestionRepo.getFooditemSuggestionById(await fooditemSuggestionRepo.createFooditemSuggestion(fooditemSuggestion));
 }
 
 export const getAllFooditemSuggestions = async () => {
@@ -24,21 +27,21 @@ export const getFooditemSuggestion = async (id: string) => {
 }
 
 export const addVote = async (fooditemSuggestionId: string, upVote: boolean, user: User) => {
-    const fooditemSuggestion: FooditemSuggestion = await fooditemSuggestionRepo.getFooditemSuggestionById(fooditemSuggestionId);
+    const fooditemSuggestion: FooditemSuggestion | undefined = await fooditemSuggestionRepo.getFooditemSuggestionById(fooditemSuggestionId);
 
     if (!fooditemSuggestion) {
         throw new invalidIdException();
     }
 
     fooditemSuggestion.votes.push({
-        userId: user.userId,
+        userId: user._id.toString(),
         upVote: upVote,
     });
 
     fooditemSuggestion.rating = upVote ?
-        (fooditemSuggestion.rating + user.userLevel) : (fooditemSuggestion.rating + user.userLevel);
+        (fooditemSuggestion.rating + user.userLevel.levelValue) : (fooditemSuggestion.rating + user.userLevel.levelValue);
 
-    const newFooditemSuggestion: FooditemSuggestion = await fooditemSuggestionRepo.updateFooditemSuggestion(fooditemSuggestion);
+    const newFooditemSuggestion: FooditemSuggestion | undefined = await fooditemSuggestionRepo.updateFooditemSuggestion(fooditemSuggestion);
 
     if (!fooditemSuggestion) {
         throw new invalidIdException();
@@ -47,10 +50,10 @@ export const addVote = async (fooditemSuggestionId: string, upVote: boolean, use
     return newFooditemSuggestion;
 }
 
-export const getUpVoteCount = async (fooditemSuggestion: FooditemSuggestion) => {
+export const getUpVoteCount = (fooditemSuggestion: FooditemSuggestion) => {
     return fooditemSuggestion.votes.filter((x) => x.upVote).length;
 }
 
-export const getDownVoteCount = async (fooditemSuggestion: FooditemSuggestion) => {
+export const getDownVoteCount = (fooditemSuggestion: FooditemSuggestion) => {
     return fooditemSuggestion.votes.filter((x) => !x.upVote).length;
 }

@@ -8,15 +8,16 @@ import {JWT_ALG, SECRET} from "../config/config.ts";
 import User from "../types/user.ts";
 import * as userService from "../services/userService.ts";
 
-const authMiddleware = async ({
-                                  state,
-                                  response,
-                                  cookies,
-                              }: {
-    state: State;
-    response: Response;
-    cookies: Cookies;
-}, next: Function) => {
+const authMiddleware = async (
+    {
+        state,
+        response,
+        cookies,
+    }: {
+        state: State;
+        response: Response;
+        cookies: Cookies;
+    }, next: Function) => {
     var username: string;
 
     try {

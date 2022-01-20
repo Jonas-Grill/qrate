@@ -9,15 +9,15 @@ export const createFooditemSuggestion = async (fooditemSuggestion: FooditemSugge
     const id = await fooditemsSuggestions.insertOne({
         fooditem: fooditemSuggestion.fooditem,
         creator: fooditemSuggestion.creator,
-        votes: [],
-        rating: 0,
+        votes: fooditemSuggestion.votes,
+        rating: fooditemSuggestion.rating,
     });
 
     return id.toString();
 };
 
 export const getAllFooditemSuggestion = async () => {
-    return await fooditemsSuggestions.find({creator: {$ne: null}}).toArray();
+    return await fooditemsSuggestions.find({}).toArray();
 };
 
 export const getFooditemSuggestionById = async (id: string) => {
@@ -31,22 +31,28 @@ export const getFooditemSuggestionById = async (id: string) => {
 };
 
 export const updateFooditemSuggestion = async (fooditemSuggestion: FooditemSuggestion) => {
-    if (!Bson.ObjectId.isValid(fooditemSuggestion._id.id)) {
+    if (!fooditemSuggestion._id) {
+        throw new InvalidIdException();
+    }
+
+    if (!Bson.ObjectId.isValid(fooditemSuggestion._id.toString())) {
         throw new InvalidIdException();
     }
 
     await fooditemsSuggestions.updateOne(
         {
-            _id: new Bson.ObjectId(fooditemSuggestion._id.id),
+            _id: new Bson.ObjectId(fooditemSuggestion._id.toString()),
         },
         {
-            fooditem: fooditemSuggestion.fooditem,
-            votes: fooditemSuggestion.votes,
-            rating: fooditemSuggestion.rating,
+            $set: {
+                fooditem: fooditemSuggestion.fooditem,
+                votes: fooditemSuggestion.votes,
+                rating: fooditemSuggestion.rating,
+            }
         },
     );
 
-    return await getFooditemSuggestionById(fooditemSuggestion._id.id.toString());
+    return await getFooditemSuggestionById(fooditemSuggestion._id.toString());
 };
 
 export const deleteFooditemSuggestionById = async (id: string) => {
