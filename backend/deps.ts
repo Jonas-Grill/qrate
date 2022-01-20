@@ -13,7 +13,10 @@ export {
     Context, Request, Response,
     Router, Cookies, Application, isHttpError
 } from "https://deno.land/x/oak@v10.0.0/mod.ts";
-export type {State} from "https://deno.land/x/oak@v10.0.0/mod.ts";
+export type {State, RouteParams} from "https://deno.land/x/oak@v10.0.0/mod.ts";
+// OakLogger
+import logger from "https://deno.land/x/oak_logger@1.0.0/mod.ts";
+export {logger};
 
 //Bcrypt
 export * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
