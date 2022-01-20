@@ -190,6 +190,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FooditemSuggestion'
+  /allergens:
+    get:
+      summary: Returns all allergens
+      responses:
+        200:
+          description: allergens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: Laktose, Gluten
+  /diets:
+    get:
+      summary: Returns all diets
+      responses:
+        200:
+          description: diets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: Vegan, Vegetarisch
 components:
   responses:
     UnauthorizedError:
