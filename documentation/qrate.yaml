@@ -159,7 +159,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of fooditem suggestions to fetch
+          description: ID of the fooditem suggestion to fetch
           required: true
           schema:
             $ref: '#/components/schemas/Id'

@@ -9,8 +9,7 @@ export const createFooditemSuggestion = async (fooditemSuggestion: FooditemSugge
     const id = await fooditemsSuggestions.insertOne({
         fooditem: fooditemSuggestion.fooditem,
         creator: fooditemSuggestion.creator,
-        upVotes: fooditemSuggestion.upVotes,
-        downVotes: fooditemSuggestion.downVotes,
+        votes: fooditemSuggestion.votes,
         rating: fooditemSuggestion.rating,
     });
 
@@ -42,17 +41,16 @@ export const updateFooditemSuggestion = async (fooditemSuggestion: FooditemSugge
         },
         {
             fooditem: fooditemSuggestion.fooditem,
-            upVotes: fooditemSuggestion.upVotes,
-            downVotes: fooditemSuggestion.downVotes,
+            votes: fooditemSuggestion.votes,
             rating: fooditemSuggestion.rating,
         },
     );
 
-    return await getFooditemSuggestionById(fooditemSuggestion._id.id);
+    return await getFooditemSuggestionById(fooditemSuggestion._id.id.toString());
 };
 
 export const deleteFooditemSuggestionById = async (id: string) => {
-    if (!Bson.ObjectID.isValid(id)) {
+    if (!Bson.ObjectId.isValid(id)) {
         throw new InvalidIdException();
     }
 
