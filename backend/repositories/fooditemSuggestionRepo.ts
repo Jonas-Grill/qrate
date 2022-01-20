@@ -9,8 +9,8 @@ export const createFooditemSuggestion = async (fooditemSuggestion: FooditemSugge
     const id = await fooditemsSuggestions.insertOne({
         fooditem: fooditemSuggestion.fooditem,
         creator: fooditemSuggestion.creator,
-        votes: fooditemSuggestion.votes,
-        rating: fooditemSuggestion.rating,
+        votes: [],
+        rating: 0,
     });
 
     return id.toString();
