@@ -2,22 +2,25 @@ import db from '../config/db-connection.ts';
 import Fooditem from "../types/fooditem.ts";
 import {Bson} from "../deps.ts";
 import InvalidIdException from "../exceptions/invalidIdException.ts";
+import AllergenSchema from "../types/allergen.ts";
 
 const fooditems = db.collection<Fooditem>("fooditem");
 
 export const createFooditem = async (fooditem: Fooditem) => {
     const id = await fooditems.insertOne({
-        fooditem: fooditems.fooditem,
-        creator: fooditems.creator,
-        votes: fooditems.votes,
-        rating: fooditems.rating,
+        name: fooditems.name,
+        pictures: fooditems.pictures,
+        allergens: fooditems.allergens,
+        nutritionScore: fooditems.nutritionScore,
+        diet: fooditems.diet,
+        barcode: fooditems.barcode,
     });
 
     return id.toString();
 };
 
 export const getAllFooditem = async () => {
-    return await fooditems.find({creator: {$ne: null}}).toArray();
+    return await fooditems.find({creator: {$ne: null}}).toArray(); //@ToDo
 };
 
 export const getFooditemById = async (id: string) => {
@@ -30,7 +33,7 @@ export const getFooditemById = async (id: string) => {
     });
 };
 
-export const updateFooditemSuggestion = async (fooditemSuggestion: Fooditem) => {
+export const updateFooditem = async (fooditem: Fooditem) => {
     if (!Bson.ObjectId.isValid(fooditems._id.id)) {
         throw new InvalidIdException();
     }
@@ -40,9 +43,12 @@ export const updateFooditemSuggestion = async (fooditemSuggestion: Fooditem) => 
             _id: new Bson.ObjectId(fooditems._id.id),
         },
         {
-            fooditem: fooditems.fooditem,
-            votes: fooditems.votes,
-            rating: fooditems.rating,
+            name: fooditems.name,
+            pictures: fooditems.pictures,
+            allergens: fooditems.allergens,
+            nutritionScore: fooditems.nutritionScore,
+            diet: fooditems.diet,
+            barcode: fooditems.barcode,
         },
     );
 
