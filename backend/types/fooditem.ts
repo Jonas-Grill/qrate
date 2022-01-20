@@ -1,7 +1,8 @@
 import AllergenSchema from "./allergen.ts";
+import {Bson} from "../deps.ts"
 
 export default interface FooditemSchema {
-    _id: { $oid: string };
+    _id: Bson.ObjectId;
     name: string;
     pictures: [];
     allergens: AllergenSchema[];
