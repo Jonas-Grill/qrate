@@ -23,7 +23,7 @@ export const getFooditemSuggestion = async (id: string) => {
     return fooditemSuggestion;
 }
 
-export const addVote = async (fooditemSuggestionId: string, upVote: boolean, userId: string, userLevel: number) => {
+export const addVote = async (fooditemSuggestionId: string, upVote: boolean, user: User) => {
     const fooditemSuggestion: FooditemSuggestion = await fooditemSuggestionRepo.getFooditemSuggestionById(fooditemSuggestionId);
 
     if (!fooditemSuggestion) {
@@ -31,11 +31,12 @@ export const addVote = async (fooditemSuggestionId: string, upVote: boolean, use
     }
 
     fooditemSuggestion.votes.push({
-        userId: userId,
+        userId: user.userId,
         upVote: upVote,
     });
 
-    fooditemSuggestion.rating = upVote ? (fooditemSuggestion.rating + userLevel) : (fooditemSuggestion.rating + userLevel);
+    fooditemSuggestion.rating = upVote ?
+        (fooditemSuggestion.rating + user.userLevel) : (fooditemSuggestion.rating + user.userLevel);
 
     const newFooditemSuggestion: FooditemSuggestion = await fooditemSuggestionRepo.updateFooditemSuggestion(fooditemSuggestion);
 
