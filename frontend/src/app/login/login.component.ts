@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import {NbPopoverDirective} from "@nebular/theme";
 import {Router} from "@angular/router";
+import {getUserData, loginUser, registerUser} from "../backendrequests/userdatarequests";
 
 @Component({
   selector: 'app-login',
@@ -74,17 +75,31 @@ export class LoginComponent implements OnInit {
       if (!this.username || this.username.length === 0) {
         this.usernamePopover = "Bitte überlege dir einen Username";
         this.showPopover("username");
-      } else if (this.username == "Gina") {
-        this.usernamePopover = "Dieser Username ist schon vergeben";
-        this.showPopover("username");
       }
     }
 
     if (!this.popovers?.filter(item => item.isShown).shift()) {
       if (this.isRegister) {
+        try {
+          registerUser(this.username, this.password, this.email);
+        } catch (err) {
+          if (err.message.contains("username")) {
+            this.usernamePopover = "Dieser Username ist schon vergeben";
+            this.showPopover("username");
+          } else {
+            this.emailPopover = "Diese E-Mail Adresse ist schon vergeben";
+            this.showPopover("email");
+          }
+        }
         this.router.navigate(['/', 'ernaehrungsweise']);
       } else {
-        this.router.navigate(['/', 'beitraege']);
+        try {
+          loginUser(this.username, this.password);
+          this.router.navigate(['/', 'beitraege']);
+        } catch (err) {
+          this.usernamePopover = "Diese Username Passwort Kombination ist nicht vergeben";
+          this.showPopover("username");
+        }
       }
     }
   }

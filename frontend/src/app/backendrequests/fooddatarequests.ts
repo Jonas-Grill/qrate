@@ -1,9 +1,11 @@
 import * as $ from "jquery";
 
+const baseURL = 'http://localhost:8080/';
+
 //GET REQUEST FOR ALL FOOD ITEMS
 export function getAllFoodItems() {
   $.ajax({
-    url: 'http://localhost:8080/fooditems',
+    url: `${baseURL}fooditems`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -19,9 +21,8 @@ export function getAllFoodItems() {
 
 //GET REQUEST FOR DATA OF A SPECIFIC FOOD ITEM (APPROVED)
 export function getFoodItemData(id: string) {
-  const url = 'http://localhost:8080/fooditems/${id}'
   $.ajax({
-    url: `http://localhost:8080/fooditems/${id}`,
+    url: `${baseURL}fooditems/${id}`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -38,7 +39,7 @@ export function getFoodItemData(id: string) {
 //GET REQUEST TO GET DATA OF ALL FOOD ITEM SUGGESTIONS (NOT APPROVED)
 export function getAllFoodItemSuggestions() {
   $.ajax({
-    url: 'http://localhost:8080/fooditemSuggestions',
+    url: `${baseURL}fooditemSuggestions`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -55,7 +56,7 @@ export function getAllFoodItemSuggestions() {
 //POST REQUEST TO CREATE A NEW FOOD ITEM SUGGESTION (NOT APPROVED)
 export function createNewFoodItemSuggestion(name: string, pictures: Array<string>, allergene: Array<string>, diet: string, barcode: Array<string>, username: string) {
   $.ajax({
-    url: 'http://localhost:8080/fooditemSuggestions',
+    url: `${baseURL}fooditemSuggestions`,
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
@@ -82,7 +83,7 @@ export function createNewFoodItemSuggestion(name: string, pictures: Array<string
 //GET REQUEST TO GET DATA OF A SPECIFIC FOOD ITEM SUGGESTION (NOT APPROVED)
 export function getFoodItemSuggestion(id: string) {
   $.ajax({
-    url: `http://localhost:8080/fooditemSuggestions/${id}`,
+    url: `${baseURL}fooditemSuggestions/${id}`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,

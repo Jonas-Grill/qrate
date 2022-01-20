@@ -1,9 +1,11 @@
 import * as $ from "jquery";
 
+const baseURL = 'http://localhost:8080/';
+
 //POST REQUEST FOR USER REGISTRATION
 export function registerUser(username: string, password: string, email: string) {
   $.ajax({
-    url: 'http://localhost:8080/users?username=',
+    url: `${baseURL}users`,
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({username: username, password: password, eMail: email}),
@@ -11,11 +13,11 @@ export function registerUser(username: string, password: string, email: string) 
     xhrFields: {
       withCredentials: true,
     },
-    success(response: any, errors: any) {
-
+    success(response, errors) {
+      return response;
     },
-    error(xhr: any) {
-
+    error(xhr) {
+      throw new Error(xhr.statusText);
     },
   });
 }
@@ -23,7 +25,7 @@ export function registerUser(username: string, password: string, email: string) 
 //GET REQUEST FOR USER DATA
 export function getUserData() {
   $.ajax({
-    url: 'http://localhost:8080/users?username=',
+    url: `${baseURL}users`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -40,7 +42,7 @@ export function getUserData() {
 //UPDATE REQUEST FOR USER DATA
 export function updateUserPassword(username: string, password: string) {
   $.ajax({
-    url: 'http://localhost:8080/users?username=',
+    url: `${baseURL}users`,
     type: 'PUT',
     contentType: 'application/json',
     data: JSON.stringify({password: password}),
@@ -59,7 +61,7 @@ export function updateUserPassword(username: string, password: string) {
 
 export function updateUserPreferences(username: string, preferences: Array<string>) {
   $.ajax({
-    url: 'http://localhost:8080/users?username=',
+    url: `${baseURL}users`,
     type: 'PUT',
     contentType: 'application/json',
     data: JSON.stringify({allergene: preferences}),
@@ -76,9 +78,9 @@ export function updateUserPreferences(username: string, preferences: Array<strin
   });
 }
 
-export function updateUserDiet(username: string, diet: Array<string>) {
+export function updateUserDiet(token: string, diet: Array<string>) {
   $.ajax({
-    url: 'http://localhost:8080/users?username=',
+    url: `${baseURL}users`,
     type: 'PUT',
     contentType: 'application/json',
     data: JSON.stringify({diet: diet}),
@@ -98,7 +100,7 @@ export function updateUserDiet(username: string, diet: Array<string>) {
 //POST REQUEST FOR USER LOGIN
 export function loginUser(username: string, password: string) {
   $.ajax({
-    url: 'http://localhost:8080/login',
+    url: `${baseURL}login`,
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({username: username, password: password}),
@@ -106,11 +108,11 @@ export function loginUser(username: string, password: string) {
     xhrFields: {
       withCredentials: true,
     },
-    success(response: any, errors: any) {
-
+    success(response: any) {
+      response.token;
     },
-    error(xhr: any) {
-
+    error(xhr) {
+      throw new Error(xhr.statusText);
     },
   });
 }
