@@ -18,7 +18,7 @@ router
     .get("/allergens", (ctx) => {
         ctx.response.status = Status.OK;
         ctx.response.body = [
-            "Gluten", "Laktose", "Soybeans", "Peanuts", "Eggs", "Fish", "Shellfish", "Tree nuts",
+            "Gluten", "Laktose", "Sojabohnen", "Erdnüsse", "Ei", "Fisch", "Meeresfrüchte", "Nüsse",
         ];
     })
     .get("/diets", (ctx) => {
