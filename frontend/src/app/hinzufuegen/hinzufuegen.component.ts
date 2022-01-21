@@ -1,3 +1,4 @@
+import { getAllFooditemSuggestion } from './../../../../backend/repositories/fooditemSuggestionRepo';
 import { ChangeDetectionStrategy, Component, QueryList, ViewChild, ViewChildren, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -5,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { NbTagComponent } from '@nebular/theme';
 import {NbPopoverDirective} from "@nebular/theme";
 import { Router} from '@angular/router';
+import { getAllAllergens } from '../backendrequests/fooddatarequests';
 
 @Component({
   selector: 'app-hinzufuegen',
@@ -35,6 +37,8 @@ export class HinzufuegenComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    let testArray: any = getAllAllergens();
+    console.log(testArray);
     this.options = ['Option 1', 'Option 2', 'Option 3'];
     this.filteredControlOptions$ = of(this.options);
     this.filteredControlOptions$ = this.inputFormControl.valueChanges

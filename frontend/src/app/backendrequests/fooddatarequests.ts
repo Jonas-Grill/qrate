@@ -17,6 +17,23 @@ export function getAllFoodItems() {
   });
 }
 
+//GET REQUEST FOR ALL Allergens
+export function getAllAllergens() {
+  $.ajax({
+    url: 'http://localhost:8008/allergens',
+    type: 'GET',
+    xhrFields: {
+      withCredentials: true,
+    },
+    success(response: any, errors: any) {
+
+    },
+    error(xhr: any) {
+
+    },
+  });
+}
+
 //GET REQUEST FOR DATA OF A SPECIFIC FOOD ITEM (APPROVED)
 export function getFoodItemData(id: string) {
   const url = 'http://localhost:8080/fooditems/${id}'
