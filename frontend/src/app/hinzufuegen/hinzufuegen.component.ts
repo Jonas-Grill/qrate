@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { NbTagComponent } from '@nebular/theme';
 import {NbPopoverDirective} from "@nebular/theme";
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-hinzufuegen',
@@ -31,7 +32,7 @@ export class HinzufuegenComponent implements OnInit {
   @ViewChild('tagInput') tagInput: any;
   @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.options = ['Option 1', 'Option 2', 'Option 3'];
@@ -44,11 +45,16 @@ export class HinzufuegenComponent implements OnInit {
   }
 
   onScanClick(element: any): void {
-    this.isScanned = true;
+    //this.isScanned = true;
+    this.router.navigate(['/', 'barcodescanner']);
     element.textContent = "Cr-Code ändern"
+  }
+  isScaned(): void {
+    this.isScanned = true;
   }
   onBildClick(element: any): void {
     this.isBild = true;
+    this.router.navigate(['/', 'barcodescanner']);
     element.textContent = "Bild ändern"
   }
   onSubmitClick(): void {
