@@ -1,4 +1,5 @@
 import * as $ from "jquery";
+//import {url} from "./userdatarequests";
 
 //GET REQUEST FOR ALL FOOD ITEMS
 export class foodRequests {

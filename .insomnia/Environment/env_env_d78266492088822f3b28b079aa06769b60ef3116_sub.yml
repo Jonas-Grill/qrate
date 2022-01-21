@@ -3,7 +3,7 @@ type: Environment
 parentId: env_d78266492088822f3b28b079aa06769b60ef3116
 modified: 1642678686182
 created: 1638278196034
-name: OpenAPI env
+name: OpenAPI .env
 data:
   scheme: http
   base_path: ""
