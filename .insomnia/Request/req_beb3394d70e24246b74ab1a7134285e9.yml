@@ -1,17 +1,17 @@
-_id: req_9833bb9827ba47bd9af4bd05954e934d
+_id: req_beb3394d70e24246b74ab1a7134285e9
 type: Request
-parentId: fld_defc849e4cb244ae90ec05ad2d69ea86
-modified: 1642706521698
-created: 1642534648783
-url: "{{ _.base_url }}/fooditems/24214"
-name: Get Fooditem
+parentId: fld_deb16e002d37475c9509959ba5f0bc3a
+modified: 1642706437171
+created: 1642706433050
+url: "{{ _.base_url }}/users"
+name: Update User data
 description: ""
-method: GET
+method: PUT
 body: {}
 parameters: []
 headers: []
 authentication: {}
-metaSortKey: -1642534648783
+metaSortKey: -1642706292638
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

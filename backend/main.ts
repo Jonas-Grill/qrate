@@ -1,4 +1,4 @@
-import {Application, oakCors} from "./deps.ts";
+import {Application, logger, oakCors} from "./deps.ts";
 import router from "./routes.ts";
 import {PORT} from "./config/config.ts";
 
@@ -12,6 +12,8 @@ app.use(
         credentials: true,
     })
 );
+app.use(logger.logger)
+app.use(logger.responseTime)
 app.use(router.routes());
 app.use(router.allowedMethods());
 
