@@ -1,0 +1,21 @@
+_id: req_207ece59ad2844e28e7e86a4e564072f
+type: Request
+parentId: fld_e77448d294c04507b2ab22130f5c5b85
+modified: 1642706688651
+created: 1642706656088
+url: "{{ _.base_url }}/fooditemsSuggestions/687"
+name: Add vote
+description: ""
+method: POST
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1642706391385
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

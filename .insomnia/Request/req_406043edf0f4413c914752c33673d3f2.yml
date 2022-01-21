@@ -1,0 +1,21 @@
+_id: req_406043edf0f4413c914752c33673d3f2
+type: Request
+parentId: fld_deb16e002d37475c9509959ba5f0bc3a
+modified: 1642706479992
+created: 1642706474006
+url: "{{ _.base_url }}/login"
+name: Login
+description: ""
+method: POST
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1642706292588
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

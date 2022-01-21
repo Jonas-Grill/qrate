@@ -87,8 +87,11 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                example: 534t9ijg9834eguiv0ß98ww4e05rk
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: 534t9ijg9834eguiv0ß98ww4e05rk
   /fooditems:
     get:
       summary: Returns all fooditems
@@ -116,13 +119,13 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of user to fetch
+          description: ID of fooditem to fetch
           required: true
           schema:
             $ref: '#/components/schemas/Id'
       responses:
         200:
-          description: A Test
+          description: Returns the requested fooditem
           content:
             application/json:
               schema:
@@ -156,7 +159,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of fooditem suggestions to fetch
+          description: ID of the fooditem suggestion to fetch
           required: true
           schema:
             $ref: '#/components/schemas/Id'
@@ -172,7 +175,7 @@ paths:
     post:
       summary: Post a vote
       security:
-        -
+        - bearerAuth: [ ]
       requestBody:
         content:
           application/json:
@@ -218,7 +221,7 @@ components:
           example: alex.salzmann@web.de
         userLevel:
           $ref: '#/components/schemas/UserLevel'
-        allergene:
+        allergens:
           type: array
           items:
             $ref: '#/components/schemas/Allergen'
@@ -282,7 +285,7 @@ components:
           example: Banana Smoothie
         pictures:
           type: array
-        allergene:
+        allergens:
           type: array
           example:
             - Lactose
@@ -309,13 +312,13 @@ components:
             - Vegan
             - Vegetarisch
             - Pescetarisch
-        barcode:
+        barcodes:
           type: array
           example:
             - 4311536966101
       required:
         - name
-        - allergene
+        - allergens
         - nutritionScore
         - diet
         - barcode

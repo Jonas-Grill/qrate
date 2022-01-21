@@ -1,0 +1,21 @@
+_id: req_60e7be01855f44e89d25fa0215c109cb
+type: Request
+parentId: fld_e77448d294c04507b2ab22130f5c5b85
+modified: 1642706599728
+created: 1642706595803
+url: "{{ _.base_url }}/fooditemsSuggestions"
+name: Get all Fooditem Suggestions
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1642706467819
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

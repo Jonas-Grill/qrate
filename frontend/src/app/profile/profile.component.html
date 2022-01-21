@@ -1,0 +1,134 @@
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div class="mt-8 space-y-6">
+      <div class="mt-2">
+        <nb-card>
+          <nb-card-header>Mein Profil</nb-card-header>
+          <nb-card-body>
+            <nb-tabset fullWidth>
+              <nb-tab tabIcon="person-outline">
+                <h6 class="pt-2 break-all">Nutzername</h6>
+                <p class="pl-5 break-words">{{username}}</p>
+                <h6 class="pt-3 break-all">E-Mail</h6>
+                <p class="pl-5 break-words">{{usermail}}</p>
+                <h6 class="pt-3 break-all">Level</h6>
+                <p class="pl-5 break-words">{{userlevel}}</p>
+                <div class="py-5">
+                  <a href="#" (click)="openWindowPassword()"> Passwort ändern?</a>
+                </div>
+                <button nbButton fullWidth class="open-window relative flex justify-center" status="primary"
+                        (click)="openWindowLogout()">Abmelden
+                </button>
+              </nb-tab>
+              <nb-tab tabIcon="checkmark-square-2-outline">
+                <div>
+                  <nb-accordion multi>
+                    <nb-accordion-item>
+                      <nb-accordion-item-header>
+                        Geht gar nicht! Nichtmal Spuren von...
+                      </nb-accordion-item-header>
+                      <nb-accordion-item-body>
+                        <div *ngFor="let allergie of allergene" id="allergies-div">
+                          <nb-checkbox type="checkbox" status="primary" [id]=allergie.id [disabled]=allergie.disabled
+                                       (change)="onChangeAllergies($event, allergie.name)">
+                            <label>{{allergie.name}}</label></nb-checkbox>
+                        </div>
+                      </nb-accordion-item-body>
+                    </nb-accordion-item>
+
+                    <nb-accordion-item>
+                      <nb-accordion-item-header>
+                        Geht in geringen Mengen! Spuren von... sind in Ordnung
+                      </nb-accordion-item-header>
+                      <nb-accordion-item-body>
+                        <div *ngFor="let trace of traces" id="tracesOf-div">
+                          <nb-checkbox type="checkbox" status="primary" [id]="trace.id" [disabled]=trace.disabled
+                                       (change)="onChangeAllergies($event, trace.name)"><label>{{trace.name}}</label>
+                          </nb-checkbox>
+                        </div>
+                      </nb-accordion-item-body>
+                    </nb-accordion-item>
+                    <nb-accordion-item>
+                      <nb-accordion-item-header>
+                        Diese Ernährungsweise ist mein Ding!
+                      </nb-accordion-item-header>
+                      <nb-accordion-item-body>
+                        <div *ngFor="let diet of diets" id="diets-div">
+                          <nb-checkbox type="checkbox" status="primary" [id]=diet.id [disabled]=diet.disabled
+                                       (change)="onChangeDiet($event, diet.name)"><label>{{diet.name}}</label>
+                          </nb-checkbox>
+                        </div>
+                      </nb-accordion-item-body>
+                    </nb-accordion-item>
+                  </nb-accordion>
+                </div>
+              </nb-tab>
+              <nb-tab tabIcon="image-outline">
+                <div *ngFor="let data of displayedBeitraege">
+                  <nb-flip-card>
+                    <nb-card-front>
+                      <nb-card size="medium">
+                        <nb-card-header>
+                          <div class="flex justify-start w-full">
+                            <div class="flex justify-start w-full">
+                              {{data.name}}
+                            </div>
+                            <div class="flex justify-end w-full">
+                              <div>Rating: {{data.rating}}/5</div>
+                            </div>
+                          </div>
+                          <!--div *ngFor = "let number of [0,1,2,3,4]; let i = index" class="display: inline-block;">
+                              <div *ngIf = "data.rating >= (i+1)" class="display: inline-block;">
+                                  <nb-icon nbPrefix icon="star" pack="eva"></nb-icon>
+                              </div>
+                              <div *ngIf = "i >= data.rating" class="display: inline-block;">
+                                  <nb-icon nbPrefix icon="star-outline" pack="eva"></nb-icon>
+                              </div>
+                          </div-->
+                        </nb-card-header>
+                        <nb-card-body class="inline-block align-middle">
+                          <img class="mx-auto w-auto rounded-lg" src="{{data.image}}">
+                        </nb-card-body>
+                        <nb-card-footer>Von <a ng-href="">{{data.user}}</a></nb-card-footer>
+                      </nb-card>
+                    </nb-card-front>
+                    <nb-card-back>
+                      <nb-card size="medium">
+                        <nb-card-header>{{data.name}}</nb-card-header>
+                        <nb-card-body>
+                          <div class="mt-2">
+                            <h6>Allergene</h6>
+                            <div class="mt-2">
+                              <nb-tag-list>
+                                <nb-tag *ngFor="let allergen of data.allergens" [text]="allergen"></nb-tag>
+                              </nb-tag-list>
+                            </div>
+                          </div>
+                          <div class="mt-4">
+                            <h6>Spurenelemente</h6>
+                            <div class="mt-2">
+                              <nb-tag-list>
+                                <nb-tag *ngFor="let spuren of data.spuren" [text]="spuren"></nb-tag>
+                              </nb-tag-list>
+                            </div>
+                          </div>
+                          <div class="mt-4">
+                            <h6>Nahrungstyp</h6>
+                            <div class="mt-2">
+                              <nb-tag [text]="data.art"></nb-tag>
+                            </div>
+                          </div>
+                        </nb-card-body>
+                        <nb-card-footer>Von <a ng-href="">{{data.user}}</a></nb-card-footer>
+                      </nb-card>
+                    </nb-card-back>
+                  </nb-flip-card>
+                </div>
+              </nb-tab>
+            </nb-tabset>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </div>
+</div>

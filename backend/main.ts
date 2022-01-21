@@ -1,6 +1,4 @@
-import {Application} from "https://deno.land/x/oak@v10.0.0/mod.ts";
-import {oakCors} from "https://deno.land/x/cors@v1.2.2/mod.ts";
-import "https://deno.land/x/dotenv@v3.1.0/load.ts";
+import {Application, logger, oakCors} from "./deps.ts";
 import router from "./routes.ts";
 import {PORT} from "./config/config.ts";
 
@@ -12,8 +10,10 @@ app.use(
             "http://localhost:5000",
         ],
         credentials: true,
-    }),
+    })
 );
+app.use(logger.logger)
+app.use(logger.responseTime)
 app.use(router.routes());
 app.use(router.allowedMethods());
 

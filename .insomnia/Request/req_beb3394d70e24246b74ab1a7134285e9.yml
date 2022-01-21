@@ -1,0 +1,21 @@
+_id: req_beb3394d70e24246b74ab1a7134285e9
+type: Request
+parentId: fld_deb16e002d37475c9509959ba5f0bc3a
+modified: 1642706437171
+created: 1642706433050
+url: "{{ _.base_url }}/users"
+name: Update User data
+description: ""
+method: PUT
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1642706292638
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
