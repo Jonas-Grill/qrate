@@ -99,11 +99,14 @@ export class BarcodescannerComponent implements AfterViewInit {
         if (err) {
           this.errorMessage = `Initialization error: ${err}`;
           this.started = false;
+          console.log(this.started);
         } else {
           Quagga.start();
           this.started = true;
+          console.log(this.started);
           this.changeDetectorRef.detectChanges();
           Quagga.onDetected((res) => {
+            console.log("es klappt")
             if (res.codeResult.code) {
               this.onBarcodeScanned(res.codeResult.code);
             }
@@ -113,9 +116,10 @@ export class BarcodescannerComponent implements AfterViewInit {
   }
 
   onBarcodeScanned(code: string) {
+    console.log("wir sind fertig!");
     Quagga.stop();
     sessionStorage.setItem('barcode', code);
-    this.hinzufuegenComponent.isScaned(); //Kann eventuell wieder entfernt werden 
+    //this.hinzufuegenComponent.isScaned(); //Kann eventuell wieder entfernt werden 
     this.router.navigate(['/','produktinfo']);
   }
 }
