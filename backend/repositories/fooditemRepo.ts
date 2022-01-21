@@ -13,7 +13,7 @@ export const createFooditem = async (fooditem: Fooditem) => {
         allergens: fooditem.allergens,
         nutritionScore: fooditem.nutritionScore,
         diet: fooditem.diet,
-        barcode: fooditem.barcodes,
+        barcodes: fooditem.barcodes,
     });
 
     return id.toString();
@@ -48,7 +48,7 @@ export const updateFooditem = async (fooditem: Fooditem) => {
             allergens: fooditems.allergens,
             nutritionScore: fooditems.nutritionScore,
             diet: fooditems.diet,
-            barcode: fooditems.barcodes,
+            barcodes: fooditems.barcodes,
         },
     );
 

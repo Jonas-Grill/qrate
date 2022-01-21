@@ -5,7 +5,7 @@ import User from "../types/user.ts";
 import FooditemSchema from "../types/fooditem.ts";
 import AllergenSchema from "../types/allergen.ts";
 
-export const createNewFooditem = async (fooditem: Fooditem) => {
+export const createNewFooditem = async (fooditem: FooditemSchema, currentUser: any) => {
     fooditem.name = fooditem.name;
     fooditem.pictures = fooditem.pictures;
     fooditem.allergens = fooditem.allergens;

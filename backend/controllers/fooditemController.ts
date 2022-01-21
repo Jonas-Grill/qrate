@@ -16,7 +16,7 @@ export const createFooditem = async (
 
     ctx.assert(instanceOfFooditem(fooditemData), Status.BadRequest, "Please provide valid data");
 
-    const fooditem: Fooditem | undefined = await fooditemService.createNewFooditem(fooditemData, ctx.state.currentUser);
+    const fooditem: Fooditem | undefined = await fooditemService.createNewFooditem(fooditemData);
 
     if (!fooditem) {
         ctx.response.status = Status.BadRequest;
@@ -34,7 +34,7 @@ export const createFooditem = async (
         allergens: fooditem.allergens,
         nutritionScore: fooditem.nutritionScore,
         diet: fooditem.diet,
-        barcode: fooditem.barcodes,
+        barcodes: fooditem.barcodes,
     };
 }
 
@@ -84,7 +84,7 @@ export const getOneFooditem = async (
         allergens: fooditem.allergens,
         nutritionScore: fooditem.nutritionScore,
         diet: fooditem.diet,
-        barcode: fooditem.barcodes,
+        barcodes: fooditem.barcodes,
     };
 }
 
