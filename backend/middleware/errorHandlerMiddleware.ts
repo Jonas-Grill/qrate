@@ -1,4 +1,5 @@
 import {Context, isHttpError, Status} from "../deps.ts";
+import invalidIdException from "../exceptions/invalidIdException.ts";
 
 const errorHandlerMiddleware = async (ctx: Context, next: Function) => {
     try {
@@ -17,8 +18,11 @@ const errorHandlerMiddleware = async (ctx: Context, next: Function) => {
                 default:
                 // handle other statuses
             }
+        } else if (err instanceof invalidIdException) {
+            ctx.response.status = Status.BadRequest;
+            ctx.response.body = {msg: "Please provide a valid id"};
         } else {
-            ctx.response.status = 500;
+            ctx.response.status = Status.InternalServerError;
             ctx.response.body = {msg: "Internal server error"};
         }
     }

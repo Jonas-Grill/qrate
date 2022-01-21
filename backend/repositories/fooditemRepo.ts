@@ -1,15 +1,14 @@
 import db from '../config/db-connection.ts';
 import Fooditem from "../types/fooditem.ts";
-import {Bson} from ".//deps.ts";
+import {Bson} from "../deps.ts";
 import InvalidIdException from "../exceptions/invalidIdException.ts";
-import AllergenSchema from "../types/allergen.ts";
 
-const fooditems = db.collection<Fooditem>("fooditem");
+const fooditems = db.collection<Fooditem>("fooditems");
 
 export const createFooditem = async (fooditem: Fooditem) => {
     const id = await fooditems.insertOne({
         name: fooditem.name,
-        pictures: fooditem.pictures,
+        pictures: fooditem.pictures || [],
         allergens: fooditem.allergens,
         nutritionScore: fooditem.nutritionScore,
         diet: fooditem.diet,
@@ -20,7 +19,7 @@ export const createFooditem = async (fooditem: Fooditem) => {
 };
 
 export const getAllFooditem = async () => {
-    return await fooditems.find({name: {$ne: null}}).toArray();
+    return await fooditems.find({}).toArray();
 };
 
 export const getFooditemById = async (id: string) => {
@@ -34,25 +33,31 @@ export const getFooditemById = async (id: string) => {
 };
 
 export const updateFooditem = async (fooditem: Fooditem) => {
-    if (!Bson.ObjectId.isValid(fooditems._id.id)) {
+    if (!fooditem._id) {
+        throw new InvalidIdException();
+    }
+
+    if (!Bson.ObjectId.isValid(fooditem._id.toString())) {
         throw new InvalidIdException();
     }
 
     await fooditems.updateOne(
         {
-            _id: new Bson.ObjectId(fooditems._id.id),
+            _id: new Bson.ObjectId(fooditem._id.toString()),
         },
         {
-            name: fooditems.name,
-            pictures: fooditems.pictures,
-            allergens: fooditems.allergens,
-            nutritionScore: fooditems.nutritionScore,
-            diet: fooditems.diet,
-            barcodes: fooditems.barcodes,
+            $set: {
+                name: fooditem.name,
+                pictures: fooditem.pictures,
+                allergens: fooditem.allergens,
+                nutritionScore: fooditem.nutritionScore,
+                diet: fooditem.diet,
+                barcodes: fooditem.barcodes,
+            }
         },
     );
 
-    return await getFooditemById(fooditems._id.id.toString());
+    return await getFooditemById(fooditem._id.toString());
 };
 
 export const deleteFooditemById = async (id: string) => {

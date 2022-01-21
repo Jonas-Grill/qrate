@@ -14,9 +14,10 @@ export const createFooditem = async (
 
     const fooditemData = await ctx.request.body().value;
 
+    ctx.assert(fooditemData, Status.BadRequest, "Please provide data");
     ctx.assert(instanceOfFooditem(fooditemData), Status.BadRequest, "Please provide valid data");
 
-    const fooditem: Fooditem | undefined = await fooditemService.createNewFooditem(fooditemData, ctx.state.currentUser);
+    const fooditem: Fooditem | undefined = await fooditemService.createNewFooditem(fooditemData);
 
     if (!fooditem) {
         ctx.response.status = Status.BadRequest;
@@ -67,14 +68,6 @@ export const getOneFooditem = async (
     ctx.assert(ctx.params.id, Status.BadRequest, "Please provide an id");
 
     const fooditem: Fooditem = await fooditemService.getFooditem(ctx.params.id);
-
-    if (!fooditem) {
-        ctx.response.status = Status.BadRequest;
-        ctx.response.body = {
-            msg: "Please provide valid data"
-        }
-        return;
-    }
 
     ctx.response.status = Status.OK;
     ctx.response.body = {
