@@ -116,7 +116,7 @@ export class PreferencesanddietComponent implements OnInit {
 
     updateUserPreferences(this.userpreferences, this.userdiet);
 
-    // ROUTING
-    //this.router.navigate(['/', 'beitraege']);
+    //ROUTING
+    this.router.navigate(['/', 'beitraege']);
   }
 }
