@@ -1,15 +1,47 @@
 _id: req_63f3bd9b648f4683932236be07a2d5f7
 type: Request
 parentId: fld_e77448d294c04507b2ab22130f5c5b85
-modified: 1642706627288
+modified: 1642754144608
 created: 1642706624715
 url: "{{ _.base_url }}/fooditemsSuggestions"
 name: create Fooditem Suggestion
 description: ""
 method: POST
-body: {}
+body:
+  mimeType: application/json
+  text: |-
+    {
+    		"name": "Banana Smoothie",
+    		"allergens": [
+    			{
+    				"name": "Laktose",
+    				"tracesOf": true
+    			},
+    			{
+    				"name": "Milchzucker",
+    				"tracesOf": false
+    			}
+    		],
+    		"nutritionScore": {
+    			"calories": 71,
+    			"fat": 1.5,
+    			"carbs": 14,
+    			"sugar": 13,
+    			"protein": 0.8,
+    			"salt": 0
+    		},
+    		"diet": "Vegetarisch",
+    		"barcodes": [
+    			"4311536966101",
+    			"4311536646405",
+    			"8985230394409"
+    		]
+    	}
 parameters: []
-headers: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_67818e7bd45d45eeaff3532c55dc02ec
 authentication: {}
 metaSortKey: -1642706416863
 isPrivate: false

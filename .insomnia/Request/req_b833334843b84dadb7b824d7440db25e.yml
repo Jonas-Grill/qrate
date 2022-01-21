@@ -1,9 +1,9 @@
 _id: req_b833334843b84dadb7b824d7440db25e
 type: Request
 parentId: fld_e77448d294c04507b2ab22130f5c5b85
-modified: 1642706584860
+modified: 1642754114299
 created: 1642706569731
-url: "{{ _.base_url }}/fooditemsSuggestions/34312"
+url: "{{ _.base_url }}/fooditemsSuggestions/61e9cd47cfee918ae50d8234"
 name: Get Fooditem Suggestion
 description: ""
 method: GET
