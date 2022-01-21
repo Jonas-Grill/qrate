@@ -6,6 +6,11 @@ import {
     getAllFooditemSuggestions,
     getOneFooditemSuggestion
 } from "./controllers/fooditemSuggestionController.ts";
+import {
+    getAllFooditems,
+    getOneFooditem,
+    createFooditem
+} from "./controllers/fooditemController.ts";
 import mockUserMiddleware from "./middleware/mockUserMiddleware.ts";
 
 const router = new Router();
@@ -96,143 +101,14 @@ router
         };
     })
     // fooditems
-    .get("/fooditems", (ctx) => {
-        ctx.response.status = Status.OK;
-        ctx.response.body = [
-            {
-                _id: "611d5cd230dd29fc60df7b94",
-                name: "Banana Smoothie",
-                pictures: [
-                    "Pictures nicht mockbar"
-                ],
-                allergens: [
-                    {
-                        name: "Laktose",
-                        tracesOf: true,
-                    },
-                    {
-                        name: "Milchzucker",
-                        tracesOf: false,
-                    },
-                ],
-                nutritionScore: {
-                    calories: 71,
-                    fat: 1.5,
-                    carbs: 14.0,
-                    sugar: 13.0,
-                    protein: 0.8,
-                    salt: 0.0,
-                },
-                diet: "Vegetarisch",
-                barcodes: [
-                    "4311536966101",
-                    "4311536646405",
-                    "8985230394409",
-                ],
-            },
-            {
-                _id: "611d5cd230dd29fc60df7b94",
-                name: "Smoothie",
-                pictures: [
-                    "Pictures nicht mockbar"
-                ],
-                allergens: [
-                    {
-                        name: "Laktose",
-                        tracesOf: true,
-                    },
-                    {
-                        name: "Milchzucker",
-                        tracesOf: false,
-                    },
-                ],
-                nutritionScore: {
-                    calories: 71,
-                    fat: 1.5,
-                    carbs: 14.0,
-                    sugar: 13.0,
-                    protein: 0.8,
-                    salt: 0.0,
-                },
-                diet: "Vegetarisch",
-                barcodes: [
-                    "4311536966101",
-                    "4311536646405",
-                    "8985230394409",
-                ],
-            },
-            {
-                _id: "611d5cd230dd29fc60df7b94",
-                name: "Banana",
-                pictures: [
-                    "Pictures nicht mockbar"
-                ],
-                allergens: [
-                    {
-                        name: "Laktose",
-                        tracesOf: true,
-                    },
-                    {
-                        name: "Milchzucker",
-                        tracesOf: false,
-                    },
-                ],
-                nutritionScore: {
-                    calories: 71,
-                    fat: 1.5,
-                    carbs: 14.0,
-                    sugar: 13.0,
-                    protein: 0.8,
-                    salt: 0.0,
-                },
-                diet: "Vegetarisch",
-                barcodes: [
-                    "4311536966101",
-                    "4311536646405",
-                    "8985230394409",
-                ],
-            }
-        ];
-    })
-    .get("/fooditems/:id", (ctx) => {
-        ctx.response.status = Status.OK;
-        ctx.response.body = {
-            _id: ctx.params.id,
-            name: "Banana Smoothie",
-            pictures: [
-                "Pictures nicht mockbar"
-            ],
-            allergens: [
-                {
-                    name: "Laktose",
-                    tracesOf: true,
-                },
-                {
-                    name: "Milchzucker",
-                    tracesOf: false,
-                },
-            ],
-            nutritionScore: {
-                calories: 71,
-                fat: 1.5,
-                carbs: 14.0,
-                sugar: 13.0,
-                protein: 0.8,
-                salt: 0.0,
-            },
-            diet: "Vegetarisch",
-            barcodes: [
-                "4311536966101",
-                "4311536646405",
-                "8985230394409",
-            ],
-        };
-    })
+    .get("/fooditems", getAllFooditems)
+    .get("/fooditems/:id", getOneFooditem)
+    .post("/fooditems", createFooditem)
     // fooditemSuggestions
-    .get("/fooditemsSuggestions", getAllFooditemSuggestions)
-    .get("/fooditemsSuggestions/:id", getOneFooditemSuggestion)
-    .post("/fooditemsSuggestions", createFooditemSuggestion)
-    .post("/fooditemsSuggestions/:id", addVote)
+    .get("/fooditemSuggestions", getAllFooditemSuggestions)
+    .get("/fooditemSuggestions/:id", getOneFooditemSuggestion)
+    .post("/fooditemSuggestions", createFooditemSuggestion)
+    .post("/fooditemSuggestions/:id", addVote)
 
 router.routes();
 
