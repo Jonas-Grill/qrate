@@ -221,7 +221,7 @@ components:
           example: alex.salzmann@web.de
         userLevel:
           $ref: '#/components/schemas/UserLevel'
-        allergene:
+        allergens:
           type: array
           items:
             $ref: '#/components/schemas/Allergen'
@@ -285,7 +285,7 @@ components:
           example: Banana Smoothie
         pictures:
           type: array
-        allergene:
+        allergenes:
           type: array
           example:
             - Lactose
@@ -318,7 +318,7 @@ components:
             - 4311536966101
       required:
         - name
-        - allergene
+        - allergenes
         - nutritionScore
         - diet
         - barcode

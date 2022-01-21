@@ -32,7 +32,7 @@ router
     .get("/users", (ctx) => {
         ctx.response.status = Status.OK;
         ctx.response.body = {
-            _id: {$oid: "2384339230003240"},
+            _id: "2384339230003240",
             username: "Gina",
             eMail: "alex.salzmann@web.de",
             userLevel: {
@@ -63,7 +63,7 @@ router
     .put("/users", (ctx) => {
         ctx.response.status = Status.OK;
         ctx.response.body = {
-            _id: {$oid: "2384339230003240"},
+            _id: "2384339230003240",
             username: "Gina",
             eMail: "alex.salzmann@web.de",
             userLevel: {
@@ -100,7 +100,7 @@ router
         ctx.response.status = Status.OK;
         ctx.response.body = [
             {
-                _id: {$oid: "611d5cd230dd29fc60df7b94"},
+                _id: "611d5cd230dd29fc60df7b94",
                 name: "Banana Smoothie",
                 pictures: [
                     "Pictures nicht mockbar"
@@ -131,7 +131,7 @@ router
                 ],
             },
             {
-                _id: {$oid: "611d5cd230dd29fc60df7b94"},
+                _id: "611d5cd230dd29fc60df7b94",
                 name: "Smoothie",
                 pictures: [
                     "Pictures nicht mockbar"
@@ -162,7 +162,7 @@ router
                 ],
             },
             {
-                _id: {$oid: "611d5cd230dd29fc60df7b94"},
+                _id: "611d5cd230dd29fc60df7b94",
                 name: "Banana",
                 pictures: [
                     "Pictures nicht mockbar"
@@ -197,7 +197,7 @@ router
     .get("/fooditems/:id", (ctx) => {
         ctx.response.status = Status.OK;
         ctx.response.body = {
-            _id: {$oid: ctx.params.id},
+            _id: ctx.params.id,
             name: "Banana Smoothie",
             pictures: [
                 "Pictures nicht mockbar"
