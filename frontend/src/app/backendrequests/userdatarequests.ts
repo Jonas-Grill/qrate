@@ -1,6 +1,8 @@
 import * as $ from "jquery";
 
 export const url = "http://localhost:8008/"
+export let diets: string[];
+export let allergens: string[];
 
 //POST REQUEST FOR USER REGISTRATION
 export function registerUser(username: string, password: string, email: string) {
@@ -99,16 +101,15 @@ export function loginUser(username: string, password: string) {
 }
 
 //GET REQUEST FOR ALL PREFERENCES
-export function getAllPreferences() {
-  $.ajax({
+export async function getAllPreferences () {
+  await $.ajax({
     url: `${url}allergens`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
     },
     success(response: any, errors: any) {
-      console.log(response);
-
+      allergens = response;
     },
     error(xhr: any) {
 
@@ -117,15 +118,15 @@ export function getAllPreferences() {
 }
 
 //GET REQUEST FOR ALL DIETS
-export function getAllDiets() {
-  $.ajax({
+export async function getAllDiets() {
+  await $.ajax({
     url: `${url}diets`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
     },
     success(response: any, errors: any) {
-      console.log(response);
+      diets = response;
     },
     error(xhr: any) {
 

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Allergene} from "./allergenes";
 import {Router} from "@angular/router";
 import {getAllDiets, getAllPreferences, updateUserPreferences} from "../backendrequests/userdatarequests";
+import {diets, allergens} from "../backendrequests/userdatarequests";
 
 @Component({
   selector: 'app-preferencesanddiet',
@@ -10,21 +11,26 @@ import {getAllDiets, getAllPreferences, updateUserPreferences} from "../backendr
 })
 
 export class PreferencesanddietComponent implements OnInit {
+  public allergielist: string[] = [];
+  public dietlist: string[] = [];
   public allergene: Allergene[] = [];
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
   public userdiet: string = '';
   public userpreferences: object[] = [];
-  public allergielist: string[] = ["Eier", "Erdnuss", "Gluten", "Sesam", "Senf", "Lupine", "Sulfite", "Nuss", "Weichtiere", "Krebstiere", "Fische", "Soja", "Sellerie", "Milch"];
-  public dietlist: string[] = ["Vegetarisch", "Pescetarisch", "Vegan"];
 
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    //LOAD ALLERGENES AND DIETS FROM BACKEND
-    getAllPreferences();
-    getAllDiets();
+    this.loadBackendData();
+  }
+
+  async loadBackendData() {
+    await getAllDiets();
+    await getAllPreferences();
+    this.dietlist = diets;
+    this.allergielist = allergens;
 
     this.allergielist.sort();
     this.dietlist.sort();
@@ -106,8 +112,9 @@ export class PreferencesanddietComponent implements OnInit {
     }
 
     console.log(this.userpreferences);
+    console.log(this.userdiet);
 
-   //updateUserPreferences(this.userpreferences, this.userdiet);
+    updateUserPreferences(this.userpreferences, this.userdiet);
 
     // ROUTING
     //this.router.navigate(['/', 'beitraege']);
