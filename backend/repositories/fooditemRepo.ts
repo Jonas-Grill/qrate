@@ -1,6 +1,6 @@
 import db from '../config/db-connection.ts';
 import Fooditem from "../types/fooditem.ts";
-import {Bson} from "../deps.ts";
+import {Bson} from ".//deps.ts";
 import InvalidIdException from "../exceptions/invalidIdException.ts";
 import AllergenSchema from "../types/allergen.ts";
 
@@ -13,7 +13,7 @@ export const createFooditem = async (fooditem: Fooditem) => {
         allergens: fooditem.allergens,
         nutritionScore: fooditem.nutritionScore,
         diet: fooditem.diet,
-        barcode: fooditem.barcode,
+        barcode: fooditem.barcodes,
     });
 
     return id.toString();
@@ -48,7 +48,7 @@ export const updateFooditem = async (fooditem: Fooditem) => {
             allergens: fooditems.allergens,
             nutritionScore: fooditems.nutritionScore,
             diet: fooditems.diet,
-            barcode: fooditems.barcode,
+            barcode: fooditems.barcodes,
         },
     );
 

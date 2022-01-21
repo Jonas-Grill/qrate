@@ -34,7 +34,7 @@ export const createFooditem = async (
         allergens: fooditem.allergens,
         nutritionScore: fooditem.nutritionScore,
         diet: fooditem.diet,
-        barcode: fooditem.barcode,
+        barcode: fooditem.barcodes,
     };
 }
 
@@ -84,7 +84,7 @@ export const getOneFooditem = async (
         allergens: fooditem.allergens,
         nutritionScore: fooditem.nutritionScore,
         diet: fooditem.diet,
-        barcode: fooditem.barcode,
+        barcode: fooditem.barcodes,
     };
 }
 
