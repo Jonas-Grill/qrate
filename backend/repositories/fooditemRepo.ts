@@ -8,19 +8,19 @@ const fooditems = db.collection<Fooditem>("fooditem");
 
 export const createFooditem = async (fooditem: Fooditem) => {
     const id = await fooditems.insertOne({
-        name: fooditems.name,
-        pictures: fooditems.pictures,
-        allergens: fooditems.allergens,
-        nutritionScore: fooditems.nutritionScore,
-        diet: fooditems.diet,
-        barcode: fooditems.barcode,
+        name: fooditem.name,
+        pictures: fooditem.pictures,
+        allergens: fooditem.allergens,
+        nutritionScore: fooditem.nutritionScore,
+        diet: fooditem.diet,
+        barcode: fooditem.barcode,
     });
 
     return id.toString();
 };
 
 export const getAllFooditem = async () => {
-    return await fooditems.find({creator: {$ne: null}}).toArray(); //@ToDo
+    return await fooditems.find({name: {$ne: null}}).toArray();
 };
 
 export const getFooditemById = async (id: string) => {
