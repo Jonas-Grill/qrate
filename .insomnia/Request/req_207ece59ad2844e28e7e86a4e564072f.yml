@@ -1,15 +1,23 @@
 _id: req_207ece59ad2844e28e7e86a4e564072f
 type: Request
 parentId: fld_e77448d294c04507b2ab22130f5c5b85
-modified: 1642706688651
+modified: 1642754143824
 created: 1642706656088
-url: "{{ _.base_url }}/fooditemsSuggestions/687"
+url: "{{ _.base_url }}/fooditemsSuggestions/61ea7014b383ed77044cfbfe"
 name: Add vote
 description: ""
 method: POST
-body: {}
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"upVote": true
+    }
 parameters: []
-headers: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_e268a6a7c6c049c4bd7bd0d242d5ae1f
 authentication: {}
 metaSortKey: -1642706391385
 isPrivate: false
