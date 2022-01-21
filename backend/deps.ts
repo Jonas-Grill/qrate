@@ -26,4 +26,4 @@ export * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
 export {Status} from "https://deno.land/std@0.114.0/http/http_status.ts";
 
 // Sleep
-export {sleep} from "https://deno.land/x/sleep@1.2.1/mod.ts";
+export {sleep} from "https://deno.land/x/sleep/mod.ts";
