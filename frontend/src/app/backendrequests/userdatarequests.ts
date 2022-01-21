@@ -2,7 +2,7 @@ import * as $ from "jquery";
 
 export const url = "http://localhost:8008/"
 
-export class userdatarequests {
+export class userDataRequests {
 //POST REQUEST FOR USER REGISTRATION
   public registerUser(username: string, password: string, email: string) {
     return $.ajax({
