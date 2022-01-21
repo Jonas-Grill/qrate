@@ -1,13 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Allergene} from "./allergenes";
 import {Router} from "@angular/router";
-import {
-  allergens,
-  diets,
-  getAllDiets,
-  getAllPreferences,
-  updateUserPreferences
-} from "../backendrequests/userdatarequests";
+import {userdatarequests} from "../backendrequests/userdatarequests";
 
 @Component({
   selector: 'app-preferencesanddiet',
@@ -24,30 +18,27 @@ export class PreferencesanddietComponent implements OnInit {
   public userdiet: string = '';
   public userpreferences: object[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userApi: userdatarequests) {
   }
 
   ngOnInit(): void {
-    this.loadBackendData();
-  }
+    this.userApi.getAllPreferences().done((result) => {
+      this.allergielist = result;
+      this.allergielist.sort();
 
-  async loadBackendData() {
-    await getAllDiets();
-    await getAllPreferences();
-    this.dietlist = diets;
-    this.allergielist = allergens;
+      for (let allergie of this.allergielist) {
+        this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
+        this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
+      }
+    });
+    this.userApi.getAllDiets().done((result) => {
+      this.dietlist = result;
+      this.dietlist.sort();
 
-    this.allergielist.sort();
-    this.dietlist.sort();
-
-    for (let allergie of this.allergielist) {
-      this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
-      this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
-    }
-
-    for (let diet of this.dietlist) {
-      this.diets.push({id: diet, name: diet, disabled: false});
-    }
+      for (let diet of this.dietlist) {
+        this.diets.push({id: diet, name: diet, disabled: false});
+      }
+    });
   }
 
   onChangeAllergies(selected: any, name: string): void {
@@ -116,10 +107,7 @@ export class PreferencesanddietComponent implements OnInit {
       }
     }
 
-    console.log(this.userpreferences);
-    console.log(this.userdiet);
-
-    updateUserPreferences(this.userpreferences, this.userdiet);
+    this.userApi.updateUserPreferences(this.userpreferences, this.userdiet);
 
     //ROUTING
     this.router.navigate(['/', 'beitraege']);

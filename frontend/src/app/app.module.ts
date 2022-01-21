@@ -40,6 +40,7 @@ import {ProduktinfosComponent} from './produktinfos/produktinfos.component';
 import {ProfileComponent} from './profile/profile.component';
 import {DialogLogoutComponent} from './dialogLogout/dialogLogout.component';
 import {DialogChangePasswordComponent} from './dialog-change-password/dialog-change-password.component';
+import {userdatarequests} from "./backendrequests/userdatarequests";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,9 @@ import {DialogChangePasswordComponent} from './dialog-change-password/dialog-cha
     NbActionsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [],
+  providers: [
+    userdatarequests,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
