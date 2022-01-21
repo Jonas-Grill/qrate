@@ -7,7 +7,7 @@ import {
     getOneFooditemSuggestion
 } from "./controllers/fooditemSuggestionController.ts";
 import {
-    getAllFooditem,
+    getAllFooditems,
     getOneFooditem,
     createFooditem
 } from "./controllers/fooditemController.ts";
@@ -101,7 +101,7 @@ router
         };
     })
     // fooditems
-    .get("/fooditems", getAllFooditem)
+    .get("/fooditems", getAllFooditems)
     .get("/fooditems/:id", getOneFooditem)
     .post("/fooditems", createFooditem)
     // fooditemSuggestions

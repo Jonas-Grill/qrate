@@ -39,12 +39,12 @@ export const createFooditem = async (
     };
 }
 
-export const getAllFooditem = async (
+export const getAllFooditems = async (
     ctx: {
         request: Request;
         response: Response;
     }) => {
-    const fooditems: Fooditem[] = await fooditemService.getAllFooditem();
+    const fooditems: Fooditem[] = await fooditemService.getAllFooditems();
 
     if (!fooditems) {
         ctx.response.status = Status.BadRequest;

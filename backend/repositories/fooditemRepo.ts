@@ -18,7 +18,7 @@ export const createFooditem = async (fooditem: Fooditem) => {
     return id.toString();
 };
 
-export const getAllFooditem = async () => {
+export const getAllFooditems = async () => {
     return await fooditems.find({}).toArray();
 };
 

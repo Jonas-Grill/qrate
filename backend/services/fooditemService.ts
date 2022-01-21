@@ -6,8 +6,8 @@ export const createNewFooditem = async (fooditem: Fooditem) => {
     return fooditemRepo.getFooditemById(await fooditemRepo.createFooditem(fooditem));
 }
 
-export const getAllFooditem = async () => {
-    return await fooditemRepo.getAllFooditem();
+export const getAllFooditems = async () => {
+    return await fooditemRepo.getAllFooditems();
 }
 
 export const getFooditem = async (id: string) => {
