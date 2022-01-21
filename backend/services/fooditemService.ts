@@ -11,7 +11,7 @@ export const createNewFooditem = async (fooditem: Fooditem) => {
     fooditem.allergens = fooditem.allergens;
     fooditem.nutritionScore = fooditem.nutritionScore;
     fooditem.diet = fooditem.diet;
-    fooditem.barcode = fooditem.barcodes;
+    fooditem.barcodes = fooditem.barcodes;
 
     return await fooditemRepo.createFooditem(fooditem);
 }
