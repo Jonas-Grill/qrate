@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Allergene} from "./allergenes";
 import {Router} from "@angular/router";
+import {getAllDiets, getAllPreferences, updateUserPreferences} from "../backendrequests/userdatarequests";
 
 @Component({
   selector: 'app-preferencesanddiet',
@@ -12,11 +13,19 @@ export class PreferencesanddietComponent implements OnInit {
   public allergene: Allergene[] = [];
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
+  public userdiet: string = '';
+  public userpreferences: object[] = [];
+  public allergielist: string[] = ["Eier", "Erdnuss", "Gluten", "Sesam", "Senf", "Lupine", "Sulfite", "Nuss", "Weichtiere", "Krebstiere", "Fische", "Soja", "Sellerie", "Milch"];
+  public dietlist: string[] = ["Vegetarisch", "Pescetarisch", "Vegan"];
 
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+    //LOAD ALLERGENES AND DIETS FROM BACKEND
+    getAllPreferences();
+    getAllDiets();
+
     this.allergielist.sort();
     this.dietlist.sort();
 
@@ -29,9 +38,6 @@ export class PreferencesanddietComponent implements OnInit {
       this.diets.push({id: diet, name: diet, disabled: false});
     }
   }
-
-  allergielist = ["Eier", "Erdnuss", "Gluten", "Sesam", "Senf", "Lupine", "Sulfite", "Nuss", "Weichtiere", "Krebstiere", "Fische", "Soja", "Sellerie", "Milch"];
-  dietlist = ["Vegetarisch", "Pescetarisch", "Vegan"];
 
   onChangeAllergies(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES
@@ -73,18 +79,37 @@ export class PreferencesanddietComponent implements OnInit {
         if (this.diets[i].id !== name) {
           this.diets[i].disabled = true;
         }
+        this.userdiet = name;
       }
     } else {
       for (let i = 0; i < this.diets.length; i++) {
         if (this.diets[i].id !== name) {
           this.diets[i].disabled = false;
         }
+        this.userdiet = '';
       }
     }
   }
 
   onClickNext() {
+    //UPDATE USER DATA IN BACKEND
+    for (let i = 0; i < this.allergene.length; i++) {
+      if (this.allergene[i].disabled) {
+        this.userpreferences.push({name: this.allergene[i].name, tracesOf: true})
+      }
+    }
+
+    for (let i = 0; i < this.traces.length; i++) {
+      if (this.traces[i].disabled) {
+        this.userpreferences.push({name: this.traces[i].name, tracesOf: false})
+      }
+    }
+
+    console.log(this.userpreferences);
+
+   //updateUserPreferences(this.userpreferences, this.userdiet);
+
     // ROUTING
-    this.router.navigate(['/', 'beitraege']);
+    //this.router.navigate(['/', 'beitraege']);
   }
 }

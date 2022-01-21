@@ -1,11 +1,11 @@
 import * as $ from "jquery";
 
-export const url = "http://localhost:8080/"
+export const url = "http://localhost:8008/"
 
 //POST REQUEST FOR USER REGISTRATION
 export function registerUser(username: string, password: string, email: string) {
   $.ajax({
-    url: `${url}users?username=`,
+    url: `${url}users`,
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({username: username, password: password, eMail: email}),
@@ -25,7 +25,7 @@ export function registerUser(username: string, password: string, email: string) 
 //GET REQUEST FOR USER DATA
 export function getUserData() {
   $.ajax({
-    url: `${url}users?username=`,
+    url: `${url}users`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -42,7 +42,7 @@ export function getUserData() {
 //UPDATE REQUEST FOR USER DATA
 export function updateUserPassword(username: string, password: string) {
   $.ajax({
-    url: `${url}users?username=`,
+    url: `${url}users`,
     type: 'PUT',
     contentType: 'application/json',
     data: JSON.stringify({password: password}),
@@ -59,31 +59,12 @@ export function updateUserPassword(username: string, password: string) {
   });
 }
 
-export function updateUserPreferences(username: string, preferences: Array<string>) {
+export function updateUserPreferences(preferences: Array<object>, diet: string,) {
   $.ajax({
-    url: `${url}users?username=`,
+    url: `${url}users`,
     type: 'PUT',
     contentType: 'application/json',
-    data: JSON.stringify({allergene: preferences}),
-    dataType: 'json',
-    xhrFields: {
-      withCredentials: true,
-    },
-    success(response: any, errors: any) {
-
-    },
-    error(xhr: any) {
-
-    },
-  });
-}
-
-export function updateUserDiet(username: string, diet: Array<string>) {
-  $.ajax({
-    url: `${url}users?username=`,
-    type: 'PUT',
-    contentType: 'application/json',
-    data: JSON.stringify({diet: diet}),
+    data: JSON.stringify({allergens: preferences, diet: diet}),
     dataType: 'json',
     xhrFields: {
       withCredentials: true,
@@ -126,6 +107,7 @@ export function getAllPreferences() {
       withCredentials: true,
     },
     success(response: any, errors: any) {
+      console.log(response);
 
     },
     error(xhr: any) {
@@ -143,7 +125,7 @@ export function getAllDiets() {
       withCredentials: true,
     },
     success(response: any, errors: any) {
-
+      console.log(response);
     },
     error(xhr: any) {
 
