@@ -1,4 +1,5 @@
-import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
+import { HinzufuegenComponent } from './../hinzufuegen/hinzufuegen.component';
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import Quagga from '@ericblade/quagga2';
 import {UpdateService} from './update.service';
 import {environment} from "../../environments/environment";
@@ -14,6 +15,10 @@ export class BarcodescannerComponent implements AfterViewInit {
   started: boolean | undefined;
   errorMessage: string | undefined;
   acceptAnyCode = true;
+
+  //Kann eventuell wieder entfernt werden
+  @ViewChild('hinzufuegenComponent', { static: false })
+  hinzufuegenComponent!: HinzufuegenComponent;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private updateService: UpdateService,
@@ -109,6 +114,8 @@ export class BarcodescannerComponent implements AfterViewInit {
 
   onBarcodeScanned(code: string) {
     Quagga.stop();
-    this.router.navigate(['/', 'produktinfo']);
+    sessionStorage.setItem('barcode', code);
+    this.hinzufuegenComponent.isScaned(); //Kann eventuell wieder entfernt werden 
+    this.router.navigate(['/','produktinfo']);
   }
 }

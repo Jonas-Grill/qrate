@@ -4,14 +4,16 @@
   </nb-layout-header>
 
   <nb-layout-column>
-
+    
     <router-outlet></router-outlet>
 
   </nb-layout-column>
-  <nb-layout-footer>
-    <nb-actions size="small" fullWidth>
-      <nb-action icon="search-outline"></nb-action>
-      <nb-action icon="power-outline"></nb-action>
+  <nb-layout-footer class="fixed bottom-0 left-0 w-full flex justify-between">
+    <nb-actions class="flex justify-between" size="small">
+      <nb-action icon="file-text-outline" title="Beiträge" href="/beitraege"></nb-action>
+      <nb-action icon="camera-outline" title="Barcodescanner" href="/barcodescanner"></nb-action>
+      <nb-action icon="plus-circle-outline" title="Hinzufügen" href="/hinzufuegen"></nb-action>
+      <nb-action icon="person-outline" title="Profil" href="/profil"></nb-action>
     </nb-actions>
   </nb-layout-footer>
 </nb-layout>

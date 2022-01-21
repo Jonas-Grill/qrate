@@ -158,7 +158,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of fooditem suggestions to fetch
+          description: ID of the fooditem suggestion to fetch
           required: true
           schema:
             $ref: '#/components/schemas/Id'
@@ -248,7 +248,7 @@ components:
           example: alex.salzmann@web.de
         userLevel:
           $ref: '#/components/schemas/UserLevel'
-        allergene:
+        allergens:
           type: array
           items:
             $ref: '#/components/schemas/Allergen'
@@ -317,7 +317,7 @@ components:
             - Picture 1
             - Picture 2
             - Das steht noch nicht fest
-        allergene:
+        allergens:
           type: array
           items:
             $ref: "#/components/schemas/Allergen"
@@ -356,7 +356,7 @@ components:
             - 4311536966101
       required:
         - name
-        - allergene
+        - allergens
         - nutritionScore
         - diet
         - barcode
