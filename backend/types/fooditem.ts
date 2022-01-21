@@ -7,12 +7,12 @@ export default interface FooditemSchema {
     pictures?: [];
     allergens: AllergenSchema[];
     nutritionScore: {
-       calories: number,
-       fat: number,
-       carbs: number,
-       sugar: number,
-       protein: number,
-       salt: number
+        calories: number,
+        fat: number,
+        carbs: number,
+        sugar: number,
+        protein: number,
+        salt: number
     };
     diet: string;
     barcodes: string[];

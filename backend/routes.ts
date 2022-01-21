@@ -15,6 +15,18 @@ router
     .get("/", (ctx) => {
         ctx.response.body = "Welcome";
     })
+    .get("/allergens", (ctx) => {
+        ctx.response.status = Status.OK;
+        ctx.response.body = [
+            "Gluten", "Laktose", "Soybeans", "Peanuts", "Eggs", "Fish", "Shellfish", "Tree nuts",
+        ];
+    })
+    .get("/diets", (ctx) => {
+        ctx.response.status = Status.OK;
+        ctx.response.body = [
+            "Vegan", "Vegetarisch", "Pescetarisch", "Frutarisch",
+        ];
+    })
     .use(mockUserMiddleware)
     // users
     .get("/users", (ctx) => {
