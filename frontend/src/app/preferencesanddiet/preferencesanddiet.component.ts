@@ -1,8 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Allergene} from "./allergenes";
 import {Router} from "@angular/router";
-import {getAllDiets, getAllPreferences, updateUserPreferences} from "../backendrequests/userdatarequests";
-import {diets, allergens} from "../backendrequests/userdatarequests";
+import {
+  allergens,
+  diets,
+  getAllDiets,
+  getAllPreferences,
+  updateUserPreferences
+} from "../backendrequests/userdatarequests";
 
 @Component({
   selector: 'app-preferencesanddiet',

@@ -101,7 +101,7 @@ export function loginUser(username: string, password: string) {
 }
 
 //GET REQUEST FOR ALL PREFERENCES
-export async function getAllPreferences () {
+export async function getAllPreferences() {
   await $.ajax({
     url: `${url}allergens`,
     type: 'GET',
