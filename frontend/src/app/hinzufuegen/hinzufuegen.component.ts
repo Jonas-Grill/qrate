@@ -3,8 +3,9 @@ import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { NbTagComponent } from '@nebular/theme';
-import {NbPopoverDirective} from "@nebular/theme";
+import { NbPopoverDirective } from "@nebular/theme";
 import { Router} from '@angular/router';
+import { foodRequests } from '../backendrequests/fooddatarequests';
 
 @Component({
   selector: 'app-hinzufuegen',
@@ -13,6 +14,8 @@ import { Router} from '@angular/router';
   styleUrls: ['./hinzufuegen.component.scss']
 })
 export class HinzufuegenComponent implements OnInit {
+
+  that = this;
 
   isScanned = false;
   isBild = false;
@@ -32,16 +35,19 @@ export class HinzufuegenComponent implements OnInit {
   @ViewChild('tagInput') tagInput: any;
   @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private foodApi: foodRequests) { }
 
   ngOnInit(): void {
-    this.options = ['Option 1', 'Option 2', 'Option 3'];
-    this.filteredControlOptions$ = of(this.options);
-    this.filteredControlOptions$ = this.inputFormControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(filterString => this.filter(filterString)),
-      );
+    this.foodApi.getAllAllergens().done((result) => {
+      this.options = result;
+      this.filteredControlOptions$ = of(this.options);
+      this.filteredControlOptions$ = this.inputFormControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(filterString => this.filter(filterString)),
+        );
+      console.log(result);
+    });
   }
 
   onScanClick(element: any): void {
