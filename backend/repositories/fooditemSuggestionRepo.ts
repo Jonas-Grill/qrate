@@ -3,10 +3,10 @@ import FooditemSuggestion from "../types/fooditemSuggestion.ts";
 import {Bson} from "../deps.ts";
 import InvalidIdException from "../exceptions/invalidIdException.ts";
 
-const fooditemsSuggestions = db.collection<FooditemSuggestion>("fooditemSuggestions");
+const fooditemSuggestions = db.collection<FooditemSuggestion>("fooditemSuggestions");
 
 export const createFooditemSuggestion = async (fooditemSuggestion: FooditemSuggestion) => {
-    const id = await fooditemsSuggestions.insertOne({
+    const id = await fooditemSuggestions.insertOne({
         fooditem: fooditemSuggestion.fooditem,
         creator: fooditemSuggestion.creator,
         votes: fooditemSuggestion.votes,
@@ -17,7 +17,7 @@ export const createFooditemSuggestion = async (fooditemSuggestion: FooditemSugge
 };
 
 export const getAllFooditemSuggestion = async () => {
-    return await fooditemsSuggestions.find({}).toArray();
+    return await fooditemSuggestions.find({}).toArray();
 };
 
 export const getFooditemSuggestionById = async (id: string) => {
@@ -25,7 +25,7 @@ export const getFooditemSuggestionById = async (id: string) => {
         throw new InvalidIdException();
     }
 
-    return await fooditemsSuggestions.findOne({
+    return await fooditemSuggestions.findOne({
         _id: new Bson.ObjectId(id),
     });
 };
@@ -39,7 +39,7 @@ export const updateFooditemSuggestion = async (fooditemSuggestion: FooditemSugge
         throw new InvalidIdException();
     }
 
-    await fooditemsSuggestions.updateOne(
+    await fooditemSuggestions.updateOne(
         {
             _id: new Bson.ObjectId(fooditemSuggestion._id.toString()),
         },
@@ -60,7 +60,7 @@ export const deleteFooditemSuggestionById = async (id: string) => {
         throw new InvalidIdException();
     }
 
-    return await fooditemsSuggestions.deleteOne({
+    return await fooditemSuggestions.deleteOne({
         _id: new Bson.ObjectId(id),
     });
 };

@@ -8,7 +8,7 @@ const errorHandlerMiddleware = async (ctx: Context, next: Function) => {
 
         if (isHttpError(err)) {
             ctx.response.status = err.status;
-            ctx.response.body = { msg: err.message };
+            ctx.response.body = {msg: err.message};
 
             switch (err.status) {
                 case Status.NotFound:
@@ -19,7 +19,7 @@ const errorHandlerMiddleware = async (ctx: Context, next: Function) => {
             }
         } else {
             ctx.response.status = 500;
-            ctx.response.body = { msg: "Internal server error" };
+            ctx.response.body = {msg: "Internal server error"};
         }
     }
 }

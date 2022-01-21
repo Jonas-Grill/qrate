@@ -285,7 +285,7 @@ components:
           example: Banana Smoothie
         pictures:
           type: array
-        allergenes:
+        allergens:
           type: array
           example:
             - Lactose
@@ -318,7 +318,7 @@ components:
             - 4311536966101
       required:
         - name
-        - allergenes
+        - allergens
         - nutritionScore
         - diet
         - barcode
