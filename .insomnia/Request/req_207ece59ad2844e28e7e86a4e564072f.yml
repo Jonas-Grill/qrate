@@ -1,17 +1,17 @@
-_id: req_9833bb9827ba47bd9af4bd05954e934d
+_id: req_207ece59ad2844e28e7e86a4e564072f
 type: Request
-parentId: fld_defc849e4cb244ae90ec05ad2d69ea86
-modified: 1642706521698
-created: 1642534648783
-url: "{{ _.base_url }}/fooditems/24214"
-name: Get Fooditem
+parentId: fld_e77448d294c04507b2ab22130f5c5b85
+modified: 1642706688651
+created: 1642706656088
+url: "{{ _.base_url }}/fooditemsSuggestions/687"
+name: Add vote
 description: ""
-method: GET
+method: POST
 body: {}
 parameters: []
 headers: []
 authentication: {}
-metaSortKey: -1642534648783
+metaSortKey: -1642706391385
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
