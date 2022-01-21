@@ -16,7 +16,7 @@ export const createFooditem = async (
 
     ctx.assert(instanceOfFooditem(fooditemData), Status.BadRequest, "Please provide valid data");
 
-    const fooditem: Fooditem | undefined = await fooditemService.createNewFooditem(fooditemData);
+    const fooditem: Fooditem | undefined = await fooditemService.createNewFooditem(fooditemData, ctx.state.currentUser);
 
     if (!fooditem) {
         ctx.response.status = Status.BadRequest;
