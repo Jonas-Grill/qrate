@@ -1,48 +1,68 @@
 import User from "../types/user.ts";
 import * as userRepo from "../repositories/userRepo.ts";
-import {bcrypt} from "../deps.ts";
+import invalidDataException from "../exceptions/invalidDataException.ts";
+
+export const createNewUser = async (userData: {
+    username: string; password: string; eMail: string
+}) => {
+    if ((await userRepo.getUserByUsername(userData.username))) {
+        throw new invalidDataException("This username is already in use");
+    }
+
+    if ((await userRepo.getUserByEmail(userData.eMail))) {
+        throw new invalidDataException("This email is already in use");
+    }
+
+    // password hashing disabled for testing
+    // userData.password = await bcrypt.hash(
+    //     userData.password,
+    //     await bcrypt.genSalt(8),
+    // );
+
+    const id: string = await userRepo.createUser({
+        username: userData.username,
+        password: userData.password,
+        eMail: userData.eMail,
+        userLevel: {
+            levelName: "Kadett",
+            levelValue: 1,
+            exp: 0,
+        },
+        allergens: [],
+        diet: "",
+    });
+
+    return await userRepo.getUserById(id);
+}
 
 export const getUserByUsername = async (username: string) => {
-    return await userRepo.getUserByUsername(username);
-};
+    const user = await userRepo.getUserByUsername(username);
 
-export const login = async (
+    if (!user) {
+        throw new invalidDataException(`A user with the username ${username} does not exist`);
+    }
+
+    return user;
+}
+
+export const isUserDataValid = async (
     userData: { username: string; password: string },
 ) => {
-    const user: User | undefined = await userRepo.getUserByUsername(
+
+    let user: User | undefined = await userRepo.getUserByUsername(
         userData.username,
     );
 
     if (!user) {
-        return false;
-    } else if (await bcrypt.compare(userData.password, user.password)) {
+        user = await userRepo.getUserByEmail(userData.username);
+    }
+
+    if (!user) {
+        throw new invalidDataException(`There is no user with the provided user password combination`);
+    } else if (userData.password === user.password) {
         return true;
     } else {
         return false;
     }
-};
+}
 
-export const createNewUser = async (
-    userData: { username: string; password: string; },
-) => {
-    if (await userRepo.countUserByUsername(userData.username) > 0) {
-        return;
-    }
-
-    userData.password = await bcrypt.hash(
-        userData.password,
-        await bcrypt.genSalt(8),
-    );
-
-    const newUser: User = {
-        _id: {
-            $oid: "",
-        },
-        username: userData.username,
-        password: userData.password,
-    };
-
-    newUser._id.$oid = await userRepo.createUser(newUser);
-
-    return newUser;
-};

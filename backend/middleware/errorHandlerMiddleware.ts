@@ -1,5 +1,6 @@
 import {Context, isHttpError, Status} from "../deps.ts";
 import invalidIdException from "../exceptions/invalidIdException.ts";
+import invalidDataException from "../exceptions/invalidDataException.ts";
 
 const errorHandlerMiddleware = async (ctx: Context, next: Function) => {
     try {
@@ -21,6 +22,9 @@ const errorHandlerMiddleware = async (ctx: Context, next: Function) => {
         } else if (err instanceof invalidIdException) {
             ctx.response.status = Status.BadRequest;
             ctx.response.body = {msg: "Please provide a valid id"};
+        } else if (err instanceof invalidDataException) {
+            ctx.response.status = Status.BadRequest;
+            ctx.response.body = {msg: "Please provide valid data"};
         } else {
             ctx.response.status = Status.InternalServerError;
             ctx.response.body = {msg: "Internal server error"};

@@ -1,50 +1,53 @@
-import {
-    Cookies,
-    Request,
-    Response,
-    State,
-} from "../deps.ts";
-import {
-    create,
-    getNumericDate,
-    Header,
-    Payload,
-} from "../deps.ts";
-import {JWT_ALG, SECRET} from ".././config/config.ts";
+import {create, getNumericDate, Header, Payload, Request, Response, State, Status,} from "../deps.ts";
+import {KEY, SIGN_ALG} from ".././config/config.ts";
 import * as userService from "../services/userService.ts";
 import User from "../types/user.ts";
 
-export const login = async ({
-                                request,
-                                response,
-                                cookies,
-                            }: {
-    request: Request;
-    response: Response;
-    cookies: Cookies;
-}) => {
-    if (!request.hasBody) {
-        response.status = 400;
-        response.body = {
-            success: false,
-            msg: "No Data",
-        };
-        return;
-    }
+export const registration = async (
+    ctx: {
+        request: Request;
+        response: Response;
+        assert: Function;
+    }) => {
 
-    const userData = await request.body().value;
+    ctx.assert(ctx.request.hasBody, Status.BadRequest, "Please provide data");
 
-    if (!await userService.login(userData)) {
-        response.status = 422;
-        response.body = {
-            success: false,
+    const userData = await ctx.request.body().value;
+
+    ctx.assert(userData, Status.BadRequest, "Please provide data");
+    ctx.assert('username' in userData, Status.BadRequest, "Please provide a username");
+    ctx.assert('password' in userData, Status.BadRequest, "Please provide a password");
+    ctx.assert('eMail' in userData, Status.BadRequest, "Please provide an email");
+
+    await userService.createNewUser(userData);
+
+    ctx.response.status = Status.Created;
+}
+
+export const login = async (
+    ctx: {
+        request: Request;
+        response: Response;
+        assert: Function;
+    }) => {
+    ctx.assert(ctx.request.hasBody, Status.BadRequest, "Please provide data");
+
+    const userData = await ctx.request.body().value;
+
+    ctx.assert(userData, Status.BadRequest, "Please provide data");
+    ctx.assert('username' in userData, Status.BadRequest, "Please provide a username");
+    ctx.assert('password' in userData, Status.BadRequest, "Please provide a password");
+
+    if (!await userService.isUserDataValid(userData)) {
+        ctx.response.status = Status.BadRequest;
+        ctx.response.body = {
             msg: "Invalid username or password",
         };
         return;
     }
 
     const payload: Payload = {
-        iss: userData.username,
+        username: userData.username,
         exp: getNumericDate(60 * 60 * 24),
     };
 
@@ -52,105 +55,56 @@ export const login = async ({
     const jwt: string = await createToken(payload);
 
     if (jwt) {
-        response.status = 200;
-        response.body = {
-            success: true,
-            msg: "Login successful",
+        ctx.response.status = Status.OK;
+        ctx.response.body = {
+            token: jwt,
         };
-        cookies.set("jwt", jwt, {sameSite: "none"});
     } else {
-        response.status = 500;
-        response.body = {
-            success: false,
+        ctx.response.status = Status.InternalServerError;
+        ctx.response.body = {
             msg: "Internal server error",
         };
     }
+}
 
-    return;
-};
 
-export const registration = async ({
-                                       request,
-                                       response,
-                                   }: {
-    request: Request;
-    response: Response;
-}) => {
-    try {
-        if (!request.hasBody) {
-            response.status = 400;
-            response.body = {
-                success: false,
-                msg: "No Data",
-            };
-            return;
-        }
+export const getUserData = async (
+    ctx: {
+        request: Request;
+        response: Response;
+        state: State;
+        params: any;
+    }) => {
 
-        const userData = await request.body().value;
+    const username = ctx.request.url.searchParams.get('username');
 
-        const user = await userService.createNewUser(
-            userData,
-        );
+    if (username) {
+        const user: User = await userService.getUserByUsername(username);
 
-        if (!user) {
-            response.status = 409;
-            response.body = {
-                success: false,
-                msg: "There already is a user with that username",
-            };
-            return;
-        }
-
-        const data: User = user;
-
-        response.status = 201;
-        response.body = {
-            success: true,
-            data: {
-                username: data.username,
-            },
+        ctx.response.status = Status.Created;
+        ctx.response.body = {
+            username: user.username,
+            userLevel: user.userLevel,
         };
-    } catch (err) {
-        if (err instanceof TypeError) {
-            response.status = 400;
-            response.body = {
-                success: false,
-                msg: "JWT token is invalid.",
-            };
-            return;
-        }
+    } else {
+        const user: User = ctx.state.currentUser;
 
-        response.status = 500;
-        response.body = {
-            success: false,
-            msg: err.toString(),
+        ctx.response.status = Status.Created;
+        ctx.response.body = {
+            username: user.username,
+            eMail: user.eMail,
+            userLevel: user.userLevel,
+            allergens: user.allergens,
+            diet: user.diet,
         };
     }
-};
-
-export const getUserData = ({
-                                response,
-                                state,
-                            }: {
-    response: Response;
-    state: State;
-}) => {
-    const user: User = state.currentUser;
-
-    user.password = "";
-
-    response.status = 200;
-    response.body = {
-        success: true,
-        data: user,
-    };
 };
 
 const createToken = async (payload: Payload) => {
     const header: Header = {
-        alg: JWT_ALG,
+        alg: SIGN_ALG,
         typ: "JWT",
     };
 
-    return await create(header, payload, SECRET);
+    return await create(header, payload, KEY);
 };

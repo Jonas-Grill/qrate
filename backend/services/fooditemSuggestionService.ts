@@ -34,7 +34,7 @@ export const addVote = async (fooditemSuggestionId: string, upVote: boolean, use
     }
 
     fooditemSuggestion.votes.push({
-        userId: user._id.toString(),
+        username: user.username,
         upVote: upVote,
     });
 
