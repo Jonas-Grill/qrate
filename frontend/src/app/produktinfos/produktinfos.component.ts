@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { foodRequests } from '../backendrequests/fooddatarequests';
 
 export interface beitragType {
   name: string,
@@ -28,9 +29,13 @@ export class ProduktinfosComponent implements OnInit {
     spuren: ["spur 1", "Spur 2"],
     art: "Vegan"
   };
-  constructor() { }
+  constructor(private foodApi: foodRequests) { }
 
   ngOnInit(): void {
+    let barcode = sessionStorage.getItem('barcode');
+    this.foodApi.getFoodItemData(String(barcode)).done((result) => {
+      console.log(result);
+    })
   }
 
 }

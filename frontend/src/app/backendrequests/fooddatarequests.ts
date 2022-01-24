@@ -5,7 +5,7 @@ import * as $ from "jquery";
 export class foodRequests {
   public getAllFoodItems() {
     return $.ajax({
-      url: 'http://localhost:8080/fooditems',
+      url: 'http://localhost:8008/fooditems',
       type: 'GET',
       xhrFields: {
         withCredentials: true,
@@ -38,9 +38,9 @@ export class foodRequests {
   
   //GET REQUEST FOR DATA OF A SPECIFIC FOOD ITEM (APPROVED)
   public getFoodItemData(id: string) {
-    const url = 'http://localhost:8080/fooditems/${id}'
+    const url = 'http://localhost:8008/fooditems/${id}'
     return $.ajax({
-      url: `http://localhost:8080/fooditems/${id}`,
+      url: `http://localhost:8008/fooditems/${id}`,
       type: 'GET',
       xhrFields: {
         withCredentials: true,
@@ -57,7 +57,7 @@ export class foodRequests {
   //GET REQUEST TO GET DATA OF ALL FOOD ITEM SUGGESTIONS (NOT APPROVED)
   public getAllFoodItemSuggestions() {
     return $.ajax({
-      url: 'http://localhost:8080/fooditemSuggestions',
+      url: 'http://localhost:8008/fooditemSuggestions',
       type: 'GET',
       xhrFields: {
         withCredentials: true,
@@ -74,7 +74,7 @@ export class foodRequests {
   //POST REQUEST TO CREATE A NEW FOOD ITEM SUGGESTION (NOT APPROVED)
   public createNewFoodItemSuggestion(name: string, pictures: Array<string>, allergene: Array<string>, diet: string, barcode: Array<string>, username: string) {
     $.ajax({
-      url: 'http://localhost:8080/fooditemSuggestions',
+      url: 'http://localhost:8008/fooditemSuggestions',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -101,7 +101,7 @@ export class foodRequests {
   //GET REQUEST TO GET DATA OF A SPECIFIC FOOD ITEM SUGGESTION (NOT APPROVED)
   public getFoodItemSuggestion(id: string) {
     return $.ajax({
-      url: `http://localhost:8080/fooditemSuggestions/${id}`,
+      url: `http://localhost:8008/fooditemSuggestions/${id}`,
       type: 'GET',
       xhrFields: {
         withCredentials: true,
@@ -118,7 +118,7 @@ export class foodRequests {
   //POST REQUEST TO VOTE FOR A FOOD ITEM
   public voteForFoodItemSuggestion(id: string, vote: boolean) {
     $.ajax({
-      url: `http://localhost:8080/fooditemSuggestions/${id}`,
+      url: `http://localhost:8008/fooditemSuggestions/${id}`,
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({upVote: vote}),
