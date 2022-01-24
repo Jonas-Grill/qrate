@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Allergene} from "./allergenes";
 import {Router} from "@angular/router";
+import {userDataRequests} from "../backendrequests/userdatarequests";
 
 @Component({
   selector: 'app-preferencesanddiet',
@@ -9,29 +10,36 @@ import {Router} from "@angular/router";
 })
 
 export class PreferencesanddietComponent implements OnInit {
+  public allergieList: string[] = [];
+  public dietList: string[] = [];
   public allergene: Allergene[] = [];
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
+  public userDiet: string = '';
+  public userPreferences: object[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userApi: userDataRequests) {
   }
 
   ngOnInit(): void {
-    this.allergielist.sort();
-    this.dietlist.sort();
+    this.userApi.getAllPreferences().done((result) => {
+      this.allergieList = result;
+      this.allergieList.sort();
 
-    for (let allergie of this.allergielist) {
-      this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
-      this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
-    }
+      for (let allergie of this.allergieList) {
+        this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
+        this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
+      }
+    });
+    this.userApi.getAllDiets().done((result) => {
+      this.dietList = result;
+      this.dietList.sort();
 
-    for (let diet of this.dietlist) {
-      this.diets.push({id: diet, name: diet, disabled: false});
-    }
+      for (let diet of this.dietList) {
+        this.diets.push({id: diet, name: diet, disabled: false});
+      }
+    });
   }
-
-  allergielist = ["Eier", "Erdnuss", "Gluten", "Sesam", "Senf", "Lupine", "Sulfite", "Nuss", "Weichtiere", "Krebstiere", "Fische", "Soja", "Sellerie", "Milch"];
-  dietlist = ["Vegetarisch", "Pescetarisch", "Vegan"];
 
   onChangeAllergies(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES
@@ -73,18 +81,35 @@ export class PreferencesanddietComponent implements OnInit {
         if (this.diets[i].id !== name) {
           this.diets[i].disabled = true;
         }
+        this.userDiet = name;
       }
     } else {
       for (let i = 0; i < this.diets.length; i++) {
         if (this.diets[i].id !== name) {
           this.diets[i].disabled = false;
         }
+        this.userDiet = '';
       }
     }
   }
 
   onClickNext() {
-    // ROUTING
+    //UPDATE USER DATA IN BACKEND
+    for (let i = 0; i < this.allergene.length; i++) {
+      if (this.allergene[i].disabled) {
+        this.userPreferences.push({name: this.allergene[i].name, tracesOf: true})
+      }
+    }
+
+    for (let i = 0; i < this.traces.length; i++) {
+      if (this.traces[i].disabled) {
+        this.userPreferences.push({name: this.traces[i].name, tracesOf: false})
+      }
+    }
+
+    this.userApi.updateUserPreferences(this.userPreferences, this.userDiet);
+
+    //ROUTING
     this.router.navigate(['/', 'beitraege']);
   }
 }

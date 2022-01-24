@@ -104,15 +104,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Fooditem'
-    post:
-      summary: Creates a new fooditem
-      responses:
-        201:
-          description: Returns the created fooditem
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Fooditem'
   /fooditems/{id}:
     get:
       summary: Returns a fooditem by ID
@@ -145,7 +136,15 @@ paths:
                 items:
                   $ref: '#/components/schemas/FooditemSuggestion'
     post:
-      summary: Creates a new fooditem
+      summary: Creates a new fooditem suggestion
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fooditem"
       responses:
         201:
           description: Returns the created fooditem suggestions
@@ -169,7 +168,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Fooditem'
+                $ref: '#/components/schemas/FooditemSuggestion'
         404:
           description: A fooditem suggestions with the specified ID was not found
     post:
@@ -182,13 +181,41 @@ paths:
             schema:
               type: object
               properties:
-                userId:
-                  type: string
                 upVote:
                   type: boolean
       responses:
         200:
-          description: Feedback
+          description: Returns the updated FooditemSuggestion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FooditemSuggestion'
+  /allergens:
+    get:
+      summary: Returns all allergens
+      responses:
+        200:
+          description: allergens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: Laktose, Gluten
+  /diets:
+    get:
+      summary: Returns all diets
+      responses:
+        200:
+          description: diets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: Vegan, Vegetarisch
 components:
   responses:
     UnauthorizedError:
@@ -271,6 +298,7 @@ components:
 
     JWT-Token:
       type: string
+      readOnly: true
       example: eyJhbGciOiJIUzUxMiJ9.eyJVc2VybmFtZSI6IkdpbmEiLCJleHAiOjE2MzgzNjQwMzMsImlhdCI6MTYzODM2NDAzMywiUGFzc3dvcmQiOiIxMjM0In0.cqPtZ3bAdcDlVZdPc9yFleDZrH_dIpAv-lKtMcwMTmH5w6szvaWdYoLkQXVk6hkZG1hE0TehtbnuM9f_jgYx1w
 
     Fooditem:
@@ -285,29 +313,38 @@ components:
           example: Banana Smoothie
         pictures:
           type: array
+          example:
+            - Picture 1
+            - Picture 2
+            - Das steht noch nicht fest
         allergens:
           type: array
-          example:
-            - Lactose
-            - Milksugar
-            - Gluten
+          items:
+            $ref: "#/components/schemas/Allergen"
         nutritionScore:
           type: object
           properties:
             calories:
               type: integer
+              example: 45
             fat:
               type: integer
+              example: 345
             carbs:
               type: integer
+              example: 234
             sugar:
               type: integer
+              example: 323
             protein:
               type: integer
+              example: 324
             salt:
               type: integer
+              example: 445
         diet:
           type: string
+          example: Vegan
           enum:
             - Vegan
             - Vegetarisch
@@ -315,6 +352,7 @@ components:
         barcodes:
           type: array
           example:
+            - 4311536966101
             - 4311536966101
       required:
         - name
@@ -334,12 +372,20 @@ components:
           $ref: '#/components/schemas/Fooditem'
         creator:
           type: string
+          readOnly: true
+          example: Gina
         upVotes:
           type: integer
+          readOnly: true
+          example: 45
         downVotes:
           type: integer
+          readOnly: true
+          example: 44
         rating:
           type: integer
+          readOnly: true
+          example: 1
 
     Id:
       type: integer

@@ -1,10 +1,10 @@
-_id: req_63f3bd9b648f4683932236be07a2d5f7
+_id: req_b6aa060f1dd94f7a8f3d23f9c0babdc1
 type: Request
-parentId: fld_e77448d294c04507b2ab22130f5c5b85
-modified: 1643028716473
-created: 1642706624715
-url: "{{ _.base_url }}/fooditemSuggestions"
-name: create Fooditem Suggestion
+parentId: fld_defc849e4cb244ae90ec05ad2d69ea86
+modified: 1643035082545
+created: 1642776824196
+url: "{{ _.base_url }}/fooditems"
+name: create Fooditem
 description: ""
 method: POST
 body:
@@ -32,9 +32,8 @@ body:
     		},
     		"diet": "Vegetarisch",
     		"barcodes": [
-    			"4311536966101",
-    			"4311536646405",
-    			"8985230394409"
+    			"1234567",
+    			"213234124412"
     		]
     	}
 parameters: []
@@ -45,7 +44,7 @@ headers:
 authentication:
   type: bearer
   token: "{{ _.token }}"
-metaSortKey: -1642706416863
+metaSortKey: -1641825651455.5
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

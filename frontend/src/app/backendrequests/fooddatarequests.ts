@@ -1,11 +1,10 @@
 import * as $ from "jquery";
-
-const baseURL = 'http://localhost:8080/';
+import {url} from "./userdatarequests";
 
 //GET REQUEST FOR ALL FOOD ITEMS
 export function getAllFoodItems() {
   $.ajax({
-    url: `${baseURL}fooditems`,
+    url: `${url}fooditems`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -22,7 +21,7 @@ export function getAllFoodItems() {
 //GET REQUEST FOR DATA OF A SPECIFIC FOOD ITEM (APPROVED)
 export function getFoodItemData(id: string) {
   $.ajax({
-    url: `${baseURL}fooditems/${id}`,
+    url: `${url}fooditems/${id}`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -39,7 +38,7 @@ export function getFoodItemData(id: string) {
 //GET REQUEST TO GET DATA OF ALL FOOD ITEM SUGGESTIONS (NOT APPROVED)
 export function getAllFoodItemSuggestions() {
   $.ajax({
-    url: `${baseURL}fooditemSuggestions`,
+    url: `${url}fooditemSuggestions`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -56,7 +55,7 @@ export function getAllFoodItemSuggestions() {
 //POST REQUEST TO CREATE A NEW FOOD ITEM SUGGESTION (NOT APPROVED)
 export function createNewFoodItemSuggestion(name: string, pictures: Array<string>, allergene: Array<string>, diet: string, barcode: Array<string>, username: string) {
   $.ajax({
-    url: `${baseURL}fooditemSuggestions`,
+    url: `${url}fooditemSuggestions`,
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
@@ -83,7 +82,7 @@ export function createNewFoodItemSuggestion(name: string, pictures: Array<string
 //GET REQUEST TO GET DATA OF A SPECIFIC FOOD ITEM SUGGESTION (NOT APPROVED)
 export function getFoodItemSuggestion(id: string) {
   $.ajax({
-    url: `${baseURL}fooditemSuggestions/${id}`,
+    url: `${url}fooditemSuggestions/${id}`,
     type: 'GET',
     xhrFields: {
       withCredentials: true,
@@ -100,7 +99,7 @@ export function getFoodItemSuggestion(id: string) {
 //POST REQUEST TO VOTE FOR A FOOD ITEM
 export function voteForFoodItemSuggestion(id: string, vote: boolean) {
   $.ajax({
-    url: `http://localhost:8080/fooditemSuggestions/${id}`,
+    url: `${url}fooditemSuggestions/${id}`,
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({upVote: vote}),

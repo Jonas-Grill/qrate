@@ -1,13 +1,15 @@
-import {State} from "https://deno.land/x/oak@v10.0.0/application.ts";
-import User from "../types/user.ts";
-import {Bson} from "../deps.ts";
+import {Bson, Request, State} from "../deps.ts";
 
 const authMiddleware = async (
     {
         state,
+        request,
     }: {
         state: State;
+        request: Request;
     }, next: Function) => {
+
+    console.log(request.headers);
 
     state.currentUser = {
         _id: new Bson.ObjectId(),

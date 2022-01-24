@@ -3,10 +3,15 @@ import {DB_LINK} from "./config.ts"
 
 const client = new MongoClient();
 
-await sleep(5)
+await sleep(10);
 
 //Connecting to a Local Mongo Database
-await client.connect(DB_LINK);
+try {
+    await client.connect(DB_LINK);
+} catch (e) {
+    await sleep(10);
+    await client.connect(DB_LINK);
+}
 
 const db = client.database("qrate");
 
