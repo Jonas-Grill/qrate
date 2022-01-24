@@ -1,9 +1,9 @@
 _id: req_63f3bd9b648f4683932236be07a2d5f7
 type: Request
 parentId: fld_e77448d294c04507b2ab22130f5c5b85
-modified: 1642754144608
+modified: 1643028716473
 created: 1642706624715
-url: "{{ _.base_url }}/fooditemsSuggestions"
+url: "{{ _.base_url }}/fooditemSuggestions"
 name: create Fooditem Suggestion
 description: ""
 method: POST
@@ -42,7 +42,9 @@ headers:
   - name: Content-Type
     value: application/json
     id: pair_67818e7bd45d45eeaff3532c55dc02ec
-authentication: {}
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
 metaSortKey: -1642706416863
 isPrivate: false
 settingStoreCookies: true
