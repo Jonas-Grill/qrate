@@ -1,10 +1,18 @@
 import * as fooditemSuggestionRepo from "../repositories/fooditemSuggestionRepo.ts";
+import * as fooditemRepo from "../repositories/fooditemRepo.ts";
 import FooditemSuggestion from "../types/fooditemSuggestion.ts";
 import Fooditem from "../types/fooditem.ts";
 import invalidIdException from "../exceptions/invalidIdException.ts";
 import User from "../types/user.ts";
+import InvalidDataException from "../exceptions/invalidDataException.ts";
 
 export const createNewFooditemSuggestion = async (fooditem: Fooditem, user: User) => {
+    for await (const barcode of fooditem.barcodes) {
+        if (await fooditemRepo.getFooditemByBarcode(barcode)) {
+            throw new InvalidDataException(`There already exists a fooditem with the barcode ${barcode}`);
+        }
+    }
+
     const fooditemSuggestion: FooditemSuggestion = {
         creator: user.username, fooditem: fooditem, rating: 0, votes: []
     };

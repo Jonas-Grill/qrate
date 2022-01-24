@@ -2,6 +2,7 @@ import db from '../config/db-connection.ts';
 import Fooditem from "../types/fooditem.ts";
 import {Bson} from "../deps.ts";
 import InvalidIdException from "../exceptions/invalidIdException.ts";
+import InvalidDataException from "../exceptions/invalidDataException.ts";
 
 const fooditems = db.collection<Fooditem>("fooditems");
 
@@ -30,6 +31,18 @@ export const getFooditemById = async (id: string) => {
     return await fooditems.findOne({
         _id: new Bson.ObjectId(id),
     });
+};
+
+export const getFooditemByBarcode = async (barcode: string) => {
+    const cursor = fooditems.find({});
+
+    for await (const fooditem of cursor) {
+        if (fooditem.barcodes.includes(barcode)) {
+            return fooditem;
+        }
+    }
+
+    return;
 };
 
 export const updateFooditem = async (fooditem: Fooditem) => {

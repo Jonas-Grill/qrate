@@ -19,8 +19,6 @@ const authMiddleware = async (ctx: Context, next: Function) => {
 
         // If it is valid select user and save in context state
         ctx.state.currentUser = await userService.getUserByUsername(username);
-
-        await next();
     } catch (err) {
         if (err instanceof RangeError) {
             ctx.state.currentUser = null;
@@ -31,6 +29,8 @@ const authMiddleware = async (ctx: Context, next: Function) => {
         ctx.state.currentUser = null;
         ctx.throw(Status.BadRequest, "JWT token is invalid");
     }
+
+    await next();
 };
 
 export default authMiddleware;
