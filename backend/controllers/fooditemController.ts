@@ -67,7 +67,15 @@ export const getOneFooditem = async (
     }) => {
     ctx.assert(ctx.params.id, Status.BadRequest, "Please provide an id");
 
-    const fooditem: Fooditem = await fooditemService.getFooditem(ctx.params.id);
+    const barcode = ctx.request.url.searchParams.get('barcode');
+
+    let fooditem: Fooditem;
+
+    if (barcode && barcode === "true") {
+        fooditem = await fooditemService.getFooditemByBarcode(ctx.params.id);
+    } else {
+        fooditem = await fooditemService.getFooditemById(ctx.params.id);
+    }
 
     ctx.response.status = Status.OK;
     ctx.response.body = {

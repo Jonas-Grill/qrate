@@ -1,6 +1,7 @@
 import {Application, logger, oakCors} from "./deps.ts";
 import router from "./routes.ts";
 import {PORT} from "./config/config.ts";
+import {getFooditemByBarcode} from "./repositories/fooditemRepo.ts";
 
 const app = new Application();
 

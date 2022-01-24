@@ -24,7 +24,7 @@ const errorHandlerMiddleware = async (ctx: Context, next: Function) => {
             ctx.response.body = {msg: "Please provide a valid id"};
         } else if (err instanceof invalidDataException) {
             ctx.response.status = Status.BadRequest;
-            ctx.response.body = {msg: "Please provide valid data"};
+            ctx.response.body = {msg: err.message};
         } else {
             ctx.response.status = Status.InternalServerError;
             ctx.response.body = {msg: "Internal server error"};
