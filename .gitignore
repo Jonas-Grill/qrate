@@ -92,3 +92,4 @@ typings/
 
 # MongoDB
 db/
+backend/.env
