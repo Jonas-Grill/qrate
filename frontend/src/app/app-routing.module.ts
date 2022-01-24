@@ -4,18 +4,18 @@ import {BeitraegeComponent} from './beitraege/beitraege.component';
 import {HinzufuegenComponent} from './hinzufuegen/hinzufuegen.component';
 import {ProduktinfosComponent} from './produktinfos/produktinfos.component';
 import {ProfileComponent} from "./profile/profile.component";
-import {PreferencesanddietComponent} from "./preferencesanddiet/preferencesanddiet.component";
-import {BarcodescannerComponent} from "./barcodescanner/barcodescanner.component";
+import {PreferencesAndDietComponent} from "./preferencesAndDiet/preferencesAndDiet.component";
+import {BarcodeScannerComponent} from "./barcodeScanner/barcodeScanner.component";
 import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'profil', component: ProfileComponent},
-  {path: 'ernaehrungsweise', component: PreferencesanddietComponent},
+  {path: 'ernaehrungsweise', component: PreferencesAndDietComponent},
   {path: 'beitraege', component: BeitraegeComponent},
   {path: 'hinzufuegen', component: HinzufuegenComponent},
   {path: 'produktinfo', component: ProduktinfosComponent},
-  {path: 'barcodescanner', component: BarcodescannerComponent}
+  {path: 'barcodescanner', component: BarcodeScannerComponent}
 ];
 
 @NgModule({

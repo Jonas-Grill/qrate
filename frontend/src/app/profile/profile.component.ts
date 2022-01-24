@@ -1,8 +1,8 @@
 import {Component, OnInit, Optional} from '@angular/core';
-import {Allergene} from "../preferencesanddiet/allergenes";
+import {Allergene} from "../preferencesAndDiet/allergenes";
 import {NbWindowControlButtonsConfig, NbWindowService} from "@nebular/theme";
 import {DialogLogoutComponent} from "../dialogLogout/dialogLogout.component";
-import {DialogChangePasswordComponent} from "../dialog-change-password/dialog-change-password.component";
+import {DialogChangePasswordComponent} from "../dialogChangePassword/dialogChangePassword.component";
 import {beitragType} from "../beitraege/beitraege.component";
 import {Router} from "@angular/router";
 

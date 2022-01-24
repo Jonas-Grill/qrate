@@ -3,8 +3,8 @@ import {NbPopoverDirective, NbWindowRef} from "@nebular/theme";
 
 @Component({
   selector: 'app-dialog-change-password',
-  templateUrl: './dialog-change-password.component.html',
-  styleUrls: ['./dialog-change-password.component.scss']
+  templateUrl: './dialogChangePassword.component.html',
+  styleUrls: ['./dialogChangePassword.component.scss']
 })
 export class DialogChangePasswordComponent {
   password: any;

@@ -29,8 +29,8 @@ import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {PreferencesanddietComponent} from './preferencesanddiet/preferencesanddiet.component';
-import {BarcodescannerComponent} from './barcodescanner/barcodescanner.component';
+import {PreferencesAndDietComponent} from './preferencesAndDiet/preferencesAndDiet.component';
+import {BarcodeScannerComponent} from './barcodeScanner/barcodeScanner.component';
 import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from "../environments/environment";
 import {TabbarComponent} from './tabbar/tabbar.component';
@@ -39,7 +39,7 @@ import {HinzufuegenComponent} from './hinzufuegen/hinzufuegen.component';
 import {ProduktinfosComponent} from './produktinfos/produktinfos.component';
 import {ProfileComponent} from './profile/profile.component';
 import {DialogLogoutComponent} from './dialogLogout/dialogLogout.component';
-import {DialogChangePasswordComponent} from './dialog-change-password/dialog-change-password.component';
+import {DialogChangePasswordComponent} from './dialogChangePassword/dialogChangePassword.component';
 import {userDataRequests} from "./backendRequests/userDataRequests";
 
 @NgModule({
@@ -53,8 +53,8 @@ import {userDataRequests} from "./backendRequests/userDataRequests";
     BeitraegeComponent,
     HinzufuegenComponent,
     ProduktinfosComponent,
-    PreferencesanddietComponent,
-    BarcodescannerComponent,
+    PreferencesAndDietComponent,
+    BarcodeScannerComponent,
   ],
   imports: [
     BrowserModule,

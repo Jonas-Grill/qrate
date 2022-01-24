@@ -5,11 +5,11 @@ import {userDataRequests} from "../backendRequests/userDataRequests";
 
 @Component({
   selector: 'app-preferencesanddiet',
-  templateUrl: './preferencesanddiet.component.html',
-  styleUrls: ['./preferencesanddiet.component.scss']
+  templateUrl: './preferencesAndDiet.component.html',
+  styleUrls: ['./preferencesAndDiet.component.scss']
 })
 
-export class PreferencesanddietComponent implements OnInit {
+export class PreferencesAndDietComponent implements OnInit {
   public allergieList: string[] = [];
   public dietList: string[] = [];
   public allergene: Allergene[] = [];
