@@ -1,0 +1,54 @@
+_id: req_b6aa060f1dd94f7a8f3d23f9c0babdc1
+type: Request
+parentId: fld_defc849e4cb244ae90ec05ad2d69ea86
+modified: 1643035082545
+created: 1642776824196
+url: "{{ _.base_url }}/fooditems"
+name: create Fooditem
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    		"name": "Banana Smoothie",
+    		"allergens": [
+    			{
+    				"name": "Laktose",
+    				"tracesOf": true
+    			},
+    			{
+    				"name": "Milchzucker",
+    				"tracesOf": false
+    			}
+    		],
+    		"nutritionScore": {
+    			"calories": 71,
+    			"fat": 1.5,
+    			"carbs": 14,
+    			"sugar": 13,
+    			"protein": 0.8,
+    			"salt": 0
+    		},
+    		"diet": "Vegetarisch",
+    		"barcodes": [
+    			"1234567",
+    			"213234124412"
+    		]
+    	}
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_67818e7bd45d45eeaff3532c55dc02ec
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1641825651455.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,21 @@
+_id: req_a5d8cca1c94740a3afb8c9ad0d7dac45
+type: Request
+parentId: fld_defc849e4cb244ae90ec05ad2d69ea86
+modified: 1643035199469
+created: 1643035168184
+url: "{{ _.base_url }}/fooditems/4311536966101?barcode=true"
+name: Get Fooditem by barcode
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1642180150144.25
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
