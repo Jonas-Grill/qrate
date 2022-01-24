@@ -1,15 +1,24 @@
 _id: req_406043edf0f4413c914752c33673d3f2
 type: Request
 parentId: fld_deb16e002d37475c9509959ba5f0bc3a
-modified: 1642706479992
+modified: 1643029174939
 created: 1642706474006
 url: "{{ _.base_url }}/login"
 name: Login
 description: ""
 method: POST
-body: {}
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"username": "Jonas",
+    	"password": "12345"
+    }
 parameters: []
-headers: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_a7fa1b91c2c840ae9e65ade69a8b0815
 authentication: {}
 metaSortKey: -1642706292588
 isPrivate: false
