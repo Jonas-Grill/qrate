@@ -4,8 +4,6 @@ import { foodRequests } from '../backendrequests/fooddatarequests';
 export interface beitragType {
   name: string,
   image: string,
-  rating: number,
-  user: string,
   allergens: string[],
   spuren: string[],
   art: string
@@ -21,8 +19,6 @@ export class ProduktinfosComponent implements OnInit {
   beitrag: beitragType = {
     name: "",
     image: "/assets/Logo.PNG",
-    rating: 0,
-    user: "",
     allergens: [],
     spuren: [],
     art: ""
@@ -33,10 +29,15 @@ export class ProduktinfosComponent implements OnInit {
     let barcode = sessionStorage.getItem('barcode');
     this.foodApi.getFoodItemData(String(barcode), true).done((result) => {
       console.log(result);
-      this.beitrag.name = result.fooditem.name;
-      this.beitrag.rating = result.result;
-      this.beitrag.user = result.creator;
-      this.beitrag.allergens 
+      this.beitrag.name = result.name;
+      this.beitrag.art = result.diet;
+      for (let i = 0; i < result.allergens.length; i++) {
+        if (result.allergens[i].tracesOf === true) {
+          this.beitrag.spuren.push(result.allergens[i].name);
+        } else {
+          this.beitrag.allergens.push(result.allergens[i].name);
+        }
+      }
 
     })
   }

@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { NbTagComponent } from '@nebular/theme';
 import { NbPopoverDirective } from "@nebular/theme";
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { foodRequests } from '../backendrequests/fooddatarequests';
 
 @Component({
@@ -102,11 +102,11 @@ export class HinzufuegenComponent implements OnInit {
   //Change Funktion für Allergene
   onSelectionChange() {
     let checker: boolean = false;
-    for(let tag in this.usedAllergenes) {
-      if(this.usedAllergenes[tag] == this.input.nativeElement.value) {
+    for (let tag in this.usedAllergenes) {
+      if (this.usedAllergenes[tag] == this.input.nativeElement.value) {
         this.input.nativeElement.value = '';
         checker = true;
-        this.allergenPopover = "Dieses Allergen wurde bereits als Allergen oder Spurenelement ausgewählt";
+        this.allergenPopover = "Dieses Allergen wurde bereits ausgewählt";
         this.popovers?.filter(item => item.popoverClass == "allergen").shift()?.show();
         setTimeout(() => {
           this.popovers?.filter(item => item.popoverClass == "allergen").shift()?.hide();
@@ -114,7 +114,7 @@ export class HinzufuegenComponent implements OnInit {
         break;
       }
     }
-    if(checker === false) {
+    if (checker === false) {
       this.tags.push(this.input.nativeElement.value);
       this.usedAllergenes.push(this.input.nativeElement.value);
       this.input.nativeElement.value = '';
@@ -124,11 +124,11 @@ export class HinzufuegenComponent implements OnInit {
   //Change Funktion für Spuren
   onSelectionTagChange() {
     let checker: boolean = false;
-    for(let tag in this.usedAllergenes) {
-      if(this.usedAllergenes[tag] == this.tagInput.nativeElement.value) {
+    for (let tag in this.usedAllergenes) {
+      if (this.usedAllergenes[tag] == this.tagInput.nativeElement.value) {
         this.tagInput.nativeElement.value = '';
         checker = true;
-        this.spurenPopover = "Dieses Allergen wurde bereits als Allergen oder Spurenelement ausgewählt";
+        this.spurenPopover = "Dieses Allergen wurde bereits ausgewählt";
         this.popovers?.filter(item => item.popoverClass == "spur").shift()?.show();
         setTimeout(() => {
           this.popovers?.filter(item => item.popoverClass == "spur").shift()?.hide();
@@ -136,7 +136,7 @@ export class HinzufuegenComponent implements OnInit {
         break;
       }
     }
-    if(checker === false) {
+    if (checker === false) {
       this.spurenTags.push(this.tagInput.nativeElement.value);
       this.usedAllergenes.push(this.tagInput.nativeElement.value);
       this.tagInput.nativeElement.value = '';
