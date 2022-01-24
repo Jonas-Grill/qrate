@@ -13,7 +13,6 @@ try {
     await client.connect(DB_LINK);
 }
 
-
 const db = client.database("qrate");
 
 export default db;
