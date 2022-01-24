@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Allergene} from "./allergenes";
 import {Router} from "@angular/router";
-import {userDataRequests} from "../backendrequests/userdatarequests";
+import {userDataRequests} from "../backendRequests/userDataRequests";
 
 @Component({
   selector: 'app-preferencesanddiet',

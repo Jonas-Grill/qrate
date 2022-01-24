@@ -40,7 +40,7 @@ import {ProduktinfosComponent} from './produktinfos/produktinfos.component';
 import {ProfileComponent} from './profile/profile.component';
 import {DialogLogoutComponent} from './dialogLogout/dialogLogout.component';
 import {DialogChangePasswordComponent} from './dialog-change-password/dialog-change-password.component';
-import {userDataRequests} from "./backendrequests/userdatarequests";
+import {userDataRequests} from "./backendRequests/userDataRequests";
 
 @NgModule({
   declarations: [

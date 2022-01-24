@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import {NbPopoverDirective} from "@nebular/theme";
 import {Router} from "@angular/router";
-import {getUserData, loginUser, registerUser} from "../backendrequests/userdatarequests";
+import {userDataRequests} from "../backendRequests/userDataRequests";
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
-  constructor(private cd: ChangeDetectorRef, private router: Router) {
+  constructor(private cd: ChangeDetectorRef, private router: Router, private userApi: userDataRequests) {
   }
 
   ngOnInit(): void {
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
     if (!this.popovers?.filter(item => item.isShown).shift()) {
       if (this.isRegister) {
         try {
-          registerUser(this.username, this.password, this.email);
+          this.userApi.registerUser(this.username, this.password, this.email);
         } catch (err) {
           if (err.message.contains("username")) {
             this.usernamePopover = "Dieser Username ist schon vergeben";
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/', 'ernaehrungsweise']);
       } else {
         try {
-          loginUser(this.username, this.password);
+          sessionStorage.setItem('token', this.userApi.loginUser(this.username, this.password).toString());;
           this.router.navigate(['/', 'beitraege']);
         } catch (err) {
           this.usernamePopover = "Die Kombination aus Username und Passwort ist nicht vergeben";

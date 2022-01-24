@@ -3,7 +3,7 @@ import * as $ from "jquery";
 export const url = "http://localhost:8008/"
 
 export class userDataRequests {
-//POST REQUEST FOR USER REGISTRATION
+  //POST REQUEST FOR USER REGISTRATION
   public registerUser(username: string, password: string, email: string) {
     return $.ajax({
       url: `${url}users`,
@@ -23,7 +23,7 @@ export class userDataRequests {
     });
   }
 
-//GET REQUEST FOR USER DATA
+  //GET REQUEST FOR USER DATA
   public getUserData() {
     return $.ajax({
       url: `${url}users`,
@@ -40,7 +40,7 @@ export class userDataRequests {
     });
   }
 
-//UPDATE REQUEST FOR USER DATA
+  //UPDATE REQUEST FOR USER DATA
   public updateUserPassword(username: string, password: string) {
     return $.ajax({
       url: `${url}users`,
@@ -98,7 +98,7 @@ export class userDataRequests {
     });
   }
 
-//POST REQUEST FOR USER LOGIN
+  //POST REQUEST FOR USER LOGIN
   public loginUser(username: string, password: string) {
     return $.ajax({
       url: `${url}login`,
@@ -110,7 +110,7 @@ export class userDataRequests {
         withCredentials: true,
       },
       success(response: any, errors: any) {
-        response.token;
+        return response.token;
       },
       error(xhr: any) {
 
@@ -118,7 +118,7 @@ export class userDataRequests {
     });
   }
 
-//GET REQUEST FOR ALL PREFERENCES
+  //GET REQUEST FOR ALL PREFERENCES
   public getAllPreferences() {
     return $.ajax({
       url: `${url}allergens`,
@@ -135,7 +135,7 @@ export class userDataRequests {
     });
   }
 
-//GET REQUEST FOR ALL DIETS
+  //GET REQUEST FOR ALL DIETS
   public getAllDiets() {
     return $.ajax({
       url: `${url}diets`,

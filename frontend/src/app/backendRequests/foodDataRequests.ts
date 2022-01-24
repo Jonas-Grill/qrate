@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import {url} from "./userdatarequests";
+import {url} from "./userDataRequests";
 
 //GET REQUEST FOR ALL FOOD ITEMS
 export function getAllFoodItems() {
