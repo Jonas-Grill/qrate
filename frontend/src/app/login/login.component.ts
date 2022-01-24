@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
           loginUser(this.username, this.password);
           this.router.navigate(['/', 'beitraege']);
         } catch (err) {
-          this.usernamePopover = "Diese Username Passwort Kombination ist nicht vergeben";
+          this.usernamePopover = "Die Kombination aus Username und Passwort ist nicht vergeben";
           this.showPopover("username");
         }
       }
