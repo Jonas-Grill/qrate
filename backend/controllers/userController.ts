@@ -1,15 +1,9 @@
-import {create, getNumericDate, Header, Payload, Request, Response, State, Status,} from "../deps.ts";
+import {Context, create, getNumericDate, Header, Payload, Request, Response, State, Status,} from "../deps.ts";
 import {KEY, SIGN_ALG} from ".././config/config.ts";
 import * as userService from "../services/userService.ts";
 import User from "../types/user.ts";
 
-export const registration = async (
-    ctx: {
-        request: Request;
-        response: Response;
-        assert: Function;
-    }) => {
-
+export const registration = async (ctx: Context) => {
     ctx.assert(ctx.request.hasBody, Status.BadRequest, "Please provide data");
 
     const userData = await ctx.request.body().value;
@@ -24,12 +18,7 @@ export const registration = async (
     ctx.response.status = Status.Created;
 }
 
-export const login = async (
-    ctx: {
-        request: Request;
-        response: Response;
-        assert: Function;
-    }) => {
+export const login = async (ctx: Context) => {
     ctx.assert(ctx.request.hasBody, Status.BadRequest, "Please provide data");
 
     const userData = await ctx.request.body().value;
@@ -98,6 +87,28 @@ export const getUserData = async (
             diet: user.diet,
         };
     }
+};
+
+export const updateUser = async (ctx: Context) => {
+    ctx.assert(ctx.request.hasBody, Status.BadRequest, "Please provide data");
+
+    const user = await ctx.request.body().value;
+
+    ctx.assert(user, Status.BadRequest, "Please provide data");
+
+    const newUser: User | undefined = await userService.updateUser(user, ctx.state.currentUser.username)
+
+    ctx.assert(newUser, Status.BadRequest, "Please provide valid data");
+
+    ctx.response.status = Status.OK;
+    ctx.response.body = {
+        username: newUser.username,
+        eMail: newUser.eMail,
+        userLevel: newUser.userLevel,
+        allergens: newUser.allergens,
+        diet: newUser.diet,
+    };
+
 };
 
 const createToken = async (payload: Payload) => {

@@ -1,6 +1,7 @@
 import User from "../types/user.ts";
 import * as userRepo from "../repositories/userRepo.ts";
 import invalidDataException from "../exceptions/invalidDataException.ts";
+import {instanceOfAllergenArray} from "../types/allergen.ts";
 
 export const createNewUser = async (userData: {
     username: string; password: string; eMail: string
@@ -65,4 +66,25 @@ export const isUserDataValid = async (
         return false;
     }
 }
+
+export const updateUser = async (user: any, username: string) => {
+    const oldUser: User | undefined = await userRepo.getUserByUsername(username);
+
+    if (!(oldUser)) {
+        throw new invalidDataException("A user with this username does not exist");
+    }
+
+    const newUser: User | undefined = await userRepo.updateUser({
+        _id: oldUser._id,
+        username: oldUser.username,
+        password: user.password || oldUser.password,
+        eMail: user.eMail || oldUser.eMail,
+        userLevel: oldUser.userLevel,
+        allergens: instanceOfAllergenArray(user.allergens) ? user.allergens : oldUser.allergens,
+        diet: user.diet || oldUser.diet,
+    });
+
+    return newUser;
+}
+
 

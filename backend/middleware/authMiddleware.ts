@@ -22,25 +22,14 @@ const authMiddleware = async (ctx: Context, next: Function) => {
 
         await next();
     } catch (err) {
-        console.error(err);
-
-        if (err instanceof TypeError) {
-            ctx.state.currentUser = null;
-
-            ctx.throw(Status.BadRequest, "JWT token is invalid");
-        }
-
         if (err instanceof RangeError) {
             ctx.state.currentUser = null;
 
             ctx.throw(Status.BadRequest, "JWT token is expired");
         }
 
-        ctx.response.status = 500;
-        ctx.response.body = {
-            success: false,
-            msg: err.toString(),
-        };
+        ctx.state.currentUser = null;
+        ctx.throw(Status.BadRequest, "JWT token is invalid");
     }
 };
 

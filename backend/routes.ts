@@ -12,7 +12,12 @@ import {
     createFooditem
 } from "./controllers/fooditemController.ts";
 import authMiddleware from "./middleware/authMiddleware.ts";
-import {getUserData, login, registration} from "./controllers/userController.ts";
+import {
+    getUserData,
+    login,
+    registration,
+    updateUser
+} from "./controllers/userController.ts";
 
 const router = new Router();
 
@@ -44,34 +49,7 @@ router
     .post("/fooditems", createFooditem)
     .post("/fooditemSuggestions", createFooditemSuggestion)
     .post("/fooditemSuggestions/:id", addVote)
-    .put("/users", (ctx) => {
-        ctx.response.status = Status.OK;
-        ctx.response.body = {
-            _id: "2384339230003240",
-            username: "Gina",
-            eMail: "alex.salzmann@web.de",
-            userLevel: {
-                levelName: "Kadett",
-                levelValue: "2",
-                exp: 2439,
-            },
-            allergens: [
-                {
-                    name: "Laktose",
-                    tracesOf: true,
-                },
-                {
-                    name: "Milchzucker",
-                    tracesOf: false,
-                },
-                {
-                    name: "Gluten",
-                    tracesOf: false,
-                },
-            ],
-            diet: "Vegetarisch",
-        };
-    })
+    .put("/users", updateUser)
 
 router.routes();
 
