@@ -37,10 +37,10 @@ export class foodRequests {
   }
   
   //GET REQUEST FOR DATA OF A SPECIFIC FOOD ITEM (APPROVED)
-  public getFoodItemData(id: string) {
-    const url = 'http://localhost:8008/fooditems/${id}'
+  public getFoodItemData(id: string, bool: boolean) {
+    const url = 'http://localhost:8008/fooditems/${id}?barcode={bool}'
     return $.ajax({
-      url: `http://localhost:8008/fooditems/${id}`,
+      url: `http://localhost:8008/fooditems/${id}?barcode=${bool}`,
       type: 'GET',
       xhrFields: {
         withCredentials: true,

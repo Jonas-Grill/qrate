@@ -18,23 +18,26 @@ export interface beitragType {
 })
 export class ProduktinfosComponent implements OnInit {
 
-  allergene: string[] = ["allergen 1", "allergen 2", "allergen 3"];
-  spurenelemente: string[] = ["spur 1", "spur 2", "spur 3"];
   beitrag: beitragType = {
-    name: "Apfel",
+    name: "",
     image: "/assets/Logo.PNG",
-    rating: 5,
-    user: "niklas",
-    allergens: ["c2c", "aa4"],
-    spuren: ["spur 1", "Spur 2"],
-    art: "Vegan"
+    rating: 0,
+    user: "",
+    allergens: [],
+    spuren: [],
+    art: ""
   };
   constructor(private foodApi: foodRequests) { }
 
   ngOnInit(): void {
     let barcode = sessionStorage.getItem('barcode');
-    this.foodApi.getFoodItemData(String(barcode)).done((result) => {
+    this.foodApi.getFoodItemData(String(barcode), true).done((result) => {
       console.log(result);
+      this.beitrag.name = result.fooditem.name;
+      this.beitrag.rating = result.result;
+      this.beitrag.user = result.creator;
+      this.beitrag.allergens 
+
     })
   }
 
