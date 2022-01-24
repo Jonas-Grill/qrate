@@ -34,12 +34,12 @@ export const addVote = async (fooditemSuggestionId: string, upVote: boolean, use
     }
 
     fooditemSuggestion.votes.push({
-        userId: user._id.toString(),
+        username: user.username,
         upVote: upVote,
     });
 
     fooditemSuggestion.rating = upVote ?
-        (fooditemSuggestion.rating + user.userLevel.levelValue) : (fooditemSuggestion.rating + user.userLevel.levelValue);
+        (fooditemSuggestion.rating + user.userLevel.levelValue) : (fooditemSuggestion.rating - user.userLevel.levelValue);
 
     const newFooditemSuggestion: FooditemSuggestion | undefined = await fooditemSuggestionRepo.updateFooditemSuggestion(fooditemSuggestion);
 
