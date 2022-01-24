@@ -1,16 +1,37 @@
 _id: req_beb3394d70e24246b74ab1a7134285e9
 type: Request
 parentId: fld_deb16e002d37475c9509959ba5f0bc3a
-modified: 1642706437171
+modified: 1643028673444
 created: 1642706433050
 url: "{{ _.base_url }}/users"
 name: Update User data
 description: ""
 method: PUT
-body: {}
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"eMail": "j.g@g.com",
+    	"allergens": [
+    		{
+    			"name": "Laktose",
+    			"tracesOf": true
+    		},
+    		{
+    			"name": "Milchzucker",
+    			"tracesOf": true
+    		}
+    	],
+    	"diet": "Vegetarisch"
+    }
 parameters: []
-headers: []
-authentication: {}
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_3b44f7288fbc4595954ac43bb121abf1
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
 metaSortKey: -1642706292638
 isPrivate: false
 settingStoreCookies: true
