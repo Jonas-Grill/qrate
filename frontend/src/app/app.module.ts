@@ -41,6 +41,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {DialogLogoutComponent} from './dialogLogout/dialogLogout.component';
 import {DialogChangePasswordComponent} from './dialog-change-password/dialog-change-password.component';
 import {foodRequests} from './backendrequests/fooddatarequests';
+import {userDataRequests} from "./backendrequests/userdatarequests";
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import {foodRequests} from './backendrequests/fooddatarequests';
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
-    foodRequests
+    foodRequests,
+    userDataRequests
   ],
   bootstrap: [AppComponent]
 })

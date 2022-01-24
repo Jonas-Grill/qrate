@@ -1,13 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Allergene} from "./allergenes";
 import {Router} from "@angular/router";
-import {
-  allergens,
-  diets,
-  getAllDiets,
-  getAllPreferences,
-  updateUserPreferences
-} from "../backendrequests/userdatarequests";
+import {userDataRequests} from "../backendrequests/userdatarequests";
 
 @Component({
   selector: 'app-preferencesanddiet',
@@ -16,38 +10,35 @@ import {
 })
 
 export class PreferencesanddietComponent implements OnInit {
-  public allergielist: string[] = [];
-  public dietlist: string[] = [];
+  public allergieList: string[] = [];
+  public dietList: string[] = [];
   public allergene: Allergene[] = [];
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
-  public userdiet: string = '';
-  public userpreferences: object[] = [];
+  public userDiet: string = '';
+  public userPreferences: object[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userApi: userDataRequests) {
   }
 
   ngOnInit(): void {
-    this.loadBackendData();
-  }
+    this.userApi.getAllPreferences().done((result) => {
+      this.allergieList = result;
+      this.allergieList.sort();
 
-  async loadBackendData() {
-    await getAllDiets();
-    await getAllPreferences();
-    this.dietlist = diets;
-    this.allergielist = allergens;
+      for (let allergie of this.allergieList) {
+        this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
+        this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
+      }
+    });
+    this.userApi.getAllDiets().done((result) => {
+      this.dietList = result;
+      this.dietList.sort();
 
-    this.allergielist.sort();
-    this.dietlist.sort();
-
-    for (let allergie of this.allergielist) {
-      this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
-      this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
-    }
-
-    for (let diet of this.dietlist) {
-      this.diets.push({id: diet, name: diet, disabled: false});
-    }
+      for (let diet of this.dietList) {
+        this.diets.push({id: diet, name: diet, disabled: false});
+      }
+    });
   }
 
   onChangeAllergies(selected: any, name: string): void {
@@ -90,14 +81,14 @@ export class PreferencesanddietComponent implements OnInit {
         if (this.diets[i].id !== name) {
           this.diets[i].disabled = true;
         }
-        this.userdiet = name;
+        this.userDiet = name;
       }
     } else {
       for (let i = 0; i < this.diets.length; i++) {
         if (this.diets[i].id !== name) {
           this.diets[i].disabled = false;
         }
-        this.userdiet = '';
+        this.userDiet = '';
       }
     }
   }
@@ -106,20 +97,17 @@ export class PreferencesanddietComponent implements OnInit {
     //UPDATE USER DATA IN BACKEND
     for (let i = 0; i < this.allergene.length; i++) {
       if (this.allergene[i].disabled) {
-        this.userpreferences.push({name: this.allergene[i].name, tracesOf: true})
+        this.userPreferences.push({name: this.allergene[i].name, tracesOf: true})
       }
     }
 
     for (let i = 0; i < this.traces.length; i++) {
       if (this.traces[i].disabled) {
-        this.userpreferences.push({name: this.traces[i].name, tracesOf: false})
+        this.userPreferences.push({name: this.traces[i].name, tracesOf: false})
       }
     }
 
-    console.log(this.userpreferences);
-    console.log(this.userdiet);
-
-    updateUserPreferences(this.userpreferences, this.userdiet);
+    this.userApi.updateUserPreferences(this.userPreferences, this.userDiet);
 
     //ROUTING
     this.router.navigate(['/', 'beitraege']);

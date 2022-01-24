@@ -1,102 +1,35 @@
-import {
-    Cookies,
-    Response,
-    State,
-} from "../deps.ts";
-import {Payload, verify} from "../deps.ts";
-import {JWT_ALG, SECRET} from "../config/config.ts";
-import User from "../types/user.ts";
+import {Context, Status, verify} from "../deps.ts";
 import * as userService from "../services/userService.ts";
+import {KEY} from "../config/config.ts";
 
-const authMiddleware = async (
-    {
-        state,
-        response,
-        cookies,
-    }: {
-        state: State;
-        response: Response;
-        cookies: Cookies;
-    }, next: Function) => {
-    var username: string;
+const authMiddleware = async (ctx: Context, next: Function) => {
+    const authHeader = ctx.request.headers.get("authorization");
+
+    ctx.assert(!(authHeader === null), Status.Unauthorized, "Please authenticate yourself");
+
+    const jwt: string[] = authHeader.split(" ");
+
+    ctx.assert(jwt[0] === "Bearer", Status.BadRequest, "Wrong authorization method")
 
     try {
-        // Get JWT from cookies
-        const jwt = cookies.get("jwt");
+        // Validate JWT and if it is invalid delete from cookie
+        const username: string | unknown = await verify(jwt[1], KEY).then(payload => payload.username);
 
-        if (jwt) {
-            try {
-                // Validate JWT and if it is invalid delete from cookie
-                const data: Payload = await verify(jwt, SECRET, JWT_ALG);
+        ctx.assert(typeof username === "string", Status.BadRequest, "JWT token is invalid");
 
-                if (!data.iss) {
-                    response.status = 400;
-                    response.body = {
-                        success: false,
-                        msg: "JWT token is invalid.",
-                    };
+        // If it is valid select user and save in context state
+        ctx.state.currentUser = await userService.getUserByUsername(username);
 
-                    return;
-                } else {
-                    username = data.iss;
-                }
-
-                // If it is valid select user and save in context state
-                const user: User | undefined = await userService.getUserByUsername(
-                    username,
-                );
-
-                state.currentUser = user;
-
-                await next();
-            } catch (err) {
-                console.error(err);
-
-                if (err instanceof TypeError) {
-                    cookies.delete("jwt");
-                    state.currentUser = null;
-
-                    response.status = 400;
-                    response.body = {
-                        success: false,
-                        msg: "JWT token is invalid.",
-                    };
-                    return;
-                }
-
-                if (err instanceof RangeError) {
-                    state.currentUser = null;
-
-                    response.status = 400;
-                    response.body = {
-                        success: false,
-                        msg: "JWT token is expired.",
-                    };
-                    return;
-                }
-
-                response.status = 500;
-                response.body = {
-                    success: false,
-                    msg: err.toString(),
-                };
-            }
-        } else {
-            response.status = 400;
-            response.body = {
-                success: false,
-                msg: "JWT token is missing.",
-            };
-            state.currentUser = null;
-        }
+        await next();
     } catch (err) {
-        console.log(err);
+        if (err instanceof RangeError) {
+            ctx.state.currentUser = null;
 
-        response.status = 500;
-        response.body = {
-            success: false,
-            msg: err.toString(),
-        };
+            ctx.throw(Status.BadRequest, "JWT token is expired");
+        }
+
+        ctx.state.currentUser = null;
+        ctx.throw(Status.BadRequest, "JWT token is invalid");
     }
 };
 
