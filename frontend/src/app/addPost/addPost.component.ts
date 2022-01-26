@@ -20,7 +20,7 @@ export class AddPostComponent implements OnInit {
 
   options: string[] = [];
   tags: string[] = [];
-  spurenTags: string[] = [];
+  tracesTags: string[] = [];
   usedAllergens: string[] = [];
   inputFormControl: FormControl = new FormControl();
   inputTagControl: FormControl = new FormControl();
@@ -54,11 +54,7 @@ export class AddPostComponent implements OnInit {
     element.textContent = "Cr-Code ändern"
   }
 
-  isScaned(): void {
-    this.isScanned = true;
-  }
-
-  onBildClick(element: any): void {
+  onPictureClick(element: any): void {
     this.isPicture = true;
     this.router.navigate(['/', 'barcodescanner']);
     element.textContent = "Bild ändern"
@@ -92,9 +88,9 @@ export class AddPostComponent implements OnInit {
   }
 
   onTagSpurRemove(tagToRemove: NbTagComponent): void {
-    const index = this.spurenTags.indexOf(tagToRemove.text);
+    const index = this.tracesTags.indexOf(tagToRemove.text);
     if (index > -1) {
-      this.spurenTags.splice(index, 1);
+      this.tracesTags.splice(index, 1);
     }
     const indexUsed = this.usedAllergens.indexOf(tagToRemove.text);
     if (indexUsed > -1) {
@@ -141,7 +137,7 @@ export class AddPostComponent implements OnInit {
       }
     }
     if (!checker) {
-      this.spurenTags.push(this.tagInput.nativeElement.value);
+      this.tracesTags.push(this.tagInput.nativeElement.value);
       this.usedAllergens.push(this.tagInput.nativeElement.value);
       this.tagInput.nativeElement.value = '';
       this.filteredControlOptions$ = of(this.options);

@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
 import Quagga from '@ericblade/quagga2';
 import {UpdateService} from './update.service';
 import {environment} from "../../environments/environment";

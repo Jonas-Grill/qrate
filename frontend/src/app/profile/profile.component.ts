@@ -3,7 +3,7 @@ import {Allergene} from "../preferencesAndDiet/allergens";
 import {NbWindowControlButtonsConfig, NbWindowService} from "@nebular/theme";
 import {DialogLogoutComponent} from "../dialogLogout/dialogLogout.component";
 import {DialogChangePasswordComponent} from "../dialogChangePassword/dialogChangePassword.component";
-import {beitragType} from "../posts/posts.component";
+import {postType} from "../posts/posts.component";
 import {Router} from "@angular/router";
 
 @Component({
@@ -22,15 +22,15 @@ export class ProfileComponent implements OnInit {
   usermail = 'max.mustermann@beispielmail.com';
   userlevel = 'Enthusiastischer Essenskenner';
 
-  displayedBeitraege: beitragType[] = [
+  displayedPosts: postType[] = [
     {
       name: "Apfel",
       image: "/assets/Logo.PNG",
       rating: 5,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegan"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegan"
     },
     {
       name: "Banane",
@@ -38,8 +38,8 @@ export class ProfileComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegan"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegan"
     },
     {
       name: "Pudding",
@@ -47,8 +47,8 @@ export class ProfileComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4", "xx1", "xyzS"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegetarisch"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegetarisch"
     },
     {
       name: "Schokolade",
@@ -56,8 +56,8 @@ export class ProfileComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegetarisch"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegetarisch"
     }
   ];
 
