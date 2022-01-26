@@ -8,18 +8,18 @@
                 <nb-card-header>
                     <div class="flex justify-start w-full">
                         <div class="flex justify-start w-full">
-                            {{beitrag.name}}
+                            {{post.name}}
                         </div>
                     </div>
                 </nb-card-header>
                 <nb-card-body>
-                    <img class="mx-auto h-64 w-auto rounded-lg" src="{{beitrag.image}}">
+                    <img class="mx-auto h-64 w-auto rounded-lg" src="{{post.image}}">
                     <div class="mt-2 flex justify-center w-full">
                         <div>
                             <h6 class="flex justify-center w-full">Allergene</h6>
                             <div class="mt-2 flex justify-center w-full">
                                 <nb-tag-list >
-                                    <nb-tag *ngFor="let allergen of beitrag.allergens" [text]="allergen"></nb-tag>
+                                    <nb-tag *ngFor="let allergen of post.allergens" [text]="allergen"></nb-tag>
                                 </nb-tag-list>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                             <h6 class="flex justify-center w-full">Spurenelemente</h6>
                             <div class="mt-2 flex justify-center w-full">
                                 <nb-tag-list >
-                                    <nb-tag *ngFor="let spuren of beitrag.spuren" [text]="spuren"></nb-tag>
+                                    <nb-tag *ngFor="let traces of post.traces" [text]="traces"></nb-tag>
                                 </nb-tag-list>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                         <div>
                             <h6 class="flex justify-center w-full">Nahrungstyp</h6>
                             <div class="mt-2 flex justify-center w-full">
-                                <nb-tag [text]="beitrag.art"></nb-tag>
+                                <nb-tag [text]="post.diet"></nb-tag>
                             </div>
                         </div>
                     </div>
