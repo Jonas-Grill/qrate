@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { foodRequests } from '../backendrequests/fooddatarequests';
 
-export interface beitragType {
+export interface postType {
   name: string,
   image: string,
-  rating: number,
-  user: string,
   allergens: string[],
-  spuren: string[],
-  art: string
+  traces: string[],
+  diet: string
 }
 
 @Component({
@@ -17,20 +16,29 @@ export interface beitragType {
 })
 export class ProduktinfosComponent implements OnInit {
 
-  allergene: string[] = ["allergen 1", "allergen 2", "allergen 3"];
-  spurenelemente: string[] = ["spur 1", "spur 2", "spur 3"];
-  beitrag: beitragType = {
-    name: "Apfel",
+  post: postType = {
+    name: "",
     image: "/assets/Logo.PNG",
-    rating: 5,
-    user: "niklas",
-    allergens: ["c2c", "aa4"],
-    spuren: ["spur 1", "Spur 2"],
-    art: "Vegan"
+    allergens: [],
+    traces: [],
+    diet: ""
   };
-  constructor() { }
+  constructor(private foodApi: foodRequests) { }
 
   ngOnInit(): void {
+    let barcode = sessionStorage.getItem('barcode');
+    this.foodApi.getFoodItemData(String(barcode), true).done((result) => {
+      this.post.name = result.name;
+      this.post.diet = result.diet;
+      for (let i = 0; i < result.allergens.length; i++) {
+        if (result.allergens[i].tracesOf === true) {
+          this.post.traces.push(result.allergens[i].name);
+        } else {
+          this.post.allergens.push(result.allergens[i].name);
+        }
+      }
+
+    })
   }
 
 }
