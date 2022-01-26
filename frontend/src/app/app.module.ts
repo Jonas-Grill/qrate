@@ -34,14 +34,14 @@ import {BarcodeScannerComponent} from './barcodeScanner/barcodeScanner.component
 import {ServiceWorkerModule} from "@angular/service-worker";
 import {environment} from "../environments/environment";
 import {TabbarComponent} from './tabbar/tabbar.component';
-import {BeitraegeComponent} from './beitraege/beitraege.component';
-import {HinzufuegenComponent} from './hinzufuegen/hinzufuegen.component';
-import {ProduktinfosComponent} from './produktinfos/produktinfos.component';
+import {PostsComponent} from './posts/posts.component';
+import {AddPostComponent} from './addPost/addPost.component';
+import {ProductInfoComponent} from './productInfo/productInfo.component';
 import {ProfileComponent} from './profile/profile.component';
 import {DialogLogoutComponent} from './dialogLogout/dialogLogout.component';
 import {DialogChangePasswordComponent} from './dialogChangePassword/dialogChangePassword.component';
 import {userDataRequests} from "./backendRequests/userDataRequests";
-import {foodRequests} from './backendrequests/fooddatarequests';
+import {foodRequests} from './backendRequests/foodDataRequests';
 
 @NgModule({
   declarations: [
@@ -51,9 +51,9 @@ import {foodRequests} from './backendrequests/fooddatarequests';
     DialogLogoutComponent,
     DialogChangePasswordComponent,
     TabbarComponent,
-    BeitraegeComponent,
-    HinzufuegenComponent,
-    ProduktinfosComponent,
+    PostsComponent,
+    AddPostComponent,
+    ProductInfoComponent,
     PreferencesAndDietComponent,
     BarcodeScannerComponent,
   ],

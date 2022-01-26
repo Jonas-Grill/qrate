@@ -1,9 +1,9 @@
 import {Component, OnInit, Optional} from '@angular/core';
-import {Allergene} from "../preferencesAndDiet/allergenes";
+import {Allergene} from "../preferencesAndDiet/allergens";
 import {NbWindowControlButtonsConfig, NbWindowService} from "@nebular/theme";
 import {DialogLogoutComponent} from "../dialogLogout/dialogLogout.component";
 import {DialogChangePasswordComponent} from "../dialogChangePassword/dialogChangePassword.component";
-import {beitragType} from "../beitraege/beitraege.component";
+import {beitragType} from "../posts/posts.component";
 import {Router} from "@angular/router";
 
 @Component({
@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
 
-  allergielist = ["Eier", "Erdnuss", "Gluten", "Sesam", "Senf", "Lupine", "Sulfite", "Nuss", "Weichtiere", "Krebstiere", "Fische", "Soja", "Sellerie", "Milch"];
+  allergylist = ["Eier", "Erdnuss", "Gluten", "Sesam", "Senf", "Lupine", "Sulfite", "Nuss", "Weichtiere", "Krebstiere", "Fische", "Soja", "Sellerie", "Milch"];
   dietlist = ["Vegetarisch", "Pescetarisch", "Vegan"];
   username = 'Max Mustermann';
   usermail = 'max.mustermann@beispielmail.com';
@@ -66,12 +66,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.allergielist.sort();
+    this.allergylist.sort();
     this.dietlist.sort();
 
-    for (let allergie of this.allergielist) {
-      this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
-      this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
+    for (let allergy of this.allergylist) {
+      this.allergene.push({id: "allergy" + allergy, name: allergy, disabled: false});
+      this.traces.push({id: "tracesof" + allergy, name: allergy, disabled: false});
     }
 
     for (let diet of this.dietlist) {
@@ -102,7 +102,7 @@ export class ProfileComponent implements OnInit {
   onChangeAllergies(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES
     if (selected.target.checked) {
-      if (selected.currentTarget.id.includes("allergie")) {
+      if (selected.currentTarget.id.includes("allergy")) {
         for (let i = 0; i < this.traces.length; i++) {
           if (this.traces[i].id === "tracesof" + name) {
             this.traces[i].disabled = true;
@@ -110,13 +110,13 @@ export class ProfileComponent implements OnInit {
         }
       } else if (selected.currentTarget.id.includes("tracesof")) {
         for (let i = 0; i < this.allergene.length; i++) {
-          if (this.allergene[i].id === "allergie" + name) {
+          if (this.allergene[i].id === "allergy" + name) {
             this.allergene[i].disabled = true;
           }
         }
       }
     } else {
-      if (selected.currentTarget.id.includes("allergie")) {
+      if (selected.currentTarget.id.includes("allergy")) {
         for (let i = 0; i < this.traces.length; i++) {
           if (this.traces[i].id === "tracesof" + name) {
             this.traces[i].disabled = false;
@@ -124,7 +124,7 @@ export class ProfileComponent implements OnInit {
         }
       } else if (selected.currentTarget.id.includes("tracesof")) {
         for (let i = 0; i < this.allergene.length; i++) {
-          if (this.allergene[i].id === "allergie" + name) {
+          if (this.allergene[i].id === "allergy" + name) {
             this.allergene[i].disabled = false;
           }
         }

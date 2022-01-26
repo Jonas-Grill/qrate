@@ -12,11 +12,11 @@ export interface beitragType {
 
 @Component({
   selector: 'app-beitraege',
-  templateUrl: './beitraege.component.html',
+  templateUrl: './posts.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./beitraege.component.scss']
+  styleUrls: ['./posts.component.scss']
 })
-export class BeitraegeComponent implements OnInit {
+export class PostsComponent implements OnInit {
 
   constructor() { }
 

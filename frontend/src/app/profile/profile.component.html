@@ -28,10 +28,10 @@
                         Geht gar nicht! Nichtmal Spuren von...
                       </nb-accordion-item-header>
                       <nb-accordion-item-body>
-                        <div *ngFor="let allergie of allergene" id="allergies-div">
-                          <nb-checkbox type="checkbox" status="primary" [id]=allergie.id [disabled]=allergie.disabled
-                                       (change)="onChangeAllergies($event, allergie.name)">
-                            <label>{{allergie.name}}</label></nb-checkbox>
+                        <div *ngFor="let allergy of allergene" id="allergies-div">
+                          <nb-checkbox type="checkbox" status="primary" [id]=allergy.id [disabled]=allergy.disabled
+                                       (change)="onChangeAllergies($event, allergy.name)">
+                            <label>{{allergy.name}}</label></nb-checkbox>
                         </div>
                       </nb-accordion-item-body>
                     </nb-accordion-item>

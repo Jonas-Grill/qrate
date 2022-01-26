@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { foodRequests } from '../backendrequests/fooddatarequests';
+import { foodRequests } from '../backendRequests/foodDataRequests';
 
 export interface postType {
   name: string,
@@ -11,10 +11,10 @@ export interface postType {
 
 @Component({
   selector: 'app-produktinfos',
-  templateUrl: './produktinfos.component.html',
-  styleUrls: ['./produktinfos.component.scss']
+  templateUrl: './productInfo.component.html',
+  styleUrls: ['./productInfo.component.scss']
 })
-export class ProduktinfosComponent implements OnInit {
+export class ProductInfoComponent implements OnInit {
 
   post: postType = {
     name: "",
