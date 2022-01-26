@@ -3,8 +3,9 @@ import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { NbTagComponent } from '@nebular/theme';
-import {NbPopoverDirective} from "@nebular/theme";
-import { Router} from '@angular/router';
+import { NbPopoverDirective } from "@nebular/theme";
+import { Router } from '@angular/router';
+import { foodRequests } from '../backendrequests/fooddatarequests';
 
 @Component({
   selector: 'app-hinzufuegen',
@@ -15,33 +16,35 @@ import { Router} from '@angular/router';
 export class HinzufuegenComponent implements OnInit {
 
   isScanned = false;
-  isBild = false;
+  isPicture = false;
 
   options: string[] = [];
   tags: string[] = [];
   spurenTags: string[] = [];
-  usedAllergenes: string[] = [];
+  usedAllergens: string[] = [];
   inputFormControl: FormControl = new FormControl();
   inputTagControl: FormControl = new FormControl();
   filteredControlOptions$!: Observable<string[]>;
   value: string | undefined;
   allergenPopover: any;
-  spurenPopover: any;
+  tracesPopover: any;
 
   @ViewChild('autoInput') input: any;
   @ViewChild('tagInput') tagInput: any;
   @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private foodApi: foodRequests) { }
 
   ngOnInit(): void {
-    this.options = ['Option 1', 'Option 2', 'Option 3'];
-    this.filteredControlOptions$ = of(this.options);
-    this.filteredControlOptions$ = this.inputFormControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(filterString => this.filter(filterString)),
-      );
+    this.foodApi.getAllAllergens().done((result) => {
+      this.options = result;
+      this.filteredControlOptions$ = of(this.options);
+      this.filteredControlOptions$ = this.inputFormControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(filterString => this.filter(filterString)),
+        );
+    });
   }
 
   onScanClick(element: any): void {
@@ -53,7 +56,7 @@ export class HinzufuegenComponent implements OnInit {
     this.isScanned = true;
   }
   onBildClick(element: any): void {
-    this.isBild = true;
+    this.isPicture = true;
     this.router.navigate(['/', 'barcodescanner']);
     element.textContent = "Bild ändern"
   }
@@ -77,9 +80,9 @@ export class HinzufuegenComponent implements OnInit {
     if (index > -1) {
       this.tags.splice(index, 1);
     }
-    const indexUsed = this.usedAllergenes.indexOf(tagToRemove.text);
+    const indexUsed = this.usedAllergens.indexOf(tagToRemove.text);
     if (indexUsed > -1) {
-      this.usedAllergenes.splice(indexUsed, 1);
+      this.usedAllergens.splice(indexUsed, 1);
     }
   }
 
@@ -88,19 +91,19 @@ export class HinzufuegenComponent implements OnInit {
     if (index > -1) {
       this.spurenTags.splice(index, 1);
     }
-    const indexUsed = this.usedAllergenes.indexOf(tagToRemove.text);
+    const indexUsed = this.usedAllergens.indexOf(tagToRemove.text);
     if (indexUsed > -1) {
-      this.usedAllergenes.splice(indexUsed, 1);
+      this.usedAllergens.splice(indexUsed, 1);
     }
   }
   //Change Funktion für Allergene
   onSelectionChange() {
     let checker: boolean = false;
-    for(let tag in this.usedAllergenes) {
-      if(this.usedAllergenes[tag] == this.input.nativeElement.value) {
+    for (let tag in this.usedAllergens) {
+      if (this.usedAllergens[tag] == this.input.nativeElement.value) {
         this.input.nativeElement.value = '';
         checker = true;
-        this.allergenPopover = "Dieses Allergen wurde bereits als Allergen oder Spurenelement ausgewählt";
+        this.allergenPopover = "Dieses Allergen wurde bereits ausgewählt";
         this.popovers?.filter(item => item.popoverClass == "allergen").shift()?.show();
         setTimeout(() => {
           this.popovers?.filter(item => item.popoverClass == "allergen").shift()?.hide();
@@ -108,9 +111,9 @@ export class HinzufuegenComponent implements OnInit {
         break;
       }
     }
-    if(checker === false) {
+    if (!checker) {
       this.tags.push(this.input.nativeElement.value);
-      this.usedAllergenes.push(this.input.nativeElement.value);
+      this.usedAllergens.push(this.input.nativeElement.value);
       this.input.nativeElement.value = '';
       this.filteredControlOptions$ = of(this.options);
     }
@@ -118,21 +121,21 @@ export class HinzufuegenComponent implements OnInit {
   //Change Funktion für Spuren
   onSelectionTagChange() {
     let checker: boolean = false;
-    for(let tag in this.usedAllergenes) {
-      if(this.usedAllergenes[tag] == this.tagInput.nativeElement.value) {
+    for (let tag in this.usedAllergens) {
+      if (this.usedAllergens[tag] == this.tagInput.nativeElement.value) {
         this.tagInput.nativeElement.value = '';
         checker = true;
-        this.spurenPopover = "Dieses Allergen wurde bereits als Allergen oder Spurenelement ausgewählt";
-        this.popovers?.filter(item => item.popoverClass == "spur").shift()?.show();
+        this.tracesPopover = "Dieses Allergen wurde bereits ausgewählt";
+        this.popovers?.filter(item => item.popoverClass == "traces").shift()?.show();
         setTimeout(() => {
-          this.popovers?.filter(item => item.popoverClass == "spur").shift()?.hide();
+          this.popovers?.filter(item => item.popoverClass == "traces").shift()?.hide();
         }, 2000);
         break;
       }
     }
-    if(checker === false) {
+    if (!checker) {
       this.spurenTags.push(this.tagInput.nativeElement.value);
-      this.usedAllergenes.push(this.tagInput.nativeElement.value);
+      this.usedAllergens.push(this.tagInput.nativeElement.value);
       this.tagInput.nativeElement.value = '';
       this.filteredControlOptions$ = of(this.options);
     }

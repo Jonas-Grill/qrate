@@ -28,10 +28,10 @@
           <div class="mt-2">
             <nb-card>
                 <nb-card-body class="flex justify-center">
-                    <div *ngIf="!isBild">
+                    <div *ngIf="!isPicture">
                         <nb-icon nbPrefix icon="image-outline" pack="eva"></nb-icon> 
                     </div>
-                    <div *ngIf="isBild">
+                    <div *ngIf="isPicture">
                         <img class="mx-auto h-64 w-auto rounded-lg" src="/assets/Logo.PNG"> 
                     </div>
                 </nb-card-body>
@@ -88,9 +88,9 @@
                         type="text"
                         placeholder="Spurenelemente"
                         [nbAutocomplete]="autoControlTag"
-                        [nbPopover]="spurenPopover"
+                        [nbPopover]="tracesPopover"
                         nbPopoverTrigger="noop"
-                        nbPopoverClass="spur" nbPopoverPlacement="right"/>
+                        nbPopoverClass="traces" nbPopoverPlacement="right"/>
 
                     <nb-autocomplete #autoControlTag (selectedChange)="onSelectionTagChange()">
 
