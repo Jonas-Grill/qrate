@@ -1,9 +1,9 @@
 import {Component, OnInit, Optional} from '@angular/core';
-import {Allergene} from "../preferencesanddiet/allergenes";
+import {Allergene} from "../preferencesAndDiet/allergens";
 import {NbWindowControlButtonsConfig, NbWindowService} from "@nebular/theme";
 import {DialogLogoutComponent} from "../dialogLogout/dialogLogout.component";
-import {DialogChangePasswordComponent} from "../dialog-change-password/dialog-change-password.component";
-import {beitragType} from "../beitraege/beitraege.component";
+import {DialogChangePasswordComponent} from "../dialogChangePassword/dialogChangePassword.component";
+import {postType} from "../posts/posts.component";
 import {Router} from "@angular/router";
 
 @Component({
@@ -16,21 +16,21 @@ export class ProfileComponent implements OnInit {
   public traces: Allergene[] = [];
   public diets: Allergene[] = [];
 
-  allergielist = ["Eier", "Erdnuss", "Gluten", "Sesam", "Senf", "Lupine", "Sulfite", "Nuss", "Weichtiere", "Krebstiere", "Fische", "Soja", "Sellerie", "Milch"];
+  allergylist = ["Eier", "Erdnuss", "Gluten", "Sesam", "Senf", "Lupine", "Sulfite", "Nuss", "Weichtiere", "Krebstiere", "Fische", "Soja", "Sellerie", "Milch"];
   dietlist = ["Vegetarisch", "Pescetarisch", "Vegan"];
   username = 'Max Mustermann';
   usermail = 'max.mustermann@beispielmail.com';
   userlevel = 'Enthusiastischer Essenskenner';
 
-  displayedBeitraege: beitragType[] = [
+  displayedPosts: postType[] = [
     {
       name: "Apfel",
       image: "/assets/Logo.PNG",
       rating: 5,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegan"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegan"
     },
     {
       name: "Banane",
@@ -38,8 +38,8 @@ export class ProfileComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegan"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegan"
     },
     {
       name: "Pudding",
@@ -47,8 +47,8 @@ export class ProfileComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4", "xx1", "xyzS"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegetarisch"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegetarisch"
     },
     {
       name: "Schokolade",
@@ -56,8 +56,8 @@ export class ProfileComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegetarisch"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegetarisch"
     }
   ];
 
@@ -66,12 +66,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.allergielist.sort();
+    this.allergylist.sort();
     this.dietlist.sort();
 
-    for (let allergie of this.allergielist) {
-      this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
-      this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
+    for (let allergy of this.allergylist) {
+      this.allergene.push({id: "allergy" + allergy, name: allergy, disabled: false});
+      this.traces.push({id: "tracesof" + allergy, name: allergy, disabled: false});
     }
 
     for (let diet of this.dietlist) {
@@ -102,7 +102,7 @@ export class ProfileComponent implements OnInit {
   onChangeAllergies(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES
     if (selected.target.checked) {
-      if (selected.currentTarget.id.includes("allergie")) {
+      if (selected.currentTarget.id.includes("allergy")) {
         for (let i = 0; i < this.traces.length; i++) {
           if (this.traces[i].id === "tracesof" + name) {
             this.traces[i].disabled = true;
@@ -110,13 +110,13 @@ export class ProfileComponent implements OnInit {
         }
       } else if (selected.currentTarget.id.includes("tracesof")) {
         for (let i = 0; i < this.allergene.length; i++) {
-          if (this.allergene[i].id === "allergie" + name) {
+          if (this.allergene[i].id === "allergy" + name) {
             this.allergene[i].disabled = true;
           }
         }
       }
     } else {
-      if (selected.currentTarget.id.includes("allergie")) {
+      if (selected.currentTarget.id.includes("allergy")) {
         for (let i = 0; i < this.traces.length; i++) {
           if (this.traces[i].id === "tracesof" + name) {
             this.traces[i].disabled = false;
@@ -124,7 +124,7 @@ export class ProfileComponent implements OnInit {
         }
       } else if (selected.currentTarget.id.includes("tracesof")) {
         for (let i = 0; i < this.allergene.length; i++) {
-          if (this.allergene[i].id === "allergie" + name) {
+          if (this.allergene[i].id === "allergy" + name) {
             this.allergene[i].disabled = false;
           }
         }

@@ -3,7 +3,7 @@ import * as $ from "jquery";
 export const url = "http://localhost:8008/"
 
 export class userDataRequests {
-//POST REQUEST FOR USER REGISTRATION
+  //POST REQUEST FOR USER REGISTRATION
   public registerUser(username: string, password: string, email: string) {
     return $.ajax({
       url: `${url}users`,
@@ -14,16 +14,16 @@ export class userDataRequests {
       xhrFields: {
         withCredentials: true,
       },
-      success(response: any, errors: any) {
-
+      success(response, errors) {
+        return response;
       },
-      error(xhr: any) {
-
+      error(xhr) {
+        throw new Error(xhr.statusText);
       },
     });
   }
 
-//GET REQUEST FOR USER DATA
+  //GET REQUEST FOR USER DATA
   public getUserData() {
     return $.ajax({
       url: `${url}users`,
@@ -40,7 +40,7 @@ export class userDataRequests {
     });
   }
 
-//UPDATE REQUEST FOR USER DATA
+  //UPDATE REQUEST FOR USER DATA
   public updateUserPassword(username: string, password: string) {
     return $.ajax({
       url: `${url}users`,
@@ -79,13 +79,12 @@ export class userDataRequests {
     });
   }
 
-//POST REQUEST FOR USER LOGIN
-  public loginUser(username: string, password: string) {
+  public updateUserDiet(token: string, diet: Array<string>) {
     return $.ajax({
-      url: `${url}login`,
-      type: 'POST',
+      url: `${url}users`,
+      type: 'PUT',
       contentType: 'application/json',
-      data: JSON.stringify({username: username, password: password}),
+      data: JSON.stringify({diet: diet}),
       dataType: 'json',
       xhrFields: {
         withCredentials: true,
@@ -99,7 +98,27 @@ export class userDataRequests {
     });
   }
 
-//GET REQUEST FOR ALL PREFERENCES
+  //POST REQUEST FOR USER LOGIN
+  public loginUser(username: string, password: string) {
+    return $.ajax({
+      url: `${url}login`,
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({username: username, password: password}),
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: true,
+      },
+      success(response: any, errors: any) {
+        return response.token;
+      },
+      error(xhr: any) {
+
+      },
+    });
+  }
+
+  //GET REQUEST FOR ALL PREFERENCES
   public getAllPreferences() {
     return $.ajax({
       url: `${url}allergens`,
@@ -116,7 +135,7 @@ export class userDataRequests {
     });
   }
 
-//GET REQUEST FOR ALL DIETS
+  //GET REQUEST FOR ALL DIETS
   public getAllDiets() {
     return $.ajax({
       url: `${url}diets`,

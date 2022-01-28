@@ -28,10 +28,10 @@
                         Geht gar nicht! Nichtmal Spuren von...
                       </nb-accordion-item-header>
                       <nb-accordion-item-body>
-                        <div *ngFor="let allergie of allergene" id="allergies-div">
-                          <nb-checkbox type="checkbox" status="primary" [id]=allergie.id [disabled]=allergie.disabled
-                                       (change)="onChangeAllergies($event, allergie.name)">
-                            <label>{{allergie.name}}</label></nb-checkbox>
+                        <div *ngFor="let allergy of allergene" id="allergies-div">
+                          <nb-checkbox type="checkbox" status="primary" [id]=allergy.id [disabled]=allergy.disabled
+                                       (change)="onChangeAllergies($event, allergy.name)">
+                            <label>{{allergy.name}}</label></nb-checkbox>
                         </div>
                       </nb-accordion-item-body>
                     </nb-accordion-item>
@@ -64,7 +64,7 @@
                 </div>
               </nb-tab>
               <nb-tab tabIcon="image-outline">
-                <div *ngFor="let data of displayedBeitraege">
+                <div *ngFor="let data of displayedPosts">
                   <nb-flip-card>
                     <nb-card-front>
                       <nb-card size="medium">
@@ -108,14 +108,14 @@
                             <h6>Spurenelemente</h6>
                             <div class="mt-2">
                               <nb-tag-list>
-                                <nb-tag *ngFor="let spuren of data.spuren" [text]="spuren"></nb-tag>
+                                <nb-tag *ngFor="let traces of data.traces" [text]="traces"></nb-tag>
                               </nb-tag-list>
                             </div>
                           </div>
                           <div class="mt-4">
                             <h6>Nahrungstyp</h6>
                             <div class="mt-2">
-                              <nb-tag [text]="data.art"></nb-tag>
+                              <nb-tag [text]="data.type"></nb-tag>
                             </div>
                           </div>
                         </nb-card-body>

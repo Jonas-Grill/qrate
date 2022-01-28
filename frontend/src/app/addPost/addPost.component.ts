@@ -1,26 +1,26 @@
-import { ChangeDetectionStrategy, Component, QueryList, ViewChild, ViewChildren, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { map, startWith } from 'rxjs/operators';
-import { NbTagComponent } from '@nebular/theme';
-import { NbPopoverDirective } from "@nebular/theme";
-import { Router } from '@angular/router';
-import { foodRequests } from '../backendrequests/fooddatarequests';
+import {ChangeDetectionStrategy, Component, QueryList, ViewChild, ViewChildren, OnInit} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
+import {NbTagComponent} from '@nebular/theme';
+import {NbPopoverDirective} from "@nebular/theme";
+import {Router} from '@angular/router';
+import {foodRequests} from '../backendRequests/foodDataRequests';
 
 @Component({
   selector: 'app-hinzufuegen',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './hinzufuegen.component.html',
-  styleUrls: ['./hinzufuegen.component.scss']
+  templateUrl: './addPost.component.html',
+  styleUrls: ['./addPost.component.scss']
 })
-export class HinzufuegenComponent implements OnInit {
+export class AddPostComponent implements OnInit {
 
   isScanned = false;
   isPicture = false;
 
   options: string[] = [];
   tags: string[] = [];
-  spurenTags: string[] = [];
+  tracesTags: string[] = [];
   usedAllergens: string[] = [];
   inputFormControl: FormControl = new FormControl();
   inputTagControl: FormControl = new FormControl();
@@ -33,7 +33,8 @@ export class HinzufuegenComponent implements OnInit {
   @ViewChild('tagInput') tagInput: any;
   @ViewChildren(NbPopoverDirective) popovers: QueryList<NbPopoverDirective> | undefined;
 
-  constructor(private router: Router, private foodApi: foodRequests) { }
+  constructor(private router: Router, private foodApi: foodRequests) {
+  }
 
   ngOnInit(): void {
     this.foodApi.getAllAllergens().done((result) => {
@@ -52,17 +53,17 @@ export class HinzufuegenComponent implements OnInit {
     this.router.navigate(['/', 'barcodescanner']);
     element.textContent = "Cr-Code ändern"
   }
-  isScaned(): void {
-    this.isScanned = true;
-  }
-  onBildClick(element: any): void {
+
+  onPictureClick(element: any): void {
     this.isPicture = true;
     this.router.navigate(['/', 'barcodescanner']);
     element.textContent = "Bild ändern"
   }
+
   onSubmitClick(): void {
 
   }
+
   //Funktion für Allergene Filter
   private filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -87,15 +88,16 @@ export class HinzufuegenComponent implements OnInit {
   }
 
   onTagSpurRemove(tagToRemove: NbTagComponent): void {
-    const index = this.spurenTags.indexOf(tagToRemove.text);
+    const index = this.tracesTags.indexOf(tagToRemove.text);
     if (index > -1) {
-      this.spurenTags.splice(index, 1);
+      this.tracesTags.splice(index, 1);
     }
     const indexUsed = this.usedAllergens.indexOf(tagToRemove.text);
     if (indexUsed > -1) {
       this.usedAllergens.splice(indexUsed, 1);
     }
   }
+
   //Change Funktion für Allergene
   onSelectionChange() {
     let checker: boolean = false;
@@ -118,6 +120,7 @@ export class HinzufuegenComponent implements OnInit {
       this.filteredControlOptions$ = of(this.options);
     }
   }
+
   //Change Funktion für Spuren
   onSelectionTagChange() {
     let checker: boolean = false;
@@ -134,7 +137,7 @@ export class HinzufuegenComponent implements OnInit {
       }
     }
     if (!checker) {
-      this.spurenTags.push(this.tagInput.nativeElement.value);
+      this.tracesTags.push(this.tagInput.nativeElement.value);
       this.usedAllergens.push(this.tagInput.nativeElement.value);
       this.tagInput.nativeElement.value = '';
       this.filteredControlOptions$ = of(this.options);

@@ -1,8 +1,8 @@
 import * as $ from "jquery";
-import {url} from "./userdatarequests";
+import {url} from "./userDataRequests";
 
-//GET REQUEST FOR ALL FOOD ITEMS
 export class foodRequests {
+//GET REQUEST FOR ALL FOOD ITEMS
   public getAllFoodItems() {
     return $.ajax({
       url: `${url}fooditems`,
@@ -11,14 +11,14 @@ export class foodRequests {
         withCredentials: true,
       },
       success(response: any, errors: any) {
-  
+
       },
       error(xhr: any) {
-  
+
       },
     });
   }
-  
+
   //GET REQUEST FOR ALL Allergens
   public getAllAllergens() {
     return $.ajax({
@@ -28,14 +28,14 @@ export class foodRequests {
         withCredentials: true,
       },
       success(response: any, errors: any) {
-  
+
       },
       error(xhr: any) {
-  
+
       },
     });
   }
-  
+
   //GET REQUEST FOR DATA OF A SPECIFIC FOOD ITEM (APPROVED)
   public getFoodItemData(id: string, bool: boolean) {
     return $.ajax({
@@ -45,14 +45,14 @@ export class foodRequests {
         withCredentials: true,
       },
       success(response: any, errors: any) {
-  
+
       },
       error(xhr: any) {
-  
+
       },
     });
   }
-  
+
   //GET REQUEST TO GET DATA OF ALL FOOD ITEM SUGGESTIONS (NOT APPROVED)
   public getAllFoodItemSuggestions() {
     return $.ajax({
@@ -62,14 +62,14 @@ export class foodRequests {
         withCredentials: true,
       },
       success(response: any, errors: any) {
-  
+
       },
       error(xhr: any) {
-  
+
       },
     });
   }
-  
+
   //POST REQUEST TO CREATE A NEW FOOD ITEM SUGGESTION (NOT APPROVED)
   public createNewFoodItemSuggestion(name: string, pictures: Array<string>, allergene: Array<string>, diet: string, barcode: Array<string>, username: string) {
     $.ajax({
@@ -89,14 +89,14 @@ export class foodRequests {
         withCredentials: true,
       },
       success(response: any, errors: any) {
-  
+
       },
       error(xhr: any) {
-  
+
       },
     });
   }
-  
+
   //GET REQUEST TO GET DATA OF A SPECIFIC FOOD ITEM SUGGESTION (NOT APPROVED)
   public getFoodItemSuggestion(id: string) {
     return $.ajax({
@@ -106,14 +106,14 @@ export class foodRequests {
         withCredentials: true,
       },
       success(response: any, errors: any) {
-  
+
       },
       error(xhr: any) {
-  
+
       },
     });
   }
-  
+
   //POST REQUEST TO VOTE FOR A FOOD ITEM
   public voteForFoodItemSuggestion(id: string, vote: boolean) {
     $.ajax({
@@ -126,10 +126,10 @@ export class foodRequests {
         withCredentials: true,
       },
       success(response: any, errors: any) {
-  
+
       },
       error(xhr: any) {
-  
+
       },
     });
   }

@@ -1,21 +1,21 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {BeitraegeComponent} from './beitraege/beitraege.component';
-import {HinzufuegenComponent} from './hinzufuegen/hinzufuegen.component';
-import {ProduktinfosComponent} from './produktinfos/produktinfos.component';
+import {PostsComponent} from './posts/posts.component';
+import {AddPostComponent} from './addPost/addPost.component';
+import {ProductInfoComponent} from './productInfo/productInfo.component';
 import {ProfileComponent} from "./profile/profile.component";
-import {PreferencesanddietComponent} from "./preferencesanddiet/preferencesanddiet.component";
-import {BarcodescannerComponent} from "./barcodescanner/barcodescanner.component";
+import {PreferencesAndDietComponent} from "./preferencesAndDiet/preferencesAndDiet.component";
+import {BarcodeScannerComponent} from "./barcodeScanner/barcodeScanner.component";
 import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'profil', component: ProfileComponent},
-  {path: 'ernaehrungsweise', component: PreferencesanddietComponent},
-  {path: 'beitraege', component: BeitraegeComponent},
-  {path: 'hinzufuegen', component: HinzufuegenComponent},
-  {path: 'produktinfo', component: ProduktinfosComponent},
-  {path: 'barcodescanner', component: BarcodescannerComponent}
+  {path: 'ernaehrungsweise', component: PreferencesAndDietComponent},
+  {path: 'beitraege', component: PostsComponent},
+  {path: 'hinzufuegen', component: AddPostComponent},
+  {path: 'produktinfo', component: ProductInfoComponent},
+  {path: 'barcodescanner', component: BarcodeScannerComponent}
 ];
 
 @NgModule({

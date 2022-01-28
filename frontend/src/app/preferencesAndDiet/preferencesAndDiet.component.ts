@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Allergene} from "./allergenes";
+import {Allergene} from "./allergens";
 import {Router} from "@angular/router";
-import {userDataRequests} from "../backendrequests/userdatarequests";
+import {userDataRequests} from "../backendRequests/userDataRequests";
 
 @Component({
   selector: 'app-preferencesanddiet',
-  templateUrl: './preferencesanddiet.component.html',
-  styleUrls: ['./preferencesanddiet.component.scss']
+  templateUrl: './preferencesAndDiet.component.html',
+  styleUrls: ['./preferencesAndDiet.component.scss']
 })
 
-export class PreferencesanddietComponent implements OnInit {
-  public allergieList: string[] = [];
+export class PreferencesAndDietComponent implements OnInit {
+  public allergyList: string[] = [];
   public dietList: string[] = [];
   public allergene: Allergene[] = [];
   public traces: Allergene[] = [];
@@ -23,12 +23,12 @@ export class PreferencesanddietComponent implements OnInit {
 
   ngOnInit(): void {
     this.userApi.getAllPreferences().done((result) => {
-      this.allergieList = result;
-      this.allergieList.sort();
+      this.allergyList = result;
+      this.allergyList.sort();
 
-      for (let allergie of this.allergieList) {
-        this.allergene.push({id: "allergie" + allergie, name: allergie, disabled: false});
-        this.traces.push({id: "tracesof" + allergie, name: allergie, disabled: false});
+      for (let allergy of this.allergyList) {
+        this.allergene.push({id: "allergy" + allergy, name: allergy, disabled: false});
+        this.traces.push({id: "tracesof" + allergy, name: allergy, disabled: false});
       }
     });
     this.userApi.getAllDiets().done((result) => {
@@ -44,7 +44,7 @@ export class PreferencesanddietComponent implements OnInit {
   onChangeAllergies(selected: any, name: string): void {
     // ON CHANGE CHECKBOX IN CATEGORY ALLERGIES
     if (selected.target.checked) {
-      if (selected.currentTarget.id.includes("allergie")) {
+      if (selected.currentTarget.id.includes("allergy")) {
         for (let i = 0; i < this.traces.length; i++) {
           if (this.traces[i].id === "tracesof" + name) {
             this.traces[i].disabled = true;
@@ -52,13 +52,13 @@ export class PreferencesanddietComponent implements OnInit {
         }
       } else if (selected.currentTarget.id.includes("tracesof")) {
         for (let i = 0; i < this.allergene.length; i++) {
-          if (this.allergene[i].id === "allergie" + name) {
+          if (this.allergene[i].id === "allergy" + name) {
             this.allergene[i].disabled = true;
           }
         }
       }
     } else {
-      if (selected.currentTarget.id.includes("allergie")) {
+      if (selected.currentTarget.id.includes("allergy")) {
         for (let i = 0; i < this.traces.length; i++) {
           if (this.traces[i].id === "tracesof" + name) {
             this.traces[i].disabled = false;
@@ -66,7 +66,7 @@ export class PreferencesanddietComponent implements OnInit {
         }
       } else if (selected.currentTarget.id.includes("tracesof")) {
         for (let i = 0; i < this.allergene.length; i++) {
-          if (this.allergene[i].id === "allergie" + name) {
+          if (this.allergene[i].id === "allergy" + name) {
             this.allergene[i].disabled = false;
           }
         }

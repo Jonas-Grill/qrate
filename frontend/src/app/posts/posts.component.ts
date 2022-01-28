@@ -1,34 +1,34 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-export interface beitragType {
+export interface postType {
   name: string,
   image: string,
   rating: number,
   user: string,
   allergens: string[],
-  spuren: string[],
-  art: string
+  traces: string[],
+  type: string
 }
 
 @Component({
   selector: 'app-beitraege',
-  templateUrl: './beitraege.component.html',
+  templateUrl: './posts.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./beitraege.component.scss']
+  styleUrls: ['./posts.component.scss']
 })
-export class BeitraegeComponent implements OnInit {
+export class PostsComponent implements OnInit {
 
   constructor() { }
 
-  displayedBeitraege: beitragType[] = [
+  displayedPosts: postType[] = [
     {
       name: "Apfel",
       image: "/assets/Logo.PNG",
       rating: 5,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegan"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegan"
     },
     {
       name: "Banane",
@@ -36,8 +36,8 @@ export class BeitraegeComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegan"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegan"
     },
     {
       name: "Pudding",
@@ -45,8 +45,8 @@ export class BeitraegeComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4", "xx1", "xyzS"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegetarisch"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegetarisch"
     },
     {
       name: "Schokolade",
@@ -54,8 +54,8 @@ export class BeitraegeComponent implements OnInit {
       rating: 3,
       user: "niklas",
       allergens: ["c2c", "aa4"],
-      spuren: ["spur 1", "spur 2"],
-      art: "Vegetarisch"
+      traces: ["trace 1", "trace 2"],
+      type: "Vegetarisch"
     }
   ];
   ngOnInit(): void {

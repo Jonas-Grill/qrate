@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PreferencesanddietComponent} from './preferencesanddiet.component';
+import {PreferencesAndDietComponent} from './preferencesAndDiet.component';
 
-describe('PreferencesanddietComponent', () => {
-  let component: PreferencesanddietComponent;
-  let fixture: ComponentFixture<PreferencesanddietComponent>;
+describe('PreferencesAndDietComponent', () => {
+  let component: PreferencesAndDietComponent;
+  let fixture: ComponentFixture<PreferencesAndDietComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PreferencesanddietComponent]
+      declarations: [PreferencesAndDietComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PreferencesanddietComponent);
+    fixture = TestBed.createComponent(PreferencesAndDietComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

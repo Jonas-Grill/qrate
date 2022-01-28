@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component} from '@angular/core';
 import Quagga from '@ericblade/quagga2';
 import {UpdateService} from './update.service';
 import {environment} from "../../environments/environment";
@@ -7,10 +7,10 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-barcodescanner',
-  templateUrl: './barcodescanner.component.html',
-  styleUrls: ['./barcodescanner.component.scss']
+  templateUrl: './barcodeScanner.component.html',
+  styleUrls: ['./barcodeScanner.component.scss']
 })
-export class BarcodescannerComponent implements AfterViewInit {
+export class BarcodeScannerComponent implements AfterViewInit {
   started: boolean | undefined;
   errorMessage: string | undefined;
   acceptAnyCode = true;
