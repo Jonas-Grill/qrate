@@ -4,7 +4,7 @@ import {url} from "./userDataRequests";
 export class foodRequests {
 //GET REQUEST FOR ALL FOOD ITEMS
   public getAllFoodItems() {
-    $.ajax({
+    return $.ajax({
       url: `${url}fooditems`,
       type: 'GET',
       xhrFields: {
