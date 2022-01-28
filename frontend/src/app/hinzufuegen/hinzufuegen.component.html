@@ -1,4 +1,4 @@
-<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 pb-20">
     <div class="max-w-md w-full space-y-8">
       <div class="flex justify-center">
           <h2>Beitrag hinzufügen</h2>
@@ -15,7 +15,7 @@
                         <nb-icon nbPrefix icon="more-horizontal-outline" pack="eva"></nb-icon>
                     </div>
                     <div *ngIf="isScanned">
-                        <div>123453888</div> 
+                        <div>123453888</div>
                     </div>
                 </nb-card-body>
                 <nb-card-footer>
@@ -29,10 +29,10 @@
             <nb-card>
                 <nb-card-body class="flex justify-center">
                     <div *ngIf="!isPicture">
-                        <nb-icon nbPrefix icon="image-outline" pack="eva"></nb-icon> 
+                        <nb-icon nbPrefix icon="image-outline" pack="eva"></nb-icon>
                     </div>
                     <div *ngIf="isPicture">
-                        <img class="mx-auto h-64 w-auto rounded-lg" src="/assets/Logo.PNG"> 
+                        <img class="mx-auto h-64 w-auto rounded-lg" src="/assets/Logo.PNG">
                     </div>
                 </nb-card-body>
                 <nb-card-footer>
@@ -54,7 +54,7 @@
                         nbInput
                         type="text"
                         placeholder="Allergene"
-                        [nbAutocomplete]="autoControl" 
+                        [nbAutocomplete]="autoControl"
                         [nbPopover]="allergenPopover"
                         nbPopoverTrigger="noop"
                         nbPopoverClass="allergen" nbPopoverPlacement="right"/>
@@ -126,9 +126,9 @@
                 </nb-accordion-item>
             </nb-accordion>
           </div>
-                
+
         </div>
-  
+
         <div>
           <button nbButton fullWidth class="relative flex justify-center" status="primary" (click)="onSubmitClick()">
             Hinzufügen
